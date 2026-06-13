@@ -75,8 +75,9 @@ def export_stats() -> bool:
     if not player_season_data:
         return False
 
-    # season_list を新しい順に並べる
-    season_list_master.sort(key=lambda x: x.get("id", ""), reverse=False)
+    # season_list を新しい順（API順 = 最新が先頭）に保つ
+    # UUID辞書順ではなく、API が返した順序（episodeName/actName）を尊重するためソートしない
+    # ただし重複がないことは保証済みなのでそのまま使う
 
     # "current" キーを先頭シーズン ID に統合
     current_id = season_list_master[0]["id"] if season_list_master else "current"
@@ -84,6 +85,8 @@ def export_stats() -> bool:
     # シーズン別プレイヤーリストを構築
     seasons_out: dict[str, list] = {}
     for season_id in all_season_ids:
+        if season_id == "current":
+            continue  # 後でマージ
         records = []
         for p in players:
             key = f"{p['name']}#{p['tag']}"
@@ -92,17 +95,35 @@ def export_stats() -> bool:
         if records:
             seasons_out[season_id] = records
 
-    # "current" キャッシュも含める（後方互換）
-    if "current" in all_season_ids and current_id not in seasons_out:
-        seasons_out[current_id] = seasons_out.pop("current", [])
+    # "current" キャッシュのプレイヤーを current_id にマージ（未登録プレイヤーのみ追加）
+    if "current" in all_season_ids:
+        current_records = []
+        for p in players:
+            key = f"{p['name']}#{p['tag']}"
+            if key in player_season_data and "current" in player_season_data[key]:
+                current_records.append(player_season_data[key]["current"])
+        if current_records:
+            existing = {(r["name"], r["tag"]) for r in seasons_out.get(current_id, [])}
+            for rec in current_records:
+                if (rec["name"], rec["tag"]) not in existing:
+                    seasons_out.setdefault(current_id, []).append(rec)
+                    existing.add((rec["name"], rec["tag"]))
+
+    # current_id に誰もいない場合は "current" を独立キーとして残す
+    if current_id not in seasons_out or not seasons_out[current_id]:
+        current_id = "current"
+        seasons_out["current"] = []
+        for p in players:
+            key = f"{p['name']}#{p['tag']}"
+            if key in player_season_data and "current" in player_season_data[key]:
+                seasons_out["current"].append(player_season_data[key]["current"])
 
     payload = {
         "updated_at":       datetime.now(timezone.utc).isoformat(),
         "current_season_id": current_id,
         "season_list":      season_list_master,
         "seasons":          seasons_out,
-        # 後方互換: players = current season
-        "players": seasons_out.get(current_id, seasons_out.get("current", [])),
+        "players": seasons_out.get(current_id, []),
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
