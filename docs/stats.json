@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-13T16:18:24.279719+00:00",
+  "updated_at": "2026-06-13T16:33:40.278302+00:00",
   "current_season_id": "ce2783e8-44fc-dd48-3da3-33b5ba6c4a22",
   "season_list": [
     {
@@ -13,688 +13,6 @@
   ],
   "seasons": {
     "ce2783e8-44fc-dd48-3da3-33b5ba6c4a22": [
-      {
-        "name": "ドラゴン龍",
-        "tag": "8888",
-        "peak_rank": "Diamond 1",
-        "clutch": {
-          "success_rate": 13.4,
-          "wins": 18,
-          "losses": 116,
-          "attempts": 134,
-          "breakdown": {
-            "1v1": {
-              "wins": 14,
-              "losses": 7,
-              "attempts": 21,
-              "rate": 66.7
-            },
-            "1v2": {
-              "wins": 3,
-              "losses": 22,
-              "attempts": 25,
-              "rate": 12.0
-            },
-            "1v3": {
-              "wins": 1,
-              "losses": 33,
-              "attempts": 34,
-              "rate": 2.9
-            },
-            "1v4": {
-              "wins": 0,
-              "losses": 38,
-              "attempts": 38,
-              "rate": 0.0
-            },
-            "1v5": {
-              "wins": 0,
-              "losses": 16,
-              "attempts": 16,
-              "rate": 0.0
-            }
-          }
-        },
-        "clutch_success_rate": 13.4,
-        "clutch_wins": 18,
-        "clutch_attempts": 134,
-        "season": {
-          "id": "ce2783e8-44fc-dd48-3da3-33b5ba6c4a22",
-          "name": "Season 26 Act 3",
-          "shortName": "E26: A3",
-          "episodeName": "Season 26",
-          "actName": "Act 3",
-          "playlists": null
-        },
-        "stats": {
-          "matchesPlayed": {
-            "value": 69,
-            "displayValue": "69"
-          },
-          "matchesWon": {
-            "value": 32,
-            "displayValue": "32"
-          },
-          "matchesLost": {
-            "value": 36,
-            "displayValue": "36"
-          },
-          "matchesTied": {
-            "value": 1,
-            "displayValue": "1"
-          },
-          "matchesWinPct": {
-            "value": 46.3768115942029,
-            "displayValue": "46.4%"
-          },
-          "matchesDisconnected": {
-            "value": 0,
-            "displayValue": "0"
-          },
-          "matchesDuration": {
-            "value": 2206.5072463768115,
-            "displayValue": "36m 46s"
-          },
-          "timePlayed": {
-            "value": 152249,
-            "displayValue": "42h"
-          },
-          "mVPs": {
-            "value": 9,
-            "displayValue": "9"
-          },
-          "roundsPlayed": {
-            "value": 1464,
-            "displayValue": "1,464"
-          },
-          "roundsWon": {
-            "value": 707,
-            "displayValue": "707"
-          },
-          "roundsLost": {
-            "value": 757,
-            "displayValue": "757"
-          },
-          "roundsWinPct": {
-            "value": 48.29234972677596,
-            "displayValue": "48.3%"
-          },
-          "roundsDuration": {
-            "value": 103.99521857923497,
-            "displayValue": "01m 43s"
-          },
-          "score": {
-            "value": 327025,
-            "displayValue": "327,025"
-          },
-          "scorePerMatch": {
-            "value": 4739.492753623188,
-            "displayValue": "4,739"
-          },
-          "scorePerRound": {
-            "value": 223.37773224043715,
-            "displayValue": "223.4"
-          },
-          "kills": {
-            "value": 1117,
-            "displayValue": "1,117"
-          },
-          "killsPerRound": {
-            "value": 0.7629781420765027,
-            "displayValue": "0.8"
-          },
-          "killsPerMatch": {
-            "value": 16.18840579710145,
-            "displayValue": "16.2"
-          },
-          "deaths": {
-            "value": 1091,
-            "displayValue": "1,091"
-          },
-          "deathsPerRound": {
-            "value": 0.7452185792349727,
-            "displayValue": "0.7"
-          },
-          "deathsPerMatch": {
-            "value": 15.81159420289855,
-            "displayValue": "15.8"
-          },
-          "assists": {
-            "value": 372,
-            "displayValue": "372"
-          },
-          "assistsPerRound": {
-            "value": 0.2540983606557377,
-            "displayValue": "0.3"
-          },
-          "assistsPerMatch": {
-            "value": 5.391304347826087,
-            "displayValue": "5.4"
-          },
-          "kDRatio": {
-            "value": 1.0238313473877176,
-            "displayValue": "1.02"
-          },
-          "kDARatio": {
-            "value": 1.1943171402383135,
-            "displayValue": "1.19"
-          },
-          "kADRatio": {
-            "value": 1.3648029330889093,
-            "displayValue": "1.36"
-          },
-          "damage": {
-            "value": 213784,
-            "displayValue": "213,784"
-          },
-          "damageDelta": {
-            "value": 11316,
-            "displayValue": "11,316"
-          },
-          "damageDeltaPerRound": {
-            "value": 7.729508196721311,
-            "displayValue": "8"
-          },
-          "damagePerRound": {
-            "value": 146.02732240437157,
-            "displayValue": "146.0"
-          },
-          "damagePerMatch": {
-            "value": 3098.31884057971,
-            "displayValue": "3,098.32"
-          },
-          "damagePerMinute": {
-            "value": 84.26645644461964,
-            "displayValue": "84.3"
-          },
-          "damageReceived": {
-            "value": 202468,
-            "displayValue": "202,468"
-          },
-          "headshots": {
-            "value": 741,
-            "displayValue": "741"
-          },
-          "headshotsPerRound": {
-            "value": 0.5061475409836066,
-            "displayValue": "0.5"
-          },
-          "headshotsPercentage": {
-            "value": 25.94324914250078,
-            "displayValue": "25.9%"
-          },
-          "grenadeCasts": {
-            "value": 851,
-            "displayValue": "851"
-          },
-          "grenadeCastsPerRound": {
-            "value": 0.5812841530054644,
-            "displayValue": "0.6"
-          },
-          "grenadeCastsPerMatch": {
-            "value": 12.333333333333334,
-            "displayValue": "12.33"
-          },
-          "ability1Casts": {
-            "value": 707,
-            "displayValue": "707"
-          },
-          "ability1CastsPerRound": {
-            "value": 0.48292349726775957,
-            "displayValue": "0.5"
-          },
-          "ability1CastsPerMatch": {
-            "value": 10.246376811594203,
-            "displayValue": "10.25"
-          },
-          "ability2Casts": {
-            "value": 1345,
-            "displayValue": "1,345"
-          },
-          "ability2CastsPerRound": {
-            "value": 0.9187158469945356,
-            "displayValue": "0.9"
-          },
-          "ability2CastsPerMatch": {
-            "value": 19.492753623188406,
-            "displayValue": "19.49"
-          },
-          "ultimateCasts": {
-            "value": 128,
-            "displayValue": "128"
-          },
-          "ultimateCastsPerRound": {
-            "value": 0.08743169398907104,
-            "displayValue": "0.1"
-          },
-          "ultimateCastsPerMatch": {
-            "value": 1.855072463768116,
-            "displayValue": "1.86"
-          },
-          "dealtHeadshots": {
-            "value": 832,
-            "displayValue": "832"
-          },
-          "dealtBodyshots": {
-            "value": 2204,
-            "displayValue": "2,204"
-          },
-          "dealtLegshots": {
-            "value": 171,
-            "displayValue": "171"
-          },
-          "receivedHeadshots": {
-            "value": 680,
-            "displayValue": "680"
-          },
-          "receivedBodyshots": {
-            "value": 2702,
-            "displayValue": "2,702"
-          },
-          "receivedLegshots": {
-            "value": 322,
-            "displayValue": "322"
-          },
-          "econRating": {
-            "value": 4154,
-            "displayValue": "4,154"
-          },
-          "econRatingPerMatch": {
-            "value": 60.20289855072464,
-            "displayValue": "60"
-          },
-          "econRatingPerRound": {
-            "value": 2.837431693989071,
-            "displayValue": "2.8"
-          },
-          "suicides": {
-            "value": 0,
-            "displayValue": "0"
-          },
-          "firstBloods": {
-            "value": 183,
-            "displayValue": "183"
-          },
-          "firstBloodsPerRound": {
-            "value": 0.125,
-            "displayValue": "0.1"
-          },
-          "firstBloodsPerMatch": {
-            "value": 2.652173913043478,
-            "displayValue": "2.65"
-          },
-          "firstDeaths": {
-            "value": 153,
-            "displayValue": "153"
-          },
-          "firstDeathsPerRound": {
-            "value": 0.10450819672131148,
-            "displayValue": "0.1"
-          },
-          "lastDeaths": {
-            "value": 119,
-            "displayValue": "119"
-          },
-          "survived": {
-            "value": 375,
-            "displayValue": "375"
-          },
-          "traded": {
-            "value": 200,
-            "displayValue": "200"
-          },
-          "kAST": {
-            "value": 68.44,
-            "displayValue": "68.4%"
-          },
-          "mostKillsInMatch": {
-            "value": 31,
-            "displayValue": "31"
-          },
-          "flawless": {
-            "value": 65,
-            "displayValue": "65"
-          },
-          "thrifty": {
-            "value": 33,
-            "displayValue": "33"
-          },
-          "aces": {
-            "value": 2,
-            "displayValue": "2"
-          },
-          "teamAces": {
-            "value": 12,
-            "displayValue": "12"
-          },
-          "clutches": {
-            "value": 18,
-            "displayValue": "18"
-          },
-          "clutchesPercentage": {
-            "value": 1.2295081967213115,
-            "displayValue": "1.2%"
-          },
-          "clutchesLost": {
-            "value": 116,
-            "displayValue": "116"
-          },
-          "clutches1v1": {
-            "value": 14,
-            "displayValue": "14"
-          },
-          "clutches1v2": {
-            "value": 3,
-            "displayValue": "3"
-          },
-          "clutches1v3": {
-            "value": 1,
-            "displayValue": "1"
-          },
-          "clutches1v4": {
-            "value": 0,
-            "displayValue": "0"
-          },
-          "clutches1v5": {
-            "value": 0,
-            "displayValue": "0"
-          },
-          "clutchesLost1v1": {
-            "value": 7,
-            "displayValue": "7"
-          },
-          "clutchesLost1v2": {
-            "value": 22,
-            "displayValue": "22"
-          },
-          "clutchesLost1v3": {
-            "value": 33,
-            "displayValue": "33"
-          },
-          "clutchesLost1v4": {
-            "value": 38,
-            "displayValue": "38"
-          },
-          "clutchesLost1v5": {
-            "value": 16,
-            "displayValue": "16"
-          },
-          "kills1K": {
-            "value": 441,
-            "displayValue": "441"
-          },
-          "kills2K": {
-            "value": 208,
-            "displayValue": "208"
-          },
-          "kills3K": {
-            "value": 65,
-            "displayValue": "65"
-          },
-          "kills4K": {
-            "value": 14,
-            "displayValue": "14"
-          },
-          "kills5K": {
-            "value": 2,
-            "displayValue": "2"
-          },
-          "kills6K": {
-            "value": 0,
-            "displayValue": "0"
-          },
-          "esr": {
-            "value": 0.5446428571428571,
-            "displayValue": "0.54"
-          },
-          "plants": {
-            "value": 92,
-            "displayValue": "92"
-          },
-          "plantsPerMatch": {
-            "value": 1.3333333333333333,
-            "displayValue": "1.33"
-          },
-          "plantsPerRound": {
-            "value": 0.13105413105413105,
-            "displayValue": "0.1"
-          },
-          "attackKills": {
-            "value": 531,
-            "displayValue": "531"
-          },
-          "attackKillsPerRound": {
-            "value": 0.7564102564102564,
-            "displayValue": "0.8"
-          },
-          "attackDeaths": {
-            "value": 521,
-            "displayValue": "521"
-          },
-          "attackKDRatio": {
-            "value": 1.0191938579654511,
-            "displayValue": "1.02"
-          },
-          "attackAssists": {
-            "value": 188,
-            "displayValue": "188"
-          },
-          "attackAssistsPerRound": {
-            "value": 0.2678062678062678,
-            "displayValue": "0.3"
-          },
-          "attackRoundsWon": {
-            "value": 338,
-            "displayValue": "338"
-          },
-          "attackRoundsLost": {
-            "value": 364,
-            "displayValue": "364"
-          },
-          "attackRoundsPlayed": {
-            "value": 702,
-            "displayValue": "702"
-          },
-          "attackRoundsWinPct": {
-            "value": 48.148148148148145,
-            "displayValue": "48.1%"
-          },
-          "attackScore": {
-            "value": 153612,
-            "displayValue": "153,612"
-          },
-          "attackScorePerRound": {
-            "value": 218.82051282051282,
-            "displayValue": "218.8"
-          },
-          "attackDamage": {
-            "value": 100347,
-            "displayValue": "100,347"
-          },
-          "attackDamageReceived": {
-            "value": 98288,
-            "displayValue": "98,288"
-          },
-          "attackDamagePerRound": {
-            "value": 142.94444444444446,
-            "displayValue": "142.9"
-          },
-          "attackDamageDelta": {
-            "value": 2059,
-            "displayValue": "2,059"
-          },
-          "attackDamageDeltaPerRound": {
-            "value": 2.933048433048433,
-            "displayValue": "3"
-          },
-          "attackHeadshots": {
-            "value": 364,
-            "displayValue": "364"
-          },
-          "attackTraded": {
-            "value": 116,
-            "displayValue": "116"
-          },
-          "attackSurvived": {
-            "value": 183,
-            "displayValue": "183"
-          },
-          "attackFirstBloods": {
-            "value": 78,
-            "displayValue": "78"
-          },
-          "attackFirstBloodsPerRound": {
-            "value": 0.1111111111111111,
-            "displayValue": "0.1"
-          },
-          "attackFirstDeaths": {
-            "value": 83,
-            "displayValue": "83"
-          },
-          "attackFirstDeathsPerRound": {
-            "value": 0.11823361823361823,
-            "displayValue": "0.1"
-          },
-          "attackEsr": {
-            "value": 0.484472049689441,
-            "displayValue": "0.48"
-          },
-          "attackKAST": {
-            "value": 70.51,
-            "displayValue": "70.5%"
-          },
-          "defuses": {
-            "value": 21,
-            "displayValue": "21"
-          },
-          "defusesPerMatch": {
-            "value": 0.30434782608695654,
-            "displayValue": "0.30"
-          },
-          "defusesPerRound": {
-            "value": 0.027559055118110236,
-            "displayValue": "0.0"
-          },
-          "defenseKills": {
-            "value": 587,
-            "displayValue": "587"
-          },
-          "defenseKillsPerRound": {
-            "value": 0.7703412073490814,
-            "displayValue": "0.8"
-          },
-          "defenseDeaths": {
-            "value": 570,
-            "displayValue": "570"
-          },
-          "defenseKDRatio": {
-            "value": 1.0298245614035089,
-            "displayValue": "1.03"
-          },
-          "defenseAssists": {
-            "value": 181,
-            "displayValue": "181"
-          },
-          "defenseAssistsPerRound": {
-            "value": 0.23753280839895013,
-            "displayValue": "0.2"
-          },
-          "defenseRoundsWon": {
-            "value": 369,
-            "displayValue": "369"
-          },
-          "defenseRoundsLost": {
-            "value": 393,
-            "displayValue": "393"
-          },
-          "defenseRoundsPlayed": {
-            "value": 762,
-            "displayValue": "762"
-          },
-          "defenseRoundsWinPct": {
-            "value": 48.4251968503937,
-            "displayValue": "48.4%"
-          },
-          "defenseScore": {
-            "value": 173413,
-            "displayValue": "173,413"
-          },
-          "defenseScorePerRound": {
-            "value": 227.57611548556432,
-            "displayValue": "227.6"
-          },
-          "defenseDamage": {
-            "value": 113437,
-            "displayValue": "113,437"
-          },
-          "defenseDamageReceived": {
-            "value": 104180,
-            "displayValue": "104,180"
-          },
-          "defenseDamagePerRound": {
-            "value": 148.86745406824147,
-            "displayValue": "148.9"
-          },
-          "defenseDamageDelta": {
-            "value": 9257,
-            "displayValue": "9,257"
-          },
-          "defenseDamageDeltaPerRound": {
-            "value": 12.148293963254593,
-            "displayValue": "12"
-          },
-          "defenseHeadshots": {
-            "value": 377,
-            "displayValue": "377"
-          },
-          "defenseTraded": {
-            "value": 84,
-            "displayValue": "84"
-          },
-          "defenseSurvived": {
-            "value": 192,
-            "displayValue": "192"
-          },
-          "defenseFirstBloods": {
-            "value": 105,
-            "displayValue": "105"
-          },
-          "defenseFirstBloodsPerRound": {
-            "value": 0.1377952755905512,
-            "displayValue": "0.1"
-          },
-          "defenseFirstDeaths": {
-            "value": 70,
-            "displayValue": "70"
-          },
-          "defenseFirstDeathsPerRound": {
-            "value": 0.09186351706036745,
-            "displayValue": "0.1"
-          },
-          "defenseEsr": {
-            "value": 0.6,
-            "displayValue": "0.60"
-          },
-          "defenseKAST": {
-            "value": 66.54,
-            "displayValue": "66.5%"
-          },
-          "rank": {
-            "value": null,
-            "displayValue": ""
-          },
-          "trnPerformanceScore": {
-            "value": 479,
-            "displayValue": "479"
-          },
-          "peakRank": {
-            "value": null,
-            "displayValue": "Diamond 1"
-          }
-        }
-      }
-    ],
-    "current": [
       {
         "name": "ドラゴン龍",
         "tag": "8888",
@@ -7143,6 +6461,5094 @@
         "peakRank": {
           "value": null,
           "displayValue": "Diamond 1"
+        }
+      }
+    },
+    {
+      "name": "oga3370",
+      "tag": "3344",
+      "peak_rank": "Diamond 3",
+      "clutch": {},
+      "clutch_success_rate": 15.4,
+      "clutch_wins": 53,
+      "clutch_attempts": 344,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 130,
+          "displayValue": "130"
+        },
+        "matchesWon": {
+          "value": 59,
+          "displayValue": "59"
+        },
+        "matchesLost": {
+          "value": 69,
+          "displayValue": "69"
+        },
+        "matchesTied": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "matchesWinPct": {
+          "value": 45.38461538461539,
+          "displayValue": "45.4%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2207.9153846153845,
+          "displayValue": "36m 47s"
+        },
+        "timePlayed": {
+          "value": 287029,
+          "displayValue": "79h"
+        },
+        "mVPs": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "roundsPlayed": {
+          "value": 2742,
+          "displayValue": "2,742"
+        },
+        "roundsWon": {
+          "value": 1324,
+          "displayValue": "1,324"
+        },
+        "roundsLost": {
+          "value": 1418,
+          "displayValue": "1,418"
+        },
+        "roundsWinPct": {
+          "value": 48.28592268417214,
+          "displayValue": "48.3%"
+        },
+        "roundsDuration": {
+          "value": 104.67870167760759,
+          "displayValue": "01m 44s"
+        },
+        "score": {
+          "value": 680244,
+          "displayValue": "680,244"
+        },
+        "scorePerMatch": {
+          "value": 5232.6461538461535,
+          "displayValue": "5,233"
+        },
+        "scorePerRound": {
+          "value": 248.0831509846827,
+          "displayValue": "248.1"
+        },
+        "kills": {
+          "value": 2425,
+          "displayValue": "2,425"
+        },
+        "killsPerRound": {
+          "value": 0.8843909555069293,
+          "displayValue": "0.9"
+        },
+        "killsPerMatch": {
+          "value": 18.653846153846153,
+          "displayValue": "18.7"
+        },
+        "deaths": {
+          "value": 1912,
+          "displayValue": "1,912"
+        },
+        "deathsPerRound": {
+          "value": 0.6973012399708242,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 14.707692307692307,
+          "displayValue": "14.7"
+        },
+        "assists": {
+          "value": 562,
+          "displayValue": "562"
+        },
+        "assistsPerRound": {
+          "value": 0.2049598832968636,
+          "displayValue": "0.2"
+        },
+        "assistsPerMatch": {
+          "value": 4.323076923076923,
+          "displayValue": "4.3"
+        },
+        "kDRatio": {
+          "value": 1.268305439330544,
+          "displayValue": "1.27"
+        },
+        "kDARatio": {
+          "value": 1.4152719665271967,
+          "displayValue": "1.42"
+        },
+        "kADRatio": {
+          "value": 1.5622384937238494,
+          "displayValue": "1.56"
+        },
+        "damage": {
+          "value": 456623,
+          "displayValue": "456,623"
+        },
+        "damageDelta": {
+          "value": 88119,
+          "displayValue": "88,119"
+        },
+        "damageDeltaPerRound": {
+          "value": 32.13676148796499,
+          "displayValue": "32"
+        },
+        "damagePerRound": {
+          "value": 166.5291757840992,
+          "displayValue": "166.5"
+        },
+        "damagePerMatch": {
+          "value": 3512.4846153846156,
+          "displayValue": "3,512.48"
+        },
+        "damagePerMinute": {
+          "value": 95.46790717123145,
+          "displayValue": "95.5"
+        },
+        "damageReceived": {
+          "value": 368504,
+          "displayValue": "368,504"
+        },
+        "headshots": {
+          "value": 1677,
+          "displayValue": "1,677"
+        },
+        "headshotsPerRound": {
+          "value": 0.611597374179431,
+          "displayValue": "0.6"
+        },
+        "headshotsPercentage": {
+          "value": 26.148105625717566,
+          "displayValue": "26.1%"
+        },
+        "grenadeCasts": {
+          "value": 1459,
+          "displayValue": "1,459"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.5320933625091174,
+          "displayValue": "0.5"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 11.223076923076922,
+          "displayValue": "11.22"
+        },
+        "ability1Casts": {
+          "value": 1114,
+          "displayValue": "1,114"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.4062727935813275,
+          "displayValue": "0.4"
+        },
+        "ability1CastsPerMatch": {
+          "value": 8.569230769230769,
+          "displayValue": "8.57"
+        },
+        "ability2Casts": {
+          "value": 2402,
+          "displayValue": "2,402"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.8760029175784099,
+          "displayValue": "0.9"
+        },
+        "ability2CastsPerMatch": {
+          "value": 18.476923076923075,
+          "displayValue": "18.48"
+        },
+        "ultimateCasts": {
+          "value": 264,
+          "displayValue": "264"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.0962800875273523,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 2.0307692307692307,
+          "displayValue": "2.03"
+        },
+        "dealtHeadshots": {
+          "value": 1822,
+          "displayValue": "1,822"
+        },
+        "dealtBodyshots": {
+          "value": 4824,
+          "displayValue": "4,824"
+        },
+        "dealtLegshots": {
+          "value": 322,
+          "displayValue": "322"
+        },
+        "receivedHeadshots": {
+          "value": 1326,
+          "displayValue": "1,326"
+        },
+        "receivedBodyshots": {
+          "value": 4675,
+          "displayValue": "4,675"
+        },
+        "receivedLegshots": {
+          "value": 432,
+          "displayValue": "432"
+        },
+        "econRating": {
+          "value": 9106,
+          "displayValue": "9,106"
+        },
+        "econRatingPerMatch": {
+          "value": 70.04615384615384,
+          "displayValue": "70"
+        },
+        "econRatingPerRound": {
+          "value": 3.3209336250911745,
+          "displayValue": "3.3"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 282,
+          "displayValue": "282"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.10284463894967177,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 2.169230769230769,
+          "displayValue": "2.17"
+        },
+        "firstDeaths": {
+          "value": 251,
+          "displayValue": "251"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.09153902261123267,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 297,
+          "displayValue": "297"
+        },
+        "survived": {
+          "value": 832,
+          "displayValue": "832"
+        },
+        "traded": {
+          "value": 336,
+          "displayValue": "336"
+        },
+        "kAST": {
+          "value": 73.09,
+          "displayValue": "73.1%"
+        },
+        "mostKillsInMatch": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "flawless": {
+          "value": 118,
+          "displayValue": "118"
+        },
+        "thrifty": {
+          "value": 60,
+          "displayValue": "60"
+        },
+        "aces": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "teamAces": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "clutches": {
+          "value": 53,
+          "displayValue": "53"
+        },
+        "clutchesPercentage": {
+          "value": 1.9328956965718453,
+          "displayValue": "1.9%"
+        },
+        "clutchesLost": {
+          "value": 291,
+          "displayValue": "291"
+        },
+        "clutches1v1": {
+          "value": 31,
+          "displayValue": "31"
+        },
+        "clutches1v2": {
+          "value": 16,
+          "displayValue": "16"
+        },
+        "clutches1v3": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 18,
+          "displayValue": "18"
+        },
+        "clutchesLost1v2": {
+          "value": 66,
+          "displayValue": "66"
+        },
+        "clutchesLost1v3": {
+          "value": 101,
+          "displayValue": "101"
+        },
+        "clutchesLost1v4": {
+          "value": 75,
+          "displayValue": "75"
+        },
+        "clutchesLost1v5": {
+          "value": 31,
+          "displayValue": "31"
+        },
+        "kills1K": {
+          "value": 881,
+          "displayValue": "881"
+        },
+        "kills2K": {
+          "value": 420,
+          "displayValue": "420"
+        },
+        "kills3K": {
+          "value": 174,
+          "displayValue": "174"
+        },
+        "kills4K": {
+          "value": 38,
+          "displayValue": "38"
+        },
+        "kills5K": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.5290806754221389,
+          "displayValue": "0.53"
+        },
+        "plants": {
+          "value": 101,
+          "displayValue": "101"
+        },
+        "plantsPerMatch": {
+          "value": 0.7769230769230769,
+          "displayValue": "0.78"
+        },
+        "plantsPerRound": {
+          "value": 0.07492581602373888,
+          "displayValue": "0.1"
+        },
+        "attackKills": {
+          "value": 1176,
+          "displayValue": "1,176"
+        },
+        "attackKillsPerRound": {
+          "value": 0.8724035608308606,
+          "displayValue": "0.9"
+        },
+        "attackDeaths": {
+          "value": 956,
+          "displayValue": "956"
+        },
+        "attackKDRatio": {
+          "value": 1.2301255230125523,
+          "displayValue": "1.23"
+        },
+        "attackAssists": {
+          "value": 280,
+          "displayValue": "280"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.20771513353115728,
+          "displayValue": "0.2"
+        },
+        "attackRoundsWon": {
+          "value": 652,
+          "displayValue": "652"
+        },
+        "attackRoundsLost": {
+          "value": 696,
+          "displayValue": "696"
+        },
+        "attackRoundsPlayed": {
+          "value": 1348,
+          "displayValue": "1,348"
+        },
+        "attackRoundsWinPct": {
+          "value": 48.367952522255194,
+          "displayValue": "48.4%"
+        },
+        "attackScore": {
+          "value": 329866,
+          "displayValue": "329,866"
+        },
+        "attackScorePerRound": {
+          "value": 244.70771513353117,
+          "displayValue": "244.7"
+        },
+        "attackDamage": {
+          "value": 221099,
+          "displayValue": "221,099"
+        },
+        "attackDamageReceived": {
+          "value": 185549,
+          "displayValue": "185,549"
+        },
+        "attackDamagePerRound": {
+          "value": 164.0200296735905,
+          "displayValue": "164.0"
+        },
+        "attackDamageDelta": {
+          "value": 35550,
+          "displayValue": "35,550"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": 26.37240356083086,
+          "displayValue": "26"
+        },
+        "attackHeadshots": {
+          "value": 830,
+          "displayValue": "830"
+        },
+        "attackTraded": {
+          "value": 186,
+          "displayValue": "186"
+        },
+        "attackSurvived": {
+          "value": 393,
+          "displayValue": "393"
+        },
+        "attackFirstBloods": {
+          "value": 133,
+          "displayValue": "133"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.09866468842729971,
+          "displayValue": "0.1"
+        },
+        "attackFirstDeaths": {
+          "value": 150,
+          "displayValue": "150"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.11127596439169139,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.46996466431095407,
+          "displayValue": "0.47"
+        },
+        "attackKAST": {
+          "value": 71.81,
+          "displayValue": "71.8%"
+        },
+        "defuses": {
+          "value": 69,
+          "displayValue": "69"
+        },
+        "defusesPerMatch": {
+          "value": 0.5307692307692308,
+          "displayValue": "0.53"
+        },
+        "defusesPerRound": {
+          "value": 0.04949784791965567,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 1249,
+          "displayValue": "1,249"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.8959827833572453,
+          "displayValue": "0.9"
+        },
+        "defenseDeaths": {
+          "value": 956,
+          "displayValue": "956"
+        },
+        "defenseKDRatio": {
+          "value": 1.3064853556485356,
+          "displayValue": "1.31"
+        },
+        "defenseAssists": {
+          "value": 280,
+          "displayValue": "280"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.20086083213773315,
+          "displayValue": "0.2"
+        },
+        "defenseRoundsWon": {
+          "value": 672,
+          "displayValue": "672"
+        },
+        "defenseRoundsLost": {
+          "value": 722,
+          "displayValue": "722"
+        },
+        "defenseRoundsPlayed": {
+          "value": 1394,
+          "displayValue": "1,394"
+        },
+        "defenseRoundsWinPct": {
+          "value": 48.20659971305595,
+          "displayValue": "48.2%"
+        },
+        "defenseScore": {
+          "value": 350378,
+          "displayValue": "350,378"
+        },
+        "defenseScorePerRound": {
+          "value": 251.34720229555236,
+          "displayValue": "251.3"
+        },
+        "defenseDamage": {
+          "value": 235524,
+          "displayValue": "235,524"
+        },
+        "defenseDamageReceived": {
+          "value": 182955,
+          "displayValue": "182,955"
+        },
+        "defenseDamagePerRound": {
+          "value": 168.9555236728838,
+          "displayValue": "169.0"
+        },
+        "defenseDamageDelta": {
+          "value": 52569,
+          "displayValue": "52,569"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": 37.71090387374462,
+          "displayValue": "38"
+        },
+        "defenseHeadshots": {
+          "value": 847,
+          "displayValue": "847"
+        },
+        "defenseTraded": {
+          "value": 150,
+          "displayValue": "150"
+        },
+        "defenseSurvived": {
+          "value": 439,
+          "displayValue": "439"
+        },
+        "defenseFirstBloods": {
+          "value": 149,
+          "displayValue": "149"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.10688665710186514,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 101,
+          "displayValue": "101"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.07245337159253945,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.596,
+          "displayValue": "0.60"
+        },
+        "defenseKAST": {
+          "value": 74.32,
+          "displayValue": "74.3%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 749,
+          "displayValue": "749"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Diamond 3"
+        }
+      }
+    },
+    {
+      "name": "Nobodean",
+      "tag": "0000",
+      "peak_rank": "Gold 3",
+      "clutch": {},
+      "clutch_success_rate": 13.8,
+      "clutch_wins": 15,
+      "clutch_attempts": 109,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 47,
+          "displayValue": "47"
+        },
+        "matchesWon": {
+          "value": 22,
+          "displayValue": "22"
+        },
+        "matchesLost": {
+          "value": 24,
+          "displayValue": "24"
+        },
+        "matchesTied": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "matchesWinPct": {
+          "value": 46.808510638297875,
+          "displayValue": "46.8%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2229.68085106383,
+          "displayValue": "37m 09s"
+        },
+        "timePlayed": {
+          "value": 104795,
+          "displayValue": "29h"
+        },
+        "mVPs": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "roundsPlayed": {
+          "value": 1007,
+          "displayValue": "1,007"
+        },
+        "roundsWon": {
+          "value": 495,
+          "displayValue": "495"
+        },
+        "roundsLost": {
+          "value": 512,
+          "displayValue": "512"
+        },
+        "roundsWinPct": {
+          "value": 49.15590863952334,
+          "displayValue": "49.2%"
+        },
+        "roundsDuration": {
+          "value": 104.06653426017876,
+          "displayValue": "01m 44s"
+        },
+        "score": {
+          "value": 189019,
+          "displayValue": "189,019"
+        },
+        "scorePerMatch": {
+          "value": 4021.68085106383,
+          "displayValue": "4,022"
+        },
+        "scorePerRound": {
+          "value": 187.70506454816285,
+          "displayValue": "187.7"
+        },
+        "kills": {
+          "value": 635,
+          "displayValue": "635"
+        },
+        "killsPerRound": {
+          "value": 0.6305858987090367,
+          "displayValue": "0.6"
+        },
+        "killsPerMatch": {
+          "value": 13.51063829787234,
+          "displayValue": "13.5"
+        },
+        "deaths": {
+          "value": 743,
+          "displayValue": "743"
+        },
+        "deathsPerRound": {
+          "value": 0.7378351539225422,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 15.808510638297872,
+          "displayValue": "15.8"
+        },
+        "assists": {
+          "value": 319,
+          "displayValue": "319"
+        },
+        "assistsPerRound": {
+          "value": 0.31678252234359483,
+          "displayValue": "0.3"
+        },
+        "assistsPerMatch": {
+          "value": 6.787234042553192,
+          "displayValue": "6.8"
+        },
+        "kDRatio": {
+          "value": 0.8546433378196501,
+          "displayValue": "0.85"
+        },
+        "kDARatio": {
+          "value": 1.069313593539704,
+          "displayValue": "1.07"
+        },
+        "kADRatio": {
+          "value": 1.2839838492597577,
+          "displayValue": "1.28"
+        },
+        "damage": {
+          "value": 125332,
+          "displayValue": "125,332"
+        },
+        "damageDelta": {
+          "value": -15241,
+          "displayValue": "-15,241"
+        },
+        "damageDeltaPerRound": {
+          "value": -15.135054617676266,
+          "displayValue": "-15"
+        },
+        "damagePerRound": {
+          "value": 124.46077457795433,
+          "displayValue": "124.5"
+        },
+        "damagePerMatch": {
+          "value": 2666.6382978723404,
+          "displayValue": "2,666.64"
+        },
+        "damagePerMinute": {
+          "value": 71.78235967926689,
+          "displayValue": "71.8"
+        },
+        "damageReceived": {
+          "value": 140573,
+          "displayValue": "140,573"
+        },
+        "headshots": {
+          "value": 358,
+          "displayValue": "358"
+        },
+        "headshotsPerRound": {
+          "value": 0.3555114200595829,
+          "displayValue": "0.4"
+        },
+        "headshotsPercentage": {
+          "value": 15.732436472346786,
+          "displayValue": "15.7%"
+        },
+        "grenadeCasts": {
+          "value": 356,
+          "displayValue": "356"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.3535253227408143,
+          "displayValue": "0.4"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 7.574468085106383,
+          "displayValue": "7.57"
+        },
+        "ability1Casts": {
+          "value": 410,
+          "displayValue": "410"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.407149950347567,
+          "displayValue": "0.4"
+        },
+        "ability1CastsPerMatch": {
+          "value": 8.72340425531915,
+          "displayValue": "8.72"
+        },
+        "ability2Casts": {
+          "value": 1357,
+          "displayValue": "1,357"
+        },
+        "ability2CastsPerRound": {
+          "value": 1.3475670307845085,
+          "displayValue": "1.3"
+        },
+        "ability2CastsPerMatch": {
+          "value": 28.872340425531913,
+          "displayValue": "28.87"
+        },
+        "ultimateCasts": {
+          "value": 70,
+          "displayValue": "70"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.06951340615690169,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 1.4893617021276595,
+          "displayValue": "1.49"
+        },
+        "dealtHeadshots": {
+          "value": 421,
+          "displayValue": "421"
+        },
+        "dealtBodyshots": {
+          "value": 1985,
+          "displayValue": "1,985"
+        },
+        "dealtLegshots": {
+          "value": 270,
+          "displayValue": "270"
+        },
+        "receivedHeadshots": {
+          "value": 480,
+          "displayValue": "480"
+        },
+        "receivedBodyshots": {
+          "value": 1836,
+          "displayValue": "1,836"
+        },
+        "receivedLegshots": {
+          "value": 200,
+          "displayValue": "200"
+        },
+        "econRating": {
+          "value": 2400,
+          "displayValue": "2,400"
+        },
+        "econRatingPerMatch": {
+          "value": 51.06382978723404,
+          "displayValue": "51"
+        },
+        "econRatingPerRound": {
+          "value": 2.3833167825223436,
+          "displayValue": "2.4"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 65,
+          "displayValue": "65"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.06454816285998013,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 1.3829787234042554,
+          "displayValue": "1.38"
+        },
+        "firstDeaths": {
+          "value": 96,
+          "displayValue": "96"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.09533267130089375,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 92,
+          "displayValue": "92"
+        },
+        "survived": {
+          "value": 261,
+          "displayValue": "261"
+        },
+        "traded": {
+          "value": 156,
+          "displayValue": "156"
+        },
+        "kAST": {
+          "value": 68.42,
+          "displayValue": "68.4%"
+        },
+        "mostKillsInMatch": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "flawless": {
+          "value": 53,
+          "displayValue": "53"
+        },
+        "thrifty": {
+          "value": 18,
+          "displayValue": "18"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 7,
+          "displayValue": "7"
+        },
+        "clutches": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "clutchesPercentage": {
+          "value": 1.4895729890764648,
+          "displayValue": "1.5%"
+        },
+        "clutchesLost": {
+          "value": 94,
+          "displayValue": "94"
+        },
+        "clutches1v1": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "clutches1v2": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v3": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 8,
+          "displayValue": "8"
+        },
+        "clutchesLost1v2": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "clutchesLost1v3": {
+          "value": 19,
+          "displayValue": "19"
+        },
+        "clutchesLost1v4": {
+          "value": 28,
+          "displayValue": "28"
+        },
+        "clutchesLost1v5": {
+          "value": 19,
+          "displayValue": "19"
+        },
+        "kills1K": {
+          "value": 281,
+          "displayValue": "281"
+        },
+        "kills2K": {
+          "value": 118,
+          "displayValue": "118"
+        },
+        "kills3K": {
+          "value": 30,
+          "displayValue": "30"
+        },
+        "kills4K": {
+          "value": 7,
+          "displayValue": "7"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.40372670807453415,
+          "displayValue": "0.40"
+        },
+        "plants": {
+          "value": 54,
+          "displayValue": "54"
+        },
+        "plantsPerMatch": {
+          "value": 1.148936170212766,
+          "displayValue": "1.15"
+        },
+        "plantsPerRound": {
+          "value": 0.1073558648111332,
+          "displayValue": "0.1"
+        },
+        "attackKills": {
+          "value": 286,
+          "displayValue": "286"
+        },
+        "attackKillsPerRound": {
+          "value": 0.5685884691848907,
+          "displayValue": "0.6"
+        },
+        "attackDeaths": {
+          "value": 382,
+          "displayValue": "382"
+        },
+        "attackKDRatio": {
+          "value": 0.7486910994764397,
+          "displayValue": "0.75"
+        },
+        "attackAssists": {
+          "value": 154,
+          "displayValue": "154"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.3061630218687873,
+          "displayValue": "0.3"
+        },
+        "attackRoundsWon": {
+          "value": 253,
+          "displayValue": "253"
+        },
+        "attackRoundsLost": {
+          "value": 250,
+          "displayValue": "250"
+        },
+        "attackRoundsPlayed": {
+          "value": 503,
+          "displayValue": "503"
+        },
+        "attackRoundsWinPct": {
+          "value": 50.29821073558648,
+          "displayValue": "50.3%"
+        },
+        "attackScore": {
+          "value": 84888,
+          "displayValue": "84,888"
+        },
+        "attackScorePerRound": {
+          "value": 168.7634194831014,
+          "displayValue": "168.8"
+        },
+        "attackDamage": {
+          "value": 55601,
+          "displayValue": "55,601"
+        },
+        "attackDamageReceived": {
+          "value": 72507,
+          "displayValue": "72,507"
+        },
+        "attackDamagePerRound": {
+          "value": 110.53876739562624,
+          "displayValue": "110.5"
+        },
+        "attackDamageDelta": {
+          "value": -16906,
+          "displayValue": "-16,906"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": -33.610337972166995,
+          "displayValue": "-34"
+        },
+        "attackHeadshots": {
+          "value": 140,
+          "displayValue": "140"
+        },
+        "attackTraded": {
+          "value": 97,
+          "displayValue": "97"
+        },
+        "attackSurvived": {
+          "value": 120,
+          "displayValue": "120"
+        },
+        "attackFirstBloods": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.041749502982107355,
+          "displayValue": "0.0"
+        },
+        "attackFirstDeaths": {
+          "value": 45,
+          "displayValue": "45"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.08946322067594434,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.3181818181818182,
+          "displayValue": "0.32"
+        },
+        "attackKAST": {
+          "value": 66.8,
+          "displayValue": "66.8%"
+        },
+        "defuses": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "defusesPerMatch": {
+          "value": 0.23404255319148937,
+          "displayValue": "0.23"
+        },
+        "defusesPerRound": {
+          "value": 0.021825396825396824,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 349,
+          "displayValue": "349"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.6924603174603174,
+          "displayValue": "0.7"
+        },
+        "defenseDeaths": {
+          "value": 361,
+          "displayValue": "361"
+        },
+        "defenseKDRatio": {
+          "value": 0.9667590027700831,
+          "displayValue": "0.97"
+        },
+        "defenseAssists": {
+          "value": 163,
+          "displayValue": "163"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.32341269841269843,
+          "displayValue": "0.3"
+        },
+        "defenseRoundsWon": {
+          "value": 242,
+          "displayValue": "242"
+        },
+        "defenseRoundsLost": {
+          "value": 262,
+          "displayValue": "262"
+        },
+        "defenseRoundsPlayed": {
+          "value": 504,
+          "displayValue": "504"
+        },
+        "defenseRoundsWinPct": {
+          "value": 48.01587301587302,
+          "displayValue": "48.0%"
+        },
+        "defenseScore": {
+          "value": 104131,
+          "displayValue": "104,131"
+        },
+        "defenseScorePerRound": {
+          "value": 206.609126984127,
+          "displayValue": "206.6"
+        },
+        "defenseDamage": {
+          "value": 69731,
+          "displayValue": "69,731"
+        },
+        "defenseDamageReceived": {
+          "value": 68066,
+          "displayValue": "68,066"
+        },
+        "defenseDamagePerRound": {
+          "value": 138.35515873015873,
+          "displayValue": "138.4"
+        },
+        "defenseDamageDelta": {
+          "value": 1665,
+          "displayValue": "1,665"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": 3.3035714285714284,
+          "displayValue": "3"
+        },
+        "defenseHeadshots": {
+          "value": 218,
+          "displayValue": "218"
+        },
+        "defenseTraded": {
+          "value": 59,
+          "displayValue": "59"
+        },
+        "defenseSurvived": {
+          "value": 141,
+          "displayValue": "141"
+        },
+        "defenseFirstBloods": {
+          "value": 44,
+          "displayValue": "44"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.0873015873015873,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 51,
+          "displayValue": "51"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.10119047619047619,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.4631578947368421,
+          "displayValue": "0.46"
+        },
+        "defenseKAST": {
+          "value": 70.04,
+          "displayValue": "70.0%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 240,
+          "displayValue": "240"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Gold 3"
+        }
+      }
+    },
+    {
+      "name": "上三川の悪魔",
+      "tag": "トキシック",
+      "peak_rank": "Gold 1",
+      "clutch": {},
+      "clutch_success_rate": 9.1,
+      "clutch_wins": 4,
+      "clutch_attempts": 44,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "matchesWon": {
+          "value": 7,
+          "displayValue": "7"
+        },
+        "matchesLost": {
+          "value": 7,
+          "displayValue": "7"
+        },
+        "matchesTied": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "matchesWinPct": {
+          "value": 46.666666666666664,
+          "displayValue": "46.7%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2395.133333333333,
+          "displayValue": "39m 55s"
+        },
+        "timePlayed": {
+          "value": 35927,
+          "displayValue": "9h 58m"
+        },
+        "mVPs": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "roundsPlayed": {
+          "value": 348,
+          "displayValue": "348"
+        },
+        "roundsWon": {
+          "value": 173,
+          "displayValue": "173"
+        },
+        "roundsLost": {
+          "value": 175,
+          "displayValue": "175"
+        },
+        "roundsWinPct": {
+          "value": 49.712643678160916,
+          "displayValue": "49.7%"
+        },
+        "roundsDuration": {
+          "value": 103.23850574712644,
+          "displayValue": "01m 43s"
+        },
+        "score": {
+          "value": 47496,
+          "displayValue": "47,496"
+        },
+        "scorePerMatch": {
+          "value": 3166.4,
+          "displayValue": "3,166"
+        },
+        "scorePerRound": {
+          "value": 136.48275862068965,
+          "displayValue": "136.5"
+        },
+        "kills": {
+          "value": 166,
+          "displayValue": "166"
+        },
+        "killsPerRound": {
+          "value": 0.47701149425287354,
+          "displayValue": "0.5"
+        },
+        "killsPerMatch": {
+          "value": 11.066666666666666,
+          "displayValue": "11.1"
+        },
+        "deaths": {
+          "value": 265,
+          "displayValue": "265"
+        },
+        "deathsPerRound": {
+          "value": 0.7614942528735632,
+          "displayValue": "0.8"
+        },
+        "deathsPerMatch": {
+          "value": 17.666666666666668,
+          "displayValue": "17.7"
+        },
+        "assists": {
+          "value": 68,
+          "displayValue": "68"
+        },
+        "assistsPerRound": {
+          "value": 0.19540229885057472,
+          "displayValue": "0.2"
+        },
+        "assistsPerMatch": {
+          "value": 4.533333333333333,
+          "displayValue": "4.5"
+        },
+        "kDRatio": {
+          "value": 0.6264150943396226,
+          "displayValue": "0.63"
+        },
+        "kDARatio": {
+          "value": 0.7547169811320755,
+          "displayValue": "0.75"
+        },
+        "kADRatio": {
+          "value": 0.8830188679245283,
+          "displayValue": "0.88"
+        },
+        "damage": {
+          "value": 32070,
+          "displayValue": "32,070"
+        },
+        "damageDelta": {
+          "value": -17247,
+          "displayValue": "-17,247"
+        },
+        "damageDeltaPerRound": {
+          "value": -49.560344827586206,
+          "displayValue": "-50"
+        },
+        "damagePerRound": {
+          "value": 92.15517241379311,
+          "displayValue": "92.2"
+        },
+        "damagePerMatch": {
+          "value": 2138.0,
+          "displayValue": "2,138.00"
+        },
+        "damagePerMinute": {
+          "value": 53.62876254180602,
+          "displayValue": "53.6"
+        },
+        "damageReceived": {
+          "value": 49317,
+          "displayValue": "49,317"
+        },
+        "headshots": {
+          "value": 125,
+          "displayValue": "125"
+        },
+        "headshotsPerRound": {
+          "value": 0.35919540229885055,
+          "displayValue": "0.4"
+        },
+        "headshotsPercentage": {
+          "value": 28.460038986354775,
+          "displayValue": "28.5%"
+        },
+        "grenadeCasts": {
+          "value": 192,
+          "displayValue": "192"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.5517241379310345,
+          "displayValue": "0.6"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 12.8,
+          "displayValue": "12.80"
+        },
+        "ability1Casts": {
+          "value": 165,
+          "displayValue": "165"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.47413793103448276,
+          "displayValue": "0.5"
+        },
+        "ability1CastsPerMatch": {
+          "value": 11.0,
+          "displayValue": "11.00"
+        },
+        "ability2Casts": {
+          "value": 191,
+          "displayValue": "191"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.5488505747126436,
+          "displayValue": "0.5"
+        },
+        "ability2CastsPerMatch": {
+          "value": 12.733333333333333,
+          "displayValue": "12.73"
+        },
+        "ultimateCasts": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.09770114942528736,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 2.2666666666666666,
+          "displayValue": "2.27"
+        },
+        "dealtHeadshots": {
+          "value": 146,
+          "displayValue": "146"
+        },
+        "dealtBodyshots": {
+          "value": 330,
+          "displayValue": "330"
+        },
+        "dealtLegshots": {
+          "value": 37,
+          "displayValue": "37"
+        },
+        "receivedHeadshots": {
+          "value": 163,
+          "displayValue": "163"
+        },
+        "receivedBodyshots": {
+          "value": 579,
+          "displayValue": "579"
+        },
+        "receivedLegshots": {
+          "value": 64,
+          "displayValue": "64"
+        },
+        "econRating": {
+          "value": 554,
+          "displayValue": "554"
+        },
+        "econRatingPerMatch": {
+          "value": 36.93333333333333,
+          "displayValue": "37"
+        },
+        "econRatingPerRound": {
+          "value": 1.5919540229885059,
+          "displayValue": "1.6"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.05747126436781609,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 1.3333333333333333,
+          "displayValue": "1.33"
+        },
+        "firstDeaths": {
+          "value": 35,
+          "displayValue": "35"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.10057471264367816,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 41,
+          "displayValue": "41"
+        },
+        "survived": {
+          "value": 83,
+          "displayValue": "83"
+        },
+        "traded": {
+          "value": 42,
+          "displayValue": "42"
+        },
+        "kAST": {
+          "value": 59.77,
+          "displayValue": "59.8%"
+        },
+        "mostKillsInMatch": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "flawless": {
+          "value": 16,
+          "displayValue": "16"
+        },
+        "thrifty": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "clutches": {
+          "value": 4,
+          "displayValue": "4"
+        },
+        "clutchesPercentage": {
+          "value": 1.1494252873563218,
+          "displayValue": "1.1%"
+        },
+        "clutchesLost": {
+          "value": 40,
+          "displayValue": "40"
+        },
+        "clutches1v1": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "clutches1v2": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches1v3": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutchesLost1v2": {
+          "value": 12,
+          "displayValue": "12"
+        },
+        "clutchesLost1v3": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "clutchesLost1v4": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "clutchesLost1v5": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "kills1K": {
+          "value": 93,
+          "displayValue": "93"
+        },
+        "kills2K": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "kills3K": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "kills4K": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.36363636363636365,
+          "displayValue": "0.36"
+        },
+        "plants": {
+          "value": 47,
+          "displayValue": "47"
+        },
+        "plantsPerMatch": {
+          "value": 3.1333333333333333,
+          "displayValue": "3.13"
+        },
+        "plantsPerRound": {
+          "value": 0.2883435582822086,
+          "displayValue": "0.3"
+        },
+        "attackKills": {
+          "value": 67,
+          "displayValue": "67"
+        },
+        "attackKillsPerRound": {
+          "value": 0.4110429447852761,
+          "displayValue": "0.4"
+        },
+        "attackDeaths": {
+          "value": 126,
+          "displayValue": "126"
+        },
+        "attackKDRatio": {
+          "value": 0.5317460317460317,
+          "displayValue": "0.53"
+        },
+        "attackAssists": {
+          "value": 36,
+          "displayValue": "36"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.22085889570552147,
+          "displayValue": "0.2"
+        },
+        "attackRoundsWon": {
+          "value": 82,
+          "displayValue": "82"
+        },
+        "attackRoundsLost": {
+          "value": 81,
+          "displayValue": "81"
+        },
+        "attackRoundsPlayed": {
+          "value": 163,
+          "displayValue": "163"
+        },
+        "attackRoundsWinPct": {
+          "value": 50.306748466257666,
+          "displayValue": "50.3%"
+        },
+        "attackScore": {
+          "value": 19645,
+          "displayValue": "19,645"
+        },
+        "attackScorePerRound": {
+          "value": 120.52147239263803,
+          "displayValue": "120.5"
+        },
+        "attackDamage": {
+          "value": 13315,
+          "displayValue": "13,315"
+        },
+        "attackDamageReceived": {
+          "value": 23307,
+          "displayValue": "23,307"
+        },
+        "attackDamagePerRound": {
+          "value": 81.68711656441718,
+          "displayValue": "81.7"
+        },
+        "attackDamageDelta": {
+          "value": -9992,
+          "displayValue": "-9,992"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": -61.30061349693251,
+          "displayValue": "-61"
+        },
+        "attackHeadshots": {
+          "value": 52,
+          "displayValue": "52"
+        },
+        "attackTraded": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "attackSurvived": {
+          "value": 37,
+          "displayValue": "37"
+        },
+        "attackFirstBloods": {
+          "value": 7,
+          "displayValue": "7"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.04294478527607362,
+          "displayValue": "0.0"
+        },
+        "attackFirstDeaths": {
+          "value": 17,
+          "displayValue": "17"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.10429447852760736,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.2916666666666667,
+          "displayValue": "0.29"
+        },
+        "attackKAST": {
+          "value": 59.51,
+          "displayValue": "59.5%"
+        },
+        "defuses": {
+          "value": 8,
+          "displayValue": "8"
+        },
+        "defusesPerMatch": {
+          "value": 0.5333333333333333,
+          "displayValue": "0.53"
+        },
+        "defusesPerRound": {
+          "value": 0.043243243243243246,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 99,
+          "displayValue": "99"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.5351351351351351,
+          "displayValue": "0.5"
+        },
+        "defenseDeaths": {
+          "value": 139,
+          "displayValue": "139"
+        },
+        "defenseKDRatio": {
+          "value": 0.7122302158273381,
+          "displayValue": "0.71"
+        },
+        "defenseAssists": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.17297297297297298,
+          "displayValue": "0.2"
+        },
+        "defenseRoundsWon": {
+          "value": 91,
+          "displayValue": "91"
+        },
+        "defenseRoundsLost": {
+          "value": 94,
+          "displayValue": "94"
+        },
+        "defenseRoundsPlayed": {
+          "value": 185,
+          "displayValue": "185"
+        },
+        "defenseRoundsWinPct": {
+          "value": 49.18918918918919,
+          "displayValue": "49.2%"
+        },
+        "defenseScore": {
+          "value": 27851,
+          "displayValue": "27,851"
+        },
+        "defenseScorePerRound": {
+          "value": 150.54594594594596,
+          "displayValue": "150.5"
+        },
+        "defenseDamage": {
+          "value": 18755,
+          "displayValue": "18,755"
+        },
+        "defenseDamageReceived": {
+          "value": 26010,
+          "displayValue": "26,010"
+        },
+        "defenseDamagePerRound": {
+          "value": 101.37837837837837,
+          "displayValue": "101.4"
+        },
+        "defenseDamageDelta": {
+          "value": -7255,
+          "displayValue": "-7,255"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": -39.21621621621622,
+          "displayValue": "-39"
+        },
+        "defenseHeadshots": {
+          "value": 73,
+          "displayValue": "73"
+        },
+        "defenseTraded": {
+          "value": 22,
+          "displayValue": "22"
+        },
+        "defenseSurvived": {
+          "value": 46,
+          "displayValue": "46"
+        },
+        "defenseFirstBloods": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.07027027027027027,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 18,
+          "displayValue": "18"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.0972972972972973,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.41935483870967744,
+          "displayValue": "0.42"
+        },
+        "defenseKAST": {
+          "value": 60.0,
+          "displayValue": "60.0%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 100,
+          "displayValue": "100"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Gold 1"
+        }
+      }
+    },
+    {
+      "name": "ヘイミー",
+      "tag": "闇バイト",
+      "peak_rank": "Diamond 1",
+      "clutch": {},
+      "clutch_success_rate": 13.6,
+      "clutch_wins": 36,
+      "clutch_attempts": 265,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 109,
+          "displayValue": "109"
+        },
+        "matchesWon": {
+          "value": 49,
+          "displayValue": "49"
+        },
+        "matchesLost": {
+          "value": 58,
+          "displayValue": "58"
+        },
+        "matchesTied": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "matchesWinPct": {
+          "value": 44.95412844036697,
+          "displayValue": "45.0%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2205.880733944954,
+          "displayValue": "36m 45s"
+        },
+        "timePlayed": {
+          "value": 240441,
+          "displayValue": "66h"
+        },
+        "mVPs": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "roundsPlayed": {
+          "value": 2311,
+          "displayValue": "2,311"
+        },
+        "roundsWon": {
+          "value": 1125,
+          "displayValue": "1,125"
+        },
+        "roundsLost": {
+          "value": 1186,
+          "displayValue": "1,186"
+        },
+        "roundsWinPct": {
+          "value": 48.68022501081783,
+          "displayValue": "48.7%"
+        },
+        "roundsDuration": {
+          "value": 104.0419731717871,
+          "displayValue": "01m 44s"
+        },
+        "score": {
+          "value": 471640,
+          "displayValue": "471,640"
+        },
+        "scorePerMatch": {
+          "value": 4326.972477064221,
+          "displayValue": "4,327"
+        },
+        "scorePerRound": {
+          "value": 204.08481176979663,
+          "displayValue": "204.1"
+        },
+        "kills": {
+          "value": 1613,
+          "displayValue": "1,613"
+        },
+        "killsPerRound": {
+          "value": 0.6979662483773258,
+          "displayValue": "0.7"
+        },
+        "killsPerMatch": {
+          "value": 14.79816513761468,
+          "displayValue": "14.8"
+        },
+        "deaths": {
+          "value": 1706,
+          "displayValue": "1,706"
+        },
+        "deathsPerRound": {
+          "value": 0.7382085677196019,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 15.65137614678899,
+          "displayValue": "15.7"
+        },
+        "assists": {
+          "value": 524,
+          "displayValue": "524"
+        },
+        "assistsPerRound": {
+          "value": 0.22674167027260925,
+          "displayValue": "0.2"
+        },
+        "assistsPerMatch": {
+          "value": 4.807339449541284,
+          "displayValue": "4.8"
+        },
+        "kDRatio": {
+          "value": 0.9454865181711606,
+          "displayValue": "0.95"
+        },
+        "kDARatio": {
+          "value": 1.0990621336459554,
+          "displayValue": "1.10"
+        },
+        "kADRatio": {
+          "value": 1.2526377491207503,
+          "displayValue": "1.25"
+        },
+        "damage": {
+          "value": 315263,
+          "displayValue": "315,263"
+        },
+        "damageDelta": {
+          "value": -5332,
+          "displayValue": "-5,332"
+        },
+        "damageDeltaPerRound": {
+          "value": -2.307226308957161,
+          "displayValue": "-2"
+        },
+        "damagePerRound": {
+          "value": 136.41843357853742,
+          "displayValue": "136.4"
+        },
+        "damagePerMatch": {
+          "value": 2892.321100917431,
+          "displayValue": "2,892.32"
+        },
+        "damagePerMinute": {
+          "value": 78.67806338906912,
+          "displayValue": "78.7"
+        },
+        "damageReceived": {
+          "value": 320595,
+          "displayValue": "320,595"
+        },
+        "headshots": {
+          "value": 1003,
+          "displayValue": "1,003"
+        },
+        "headshotsPerRound": {
+          "value": 0.4340112505408914,
+          "displayValue": "0.4"
+        },
+        "headshotsPercentage": {
+          "value": 22.973809032790264,
+          "displayValue": "23.0%"
+        },
+        "grenadeCasts": {
+          "value": 1509,
+          "displayValue": "1,509"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.6529640848117698,
+          "displayValue": "0.7"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 13.844036697247706,
+          "displayValue": "13.84"
+        },
+        "ability1Casts": {
+          "value": 1020,
+          "displayValue": "1,020"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.44136737343141497,
+          "displayValue": "0.4"
+        },
+        "ability1CastsPerMatch": {
+          "value": 9.357798165137615,
+          "displayValue": "9.36"
+        },
+        "ability2Casts": {
+          "value": 1855,
+          "displayValue": "1,855"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.8026828212894851,
+          "displayValue": "0.8"
+        },
+        "ability2CastsPerMatch": {
+          "value": 17.01834862385321,
+          "displayValue": "17.02"
+        },
+        "ultimateCasts": {
+          "value": 202,
+          "displayValue": "202"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.08740804846386846,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 1.853211009174312,
+          "displayValue": "1.85"
+        },
+        "dealtHeadshots": {
+          "value": 1114,
+          "displayValue": "1,114"
+        },
+        "dealtBodyshots": {
+          "value": 3496,
+          "displayValue": "3,496"
+        },
+        "dealtLegshots": {
+          "value": 239,
+          "displayValue": "239"
+        },
+        "receivedHeadshots": {
+          "value": 1226,
+          "displayValue": "1,226"
+        },
+        "receivedBodyshots": {
+          "value": 3923,
+          "displayValue": "3,923"
+        },
+        "receivedLegshots": {
+          "value": 350,
+          "displayValue": "350"
+        },
+        "econRating": {
+          "value": 5939,
+          "displayValue": "5,939"
+        },
+        "econRatingPerMatch": {
+          "value": 54.48623853211009,
+          "displayValue": "54"
+        },
+        "econRatingPerRound": {
+          "value": 2.5698831674599742,
+          "displayValue": "2.6"
+        },
+        "suicides": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "firstBloods": {
+          "value": 299,
+          "displayValue": "299"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.1293812202509736,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 2.743119266055046,
+          "displayValue": "2.74"
+        },
+        "firstDeaths": {
+          "value": 306,
+          "displayValue": "306"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.1324102120294245,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 218,
+          "displayValue": "218"
+        },
+        "survived": {
+          "value": 607,
+          "displayValue": "607"
+        },
+        "traded": {
+          "value": 308,
+          "displayValue": "308"
+        },
+        "kAST": {
+          "value": 68.24,
+          "displayValue": "68.2%"
+        },
+        "mostKillsInMatch": {
+          "value": 29,
+          "displayValue": "29"
+        },
+        "flawless": {
+          "value": 94,
+          "displayValue": "94"
+        },
+        "thrifty": {
+          "value": 51,
+          "displayValue": "51"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 22,
+          "displayValue": "22"
+        },
+        "clutches": {
+          "value": 36,
+          "displayValue": "36"
+        },
+        "clutchesPercentage": {
+          "value": 1.5577672003461707,
+          "displayValue": "1.6%"
+        },
+        "clutchesLost": {
+          "value": 229,
+          "displayValue": "229"
+        },
+        "clutches1v1": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "clutches1v2": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "clutches1v3": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 16,
+          "displayValue": "16"
+        },
+        "clutchesLost1v2": {
+          "value": 43,
+          "displayValue": "43"
+        },
+        "clutchesLost1v3": {
+          "value": 81,
+          "displayValue": "81"
+        },
+        "clutchesLost1v4": {
+          "value": 52,
+          "displayValue": "52"
+        },
+        "clutchesLost1v5": {
+          "value": 37,
+          "displayValue": "37"
+        },
+        "kills1K": {
+          "value": 728,
+          "displayValue": "728"
+        },
+        "kills2K": {
+          "value": 277,
+          "displayValue": "277"
+        },
+        "kills3K": {
+          "value": 84,
+          "displayValue": "84"
+        },
+        "kills4K": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.49421487603305786,
+          "displayValue": "0.49"
+        },
+        "plants": {
+          "value": 176,
+          "displayValue": "176"
+        },
+        "plantsPerMatch": {
+          "value": 1.614678899082569,
+          "displayValue": "1.61"
+        },
+        "plantsPerRound": {
+          "value": 0.1537117903930131,
+          "displayValue": "0.2"
+        },
+        "attackKills": {
+          "value": 804,
+          "displayValue": "804"
+        },
+        "attackKillsPerRound": {
+          "value": 0.7021834061135371,
+          "displayValue": "0.7"
+        },
+        "attackDeaths": {
+          "value": 883,
+          "displayValue": "883"
+        },
+        "attackKDRatio": {
+          "value": 0.9105322763306908,
+          "displayValue": "0.91"
+        },
+        "attackAssists": {
+          "value": 263,
+          "displayValue": "263"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.22969432314410482,
+          "displayValue": "0.2"
+        },
+        "attackRoundsWon": {
+          "value": 553,
+          "displayValue": "553"
+        },
+        "attackRoundsLost": {
+          "value": 592,
+          "displayValue": "592"
+        },
+        "attackRoundsPlayed": {
+          "value": 1145,
+          "displayValue": "1,145"
+        },
+        "attackRoundsWinPct": {
+          "value": 48.29694323144105,
+          "displayValue": "48.3%"
+        },
+        "attackScore": {
+          "value": 235437,
+          "displayValue": "235,437"
+        },
+        "attackScorePerRound": {
+          "value": 205.62183406113536,
+          "displayValue": "205.6"
+        },
+        "attackDamage": {
+          "value": 157959,
+          "displayValue": "157,959"
+        },
+        "attackDamageReceived": {
+          "value": 165857,
+          "displayValue": "165,857"
+        },
+        "attackDamagePerRound": {
+          "value": 137.95545851528385,
+          "displayValue": "138.0"
+        },
+        "attackDamageDelta": {
+          "value": -7898,
+          "displayValue": "-7,898"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": -6.897816593886463,
+          "displayValue": "-7"
+        },
+        "attackHeadshots": {
+          "value": 514,
+          "displayValue": "514"
+        },
+        "attackTraded": {
+          "value": 194,
+          "displayValue": "194"
+        },
+        "attackSurvived": {
+          "value": 264,
+          "displayValue": "264"
+        },
+        "attackFirstBloods": {
+          "value": 141,
+          "displayValue": "141"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.12314410480349346,
+          "displayValue": "0.1"
+        },
+        "attackFirstDeaths": {
+          "value": 163,
+          "displayValue": "163"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.1423580786026201,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.46381578947368424,
+          "displayValue": "0.46"
+        },
+        "attackKAST": {
+          "value": 67.07,
+          "displayValue": "67.1%"
+        },
+        "defuses": {
+          "value": 51,
+          "displayValue": "51"
+        },
+        "defusesPerMatch": {
+          "value": 0.46788990825688076,
+          "displayValue": "0.47"
+        },
+        "defusesPerRound": {
+          "value": 0.04373927958833619,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 810,
+          "displayValue": "810"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.6946826758147513,
+          "displayValue": "0.7"
+        },
+        "defenseDeaths": {
+          "value": 823,
+          "displayValue": "823"
+        },
+        "defenseKDRatio": {
+          "value": 0.9842041312272175,
+          "displayValue": "0.98"
+        },
+        "defenseAssists": {
+          "value": 257,
+          "displayValue": "257"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.22041166380789023,
+          "displayValue": "0.2"
+        },
+        "defenseRoundsWon": {
+          "value": 572,
+          "displayValue": "572"
+        },
+        "defenseRoundsLost": {
+          "value": 594,
+          "displayValue": "594"
+        },
+        "defenseRoundsPlayed": {
+          "value": 1166,
+          "displayValue": "1,166"
+        },
+        "defenseRoundsWinPct": {
+          "value": 49.056603773584904,
+          "displayValue": "49.1%"
+        },
+        "defenseScore": {
+          "value": 236203,
+          "displayValue": "236,203"
+        },
+        "defenseScorePerRound": {
+          "value": 202.5754716981132,
+          "displayValue": "202.6"
+        },
+        "defenseDamage": {
+          "value": 157304,
+          "displayValue": "157,304"
+        },
+        "defenseDamageReceived": {
+          "value": 154738,
+          "displayValue": "154,738"
+        },
+        "defenseDamagePerRound": {
+          "value": 134.9090909090909,
+          "displayValue": "134.9"
+        },
+        "defenseDamageDelta": {
+          "value": 2566,
+          "displayValue": "2,566"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": 2.2006861063464838,
+          "displayValue": "2"
+        },
+        "defenseHeadshots": {
+          "value": 489,
+          "displayValue": "489"
+        },
+        "defenseTraded": {
+          "value": 114,
+          "displayValue": "114"
+        },
+        "defenseSurvived": {
+          "value": 343,
+          "displayValue": "343"
+        },
+        "defenseFirstBloods": {
+          "value": 158,
+          "displayValue": "158"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.13550600343053174,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 143,
+          "displayValue": "143"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.12264150943396226,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.5249169435215947,
+          "displayValue": "0.52"
+        },
+        "defenseKAST": {
+          "value": 69.38,
+          "displayValue": "69.4%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 342,
+          "displayValue": "342"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Diamond 1"
+        }
+      }
+    },
+    {
+      "name": "Lapinミサイル",
+      "tag": "f1sin",
+      "peak_rank": "Diamond 1",
+      "clutch": {},
+      "clutch_success_rate": 16.0,
+      "clutch_wins": 15,
+      "clutch_attempts": 94,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 41,
+          "displayValue": "41"
+        },
+        "matchesWon": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "matchesLost": {
+          "value": 20,
+          "displayValue": "20"
+        },
+        "matchesTied": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "matchesWinPct": {
+          "value": 48.78048780487805,
+          "displayValue": "48.8%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2191.9756097560976,
+          "displayValue": "36m 31s"
+        },
+        "timePlayed": {
+          "value": 89871,
+          "displayValue": "24h"
+        },
+        "mVPs": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "roundsPlayed": {
+          "value": 862,
+          "displayValue": "862"
+        },
+        "roundsWon": {
+          "value": 428,
+          "displayValue": "428"
+        },
+        "roundsLost": {
+          "value": 434,
+          "displayValue": "434"
+        },
+        "roundsWinPct": {
+          "value": 49.651972157772626,
+          "displayValue": "49.7%"
+        },
+        "roundsDuration": {
+          "value": 104.25870069605568,
+          "displayValue": "01m 44s"
+        },
+        "score": {
+          "value": 197987,
+          "displayValue": "197,987"
+        },
+        "scorePerMatch": {
+          "value": 4828.951219512195,
+          "displayValue": "4,829"
+        },
+        "scorePerRound": {
+          "value": 229.6832946635731,
+          "displayValue": "229.7"
+        },
+        "kills": {
+          "value": 689,
+          "displayValue": "689"
+        },
+        "killsPerRound": {
+          "value": 0.7993039443155452,
+          "displayValue": "0.8"
+        },
+        "killsPerMatch": {
+          "value": 16.804878048780488,
+          "displayValue": "16.8"
+        },
+        "deaths": {
+          "value": 621,
+          "displayValue": "621"
+        },
+        "deathsPerRound": {
+          "value": 0.7204176334106729,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 15.146341463414634,
+          "displayValue": "15.1"
+        },
+        "assists": {
+          "value": 195,
+          "displayValue": "195"
+        },
+        "assistsPerRound": {
+          "value": 0.22621809744779584,
+          "displayValue": "0.2"
+        },
+        "assistsPerMatch": {
+          "value": 4.7560975609756095,
+          "displayValue": "4.8"
+        },
+        "kDRatio": {
+          "value": 1.109500805152979,
+          "displayValue": "1.11"
+        },
+        "kDARatio": {
+          "value": 1.2665056360708535,
+          "displayValue": "1.27"
+        },
+        "kADRatio": {
+          "value": 1.423510466988728,
+          "displayValue": "1.42"
+        },
+        "damage": {
+          "value": 131593,
+          "displayValue": "131,593"
+        },
+        "damageDelta": {
+          "value": 14735,
+          "displayValue": "14,735"
+        },
+        "damageDeltaPerRound": {
+          "value": 17.093967517401392,
+          "displayValue": "17"
+        },
+        "damagePerRound": {
+          "value": 152.6600928074246,
+          "displayValue": "152.7"
+        },
+        "damagePerMatch": {
+          "value": 3209.5853658536585,
+          "displayValue": "3,209.59"
+        },
+        "damagePerMinute": {
+          "value": 87.90447561790248,
+          "displayValue": "87.9"
+        },
+        "damageReceived": {
+          "value": 116858,
+          "displayValue": "116,858"
+        },
+        "headshots": {
+          "value": 435,
+          "displayValue": "435"
+        },
+        "headshotsPerRound": {
+          "value": 0.5046403712296984,
+          "displayValue": "0.5"
+        },
+        "headshotsPercentage": {
+          "value": 24.18200408997955,
+          "displayValue": "24.2%"
+        },
+        "grenadeCasts": {
+          "value": 458,
+          "displayValue": "458"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.531322505800464,
+          "displayValue": "0.5"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 11.170731707317072,
+          "displayValue": "11.17"
+        },
+        "ability1Casts": {
+          "value": 256,
+          "displayValue": "256"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.29698375870069604,
+          "displayValue": "0.3"
+        },
+        "ability1CastsPerMatch": {
+          "value": 6.2439024390243905,
+          "displayValue": "6.24"
+        },
+        "ability2Casts": {
+          "value": 818,
+          "displayValue": "818"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.9489559164733179,
+          "displayValue": "0.9"
+        },
+        "ability2CastsPerMatch": {
+          "value": 19.951219512195124,
+          "displayValue": "19.95"
+        },
+        "ultimateCasts": {
+          "value": 83,
+          "displayValue": "83"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.0962877030162413,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 2.024390243902439,
+          "displayValue": "2.02"
+        },
+        "dealtHeadshots": {
+          "value": 473,
+          "displayValue": "473"
+        },
+        "dealtBodyshots": {
+          "value": 1384,
+          "displayValue": "1,384"
+        },
+        "dealtLegshots": {
+          "value": 99,
+          "displayValue": "99"
+        },
+        "receivedHeadshots": {
+          "value": 410,
+          "displayValue": "410"
+        },
+        "receivedBodyshots": {
+          "value": 1521,
+          "displayValue": "1,521"
+        },
+        "receivedLegshots": {
+          "value": 126,
+          "displayValue": "126"
+        },
+        "econRating": {
+          "value": 2529,
+          "displayValue": "2,529"
+        },
+        "econRatingPerMatch": {
+          "value": 61.68292682926829,
+          "displayValue": "62"
+        },
+        "econRatingPerRound": {
+          "value": 2.933874709976798,
+          "displayValue": "2.9"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 113,
+          "displayValue": "113"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.13109048723897912,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 2.7560975609756095,
+          "displayValue": "2.76"
+        },
+        "firstDeaths": {
+          "value": 106,
+          "displayValue": "106"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.12296983758700696,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 75,
+          "displayValue": "75"
+        },
+        "survived": {
+          "value": 241,
+          "displayValue": "241"
+        },
+        "traded": {
+          "value": 104,
+          "displayValue": "104"
+        },
+        "kAST": {
+          "value": 71.69,
+          "displayValue": "71.7%"
+        },
+        "mostKillsInMatch": {
+          "value": 31,
+          "displayValue": "31"
+        },
+        "flawless": {
+          "value": 40,
+          "displayValue": "40"
+        },
+        "thrifty": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "aces": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "teamAces": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "clutches": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "clutchesPercentage": {
+          "value": 1.740139211136891,
+          "displayValue": "1.7%"
+        },
+        "clutchesLost": {
+          "value": 79,
+          "displayValue": "79"
+        },
+        "clutches1v1": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "clutches1v2": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches1v3": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutches1v4": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "clutchesLost1v2": {
+          "value": 16,
+          "displayValue": "16"
+        },
+        "clutchesLost1v3": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "clutchesLost1v4": {
+          "value": 29,
+          "displayValue": "29"
+        },
+        "clutchesLost1v5": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "kills1K": {
+          "value": 277,
+          "displayValue": "277"
+        },
+        "kills2K": {
+          "value": 110,
+          "displayValue": "110"
+        },
+        "kills3K": {
+          "value": 47,
+          "displayValue": "47"
+        },
+        "kills4K": {
+          "value": 9,
+          "displayValue": "9"
+        },
+        "kills5K": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.5159817351598174,
+          "displayValue": "0.52"
+        },
+        "plants": {
+          "value": 41,
+          "displayValue": "41"
+        },
+        "plantsPerMatch": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "plantsPerRound": {
+          "value": 0.09647058823529411,
+          "displayValue": "0.1"
+        },
+        "attackKills": {
+          "value": 342,
+          "displayValue": "342"
+        },
+        "attackKillsPerRound": {
+          "value": 0.8047058823529412,
+          "displayValue": "0.8"
+        },
+        "attackDeaths": {
+          "value": 311,
+          "displayValue": "311"
+        },
+        "attackKDRatio": {
+          "value": 1.0996784565916398,
+          "displayValue": "1.10"
+        },
+        "attackAssists": {
+          "value": 96,
+          "displayValue": "96"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.22588235294117648,
+          "displayValue": "0.2"
+        },
+        "attackRoundsWon": {
+          "value": 216,
+          "displayValue": "216"
+        },
+        "attackRoundsLost": {
+          "value": 209,
+          "displayValue": "209"
+        },
+        "attackRoundsPlayed": {
+          "value": 425,
+          "displayValue": "425"
+        },
+        "attackRoundsWinPct": {
+          "value": 50.8235294117647,
+          "displayValue": "50.8%"
+        },
+        "attackScore": {
+          "value": 98918,
+          "displayValue": "98,918"
+        },
+        "attackScorePerRound": {
+          "value": 232.74823529411765,
+          "displayValue": "232.7"
+        },
+        "attackDamage": {
+          "value": 66027,
+          "displayValue": "66,027"
+        },
+        "attackDamageReceived": {
+          "value": 58985,
+          "displayValue": "58,985"
+        },
+        "attackDamagePerRound": {
+          "value": 155.35764705882352,
+          "displayValue": "155.4"
+        },
+        "attackDamageDelta": {
+          "value": 7042,
+          "displayValue": "7,042"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": 16.569411764705883,
+          "displayValue": "17"
+        },
+        "attackHeadshots": {
+          "value": 222,
+          "displayValue": "222"
+        },
+        "attackTraded": {
+          "value": 57,
+          "displayValue": "57"
+        },
+        "attackSurvived": {
+          "value": 114,
+          "displayValue": "114"
+        },
+        "attackFirstBloods": {
+          "value": 50,
+          "displayValue": "50"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.11764705882352941,
+          "displayValue": "0.1"
+        },
+        "attackFirstDeaths": {
+          "value": 46,
+          "displayValue": "46"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.10823529411764705,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.5208333333333334,
+          "displayValue": "0.52"
+        },
+        "attackKAST": {
+          "value": 72.0,
+          "displayValue": "72.0%"
+        },
+        "defuses": {
+          "value": 14,
+          "displayValue": "14"
+        },
+        "defusesPerMatch": {
+          "value": 0.34146341463414637,
+          "displayValue": "0.34"
+        },
+        "defusesPerRound": {
+          "value": 0.032036613272311214,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 347,
+          "displayValue": "347"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.7940503432494279,
+          "displayValue": "0.8"
+        },
+        "defenseDeaths": {
+          "value": 310,
+          "displayValue": "310"
+        },
+        "defenseKDRatio": {
+          "value": 1.1193548387096774,
+          "displayValue": "1.12"
+        },
+        "defenseAssists": {
+          "value": 97,
+          "displayValue": "97"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.2219679633867277,
+          "displayValue": "0.2"
+        },
+        "defenseRoundsWon": {
+          "value": 212,
+          "displayValue": "212"
+        },
+        "defenseRoundsLost": {
+          "value": 225,
+          "displayValue": "225"
+        },
+        "defenseRoundsPlayed": {
+          "value": 437,
+          "displayValue": "437"
+        },
+        "defenseRoundsWinPct": {
+          "value": 48.51258581235698,
+          "displayValue": "48.5%"
+        },
+        "defenseScore": {
+          "value": 99069,
+          "displayValue": "99,069"
+        },
+        "defenseScorePerRound": {
+          "value": 226.7025171624714,
+          "displayValue": "226.7"
+        },
+        "defenseDamage": {
+          "value": 65566,
+          "displayValue": "65,566"
+        },
+        "defenseDamageReceived": {
+          "value": 57873,
+          "displayValue": "57,873"
+        },
+        "defenseDamagePerRound": {
+          "value": 150.0366132723112,
+          "displayValue": "150.0"
+        },
+        "defenseDamageDelta": {
+          "value": 7693,
+          "displayValue": "7,693"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": 17.60411899313501,
+          "displayValue": "18"
+        },
+        "defenseHeadshots": {
+          "value": 213,
+          "displayValue": "213"
+        },
+        "defenseTraded": {
+          "value": 47,
+          "displayValue": "47"
+        },
+        "defenseSurvived": {
+          "value": 127,
+          "displayValue": "127"
+        },
+        "defenseFirstBloods": {
+          "value": 63,
+          "displayValue": "63"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.14416475972540047,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 60,
+          "displayValue": "60"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.13729977116704806,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.5121951219512195,
+          "displayValue": "0.51"
+        },
+        "defenseKAST": {
+          "value": 71.4,
+          "displayValue": "71.4%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 669,
+          "displayValue": "669"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Diamond 1"
+        }
+      }
+    },
+    {
+      "name": "PRIUSバズーカ",
+      "tag": "地元SP",
+      "peak_rank": "Diamond 1",
+      "clutch": {},
+      "clutch_success_rate": 17.0,
+      "clutch_wins": 39,
+      "clutch_attempts": 230,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 70,
+          "displayValue": "70"
+        },
+        "matchesWon": {
+          "value": 35,
+          "displayValue": "35"
+        },
+        "matchesLost": {
+          "value": 35,
+          "displayValue": "35"
+        },
+        "matchesTied": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesWinPct": {
+          "value": 50.0,
+          "displayValue": "50.0%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2211.342857142857,
+          "displayValue": "36m 51s"
+        },
+        "timePlayed": {
+          "value": 154794,
+          "displayValue": "42h"
+        },
+        "mVPs": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "roundsPlayed": {
+          "value": 1471,
+          "displayValue": "1,471"
+        },
+        "roundsWon": {
+          "value": 731,
+          "displayValue": "731"
+        },
+        "roundsLost": {
+          "value": 740,
+          "displayValue": "740"
+        },
+        "roundsWinPct": {
+          "value": 49.69408565601632,
+          "displayValue": "49.7%"
+        },
+        "roundsDuration": {
+          "value": 105.23045547246771,
+          "displayValue": "01m 45s"
+        },
+        "score": {
+          "value": 297467,
+          "displayValue": "297,467"
+        },
+        "scorePerMatch": {
+          "value": 4249.528571428571,
+          "displayValue": "4,250"
+        },
+        "scorePerRound": {
+          "value": 202.22093813732155,
+          "displayValue": "202.2"
+        },
+        "kills": {
+          "value": 1044,
+          "displayValue": "1,044"
+        },
+        "killsPerRound": {
+          "value": 0.7097212780421482,
+          "displayValue": "0.7"
+        },
+        "killsPerMatch": {
+          "value": 14.914285714285715,
+          "displayValue": "14.9"
+        },
+        "deaths": {
+          "value": 972,
+          "displayValue": "972"
+        },
+        "deathsPerRound": {
+          "value": 0.6607749830047587,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 13.885714285714286,
+          "displayValue": "13.9"
+        },
+        "assists": {
+          "value": 405,
+          "displayValue": "405"
+        },
+        "assistsPerRound": {
+          "value": 0.27532290958531613,
+          "displayValue": "0.3"
+        },
+        "assistsPerMatch": {
+          "value": 5.785714285714286,
+          "displayValue": "5.8"
+        },
+        "kDRatio": {
+          "value": 1.0740740740740742,
+          "displayValue": "1.07"
+        },
+        "kDARatio": {
+          "value": 1.2824074074074074,
+          "displayValue": "1.28"
+        },
+        "kADRatio": {
+          "value": 1.4907407407407407,
+          "displayValue": "1.49"
+        },
+        "damage": {
+          "value": 196494,
+          "displayValue": "196,494"
+        },
+        "damageDelta": {
+          "value": 10779,
+          "displayValue": "10,779"
+        },
+        "damageDeltaPerRound": {
+          "value": 7.327668252889191,
+          "displayValue": "7"
+        },
+        "damagePerRound": {
+          "value": 133.57851801495582,
+          "displayValue": "133.6"
+        },
+        "damagePerMatch": {
+          "value": 2807.057142857143,
+          "displayValue": "2,807.06"
+        },
+        "damagePerMinute": {
+          "value": 76.18999612252811,
+          "displayValue": "76.2"
+        },
+        "damageReceived": {
+          "value": 185715,
+          "displayValue": "185,715"
+        },
+        "headshots": {
+          "value": 697,
+          "displayValue": "697"
+        },
+        "headshotsPerRound": {
+          "value": 0.4738273283480625,
+          "displayValue": "0.5"
+        },
+        "headshotsPercentage": {
+          "value": 24.952380952380953,
+          "displayValue": "25.0%"
+        },
+        "grenadeCasts": {
+          "value": 644,
+          "displayValue": "644"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.43779741672331746,
+          "displayValue": "0.4"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 9.2,
+          "displayValue": "9.20"
+        },
+        "ability1Casts": {
+          "value": 636,
+          "displayValue": "636"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.4323589394969409,
+          "displayValue": "0.4"
+        },
+        "ability1CastsPerMatch": {
+          "value": 9.085714285714285,
+          "displayValue": "9.09"
+        },
+        "ability2Casts": {
+          "value": 1908,
+          "displayValue": "1,908"
+        },
+        "ability2CastsPerRound": {
+          "value": 1.2970768184908226,
+          "displayValue": "1.3"
+        },
+        "ability2CastsPerMatch": {
+          "value": 27.257142857142856,
+          "displayValue": "27.26"
+        },
+        "ultimateCasts": {
+          "value": 72,
+          "displayValue": "72"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.04894629503738953,
+          "displayValue": "0.0"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 1.0285714285714285,
+          "displayValue": "1.03"
+        },
+        "dealtHeadshots": {
+          "value": 786,
+          "displayValue": "786"
+        },
+        "dealtBodyshots": {
+          "value": 2178,
+          "displayValue": "2,178"
+        },
+        "dealtLegshots": {
+          "value": 186,
+          "displayValue": "186"
+        },
+        "receivedHeadshots": {
+          "value": 662,
+          "displayValue": "662"
+        },
+        "receivedBodyshots": {
+          "value": 2319,
+          "displayValue": "2,319"
+        },
+        "receivedLegshots": {
+          "value": 237,
+          "displayValue": "237"
+        },
+        "econRating": {
+          "value": 4115,
+          "displayValue": "4,115"
+        },
+        "econRatingPerMatch": {
+          "value": 58.785714285714285,
+          "displayValue": "59"
+        },
+        "econRatingPerRound": {
+          "value": 2.797416723317471,
+          "displayValue": "2.8"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 77,
+          "displayValue": "77"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.052345343303874914,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 1.1,
+          "displayValue": "1.10"
+        },
+        "firstDeaths": {
+          "value": 73,
+          "displayValue": "73"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.04962610469068661,
+          "displayValue": "0.0"
+        },
+        "lastDeaths": {
+          "value": 197,
+          "displayValue": "197"
+        },
+        "survived": {
+          "value": 501,
+          "displayValue": "501"
+        },
+        "traded": {
+          "value": 137,
+          "displayValue": "137"
+        },
+        "kAST": {
+          "value": 72.33,
+          "displayValue": "72.3%"
+        },
+        "mostKillsInMatch": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "flawless": {
+          "value": 66,
+          "displayValue": "66"
+        },
+        "thrifty": {
+          "value": 28,
+          "displayValue": "28"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 9,
+          "displayValue": "9"
+        },
+        "clutches": {
+          "value": 39,
+          "displayValue": "39"
+        },
+        "clutchesPercentage": {
+          "value": 2.6512576478586,
+          "displayValue": "2.7%"
+        },
+        "clutchesLost": {
+          "value": 191,
+          "displayValue": "191"
+        },
+        "clutches1v1": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "clutches1v2": {
+          "value": 10,
+          "displayValue": "10"
+        },
+        "clutches1v3": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "clutches1v4": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "clutchesLost1v2": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "clutchesLost1v3": {
+          "value": 50,
+          "displayValue": "50"
+        },
+        "clutchesLost1v4": {
+          "value": 60,
+          "displayValue": "60"
+        },
+        "clutchesLost1v5": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "kills1K": {
+          "value": 448,
+          "displayValue": "448"
+        },
+        "kills2K": {
+          "value": 180,
+          "displayValue": "180"
+        },
+        "kills3K": {
+          "value": 60,
+          "displayValue": "60"
+        },
+        "kills4K": {
+          "value": 14,
+          "displayValue": "14"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.5133333333333333,
+          "displayValue": "0.51"
+        },
+        "plants": {
+          "value": 118,
+          "displayValue": "118"
+        },
+        "plantsPerMatch": {
+          "value": 1.6857142857142857,
+          "displayValue": "1.69"
+        },
+        "plantsPerRound": {
+          "value": 0.16643159379407615,
+          "displayValue": "0.2"
+        },
+        "attackKills": {
+          "value": 518,
+          "displayValue": "518"
+        },
+        "attackKillsPerRound": {
+          "value": 0.7306064880112835,
+          "displayValue": "0.7"
+        },
+        "attackDeaths": {
+          "value": 449,
+          "displayValue": "449"
+        },
+        "attackKDRatio": {
+          "value": 1.153674832962138,
+          "displayValue": "1.15"
+        },
+        "attackAssists": {
+          "value": 180,
+          "displayValue": "180"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.2538787023977433,
+          "displayValue": "0.3"
+        },
+        "attackRoundsWon": {
+          "value": 361,
+          "displayValue": "361"
+        },
+        "attackRoundsLost": {
+          "value": 348,
+          "displayValue": "348"
+        },
+        "attackRoundsPlayed": {
+          "value": 709,
+          "displayValue": "709"
+        },
+        "attackRoundsWinPct": {
+          "value": 50.916784203102964,
+          "displayValue": "50.9%"
+        },
+        "attackScore": {
+          "value": 143464,
+          "displayValue": "143,464"
+        },
+        "attackScorePerRound": {
+          "value": 202.34696755994358,
+          "displayValue": "202.3"
+        },
+        "attackDamage": {
+          "value": 93716,
+          "displayValue": "93,716"
+        },
+        "attackDamageReceived": {
+          "value": 86919,
+          "displayValue": "86,919"
+        },
+        "attackDamagePerRound": {
+          "value": 132.1805359661495,
+          "displayValue": "132.2"
+        },
+        "attackDamageDelta": {
+          "value": 6797,
+          "displayValue": "6,797"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": 9.586741889985896,
+          "displayValue": "10"
+        },
+        "attackHeadshots": {
+          "value": 345,
+          "displayValue": "345"
+        },
+        "attackTraded": {
+          "value": 79,
+          "displayValue": "79"
+        },
+        "attackSurvived": {
+          "value": 261,
+          "displayValue": "261"
+        },
+        "attackFirstBloods": {
+          "value": 37,
+          "displayValue": "37"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.05218617771509168,
+          "displayValue": "0.1"
+        },
+        "attackFirstDeaths": {
+          "value": 38,
+          "displayValue": "38"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.0535966149506347,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.49333333333333335,
+          "displayValue": "0.49"
+        },
+        "attackKAST": {
+          "value": 74.19,
+          "displayValue": "74.2%"
+        },
+        "defuses": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "defusesPerMatch": {
+          "value": 0.45714285714285713,
+          "displayValue": "0.46"
+        },
+        "defusesPerRound": {
+          "value": 0.04199475065616798,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 526,
+          "displayValue": "526"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.6902887139107612,
+          "displayValue": "0.7"
+        },
+        "defenseDeaths": {
+          "value": 523,
+          "displayValue": "523"
+        },
+        "defenseKDRatio": {
+          "value": 1.005736137667304,
+          "displayValue": "1.01"
+        },
+        "defenseAssists": {
+          "value": 221,
+          "displayValue": "221"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.2900262467191601,
+          "displayValue": "0.3"
+        },
+        "defenseRoundsWon": {
+          "value": 370,
+          "displayValue": "370"
+        },
+        "defenseRoundsLost": {
+          "value": 392,
+          "displayValue": "392"
+        },
+        "defenseRoundsPlayed": {
+          "value": 762,
+          "displayValue": "762"
+        },
+        "defenseRoundsWinPct": {
+          "value": 48.55643044619423,
+          "displayValue": "48.6%"
+        },
+        "defenseScore": {
+          "value": 154003,
+          "displayValue": "154,003"
+        },
+        "defenseScorePerRound": {
+          "value": 202.10367454068242,
+          "displayValue": "202.1"
+        },
+        "defenseDamage": {
+          "value": 102778,
+          "displayValue": "102,778"
+        },
+        "defenseDamageReceived": {
+          "value": 98796,
+          "displayValue": "98,796"
+        },
+        "defenseDamagePerRound": {
+          "value": 134.87926509186352,
+          "displayValue": "134.9"
+        },
+        "defenseDamageDelta": {
+          "value": 3982,
+          "displayValue": "3,982"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": 5.225721784776903,
+          "displayValue": "5"
+        },
+        "defenseHeadshots": {
+          "value": 352,
+          "displayValue": "352"
+        },
+        "defenseTraded": {
+          "value": 58,
+          "displayValue": "58"
+        },
+        "defenseSurvived": {
+          "value": 240,
+          "displayValue": "240"
+        },
+        "defenseFirstBloods": {
+          "value": 40,
+          "displayValue": "40"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.05249343832020997,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 35,
+          "displayValue": "35"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.045931758530183726,
+          "displayValue": "0.0"
+        },
+        "defenseEsr": {
+          "value": 0.5333333333333333,
+          "displayValue": "0.53"
+        },
+        "defenseKAST": {
+          "value": 70.6,
+          "displayValue": "70.6%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 537,
+          "displayValue": "537"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Diamond 1"
+        }
+      }
+    },
+    {
+      "name": "むきむきキムくん",
+      "tag": "1129",
+      "peak_rank": "Gold 1",
+      "clutch": {},
+      "clutch_success_rate": 5.4,
+      "clutch_wins": 11,
+      "clutch_attempts": 202,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 76,
+          "displayValue": "76"
+        },
+        "matchesWon": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "matchesLost": {
+          "value": 42,
+          "displayValue": "42"
+        },
+        "matchesTied": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesWinPct": {
+          "value": 44.73684210526316,
+          "displayValue": "44.7%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2190.3552631578946,
+          "displayValue": "36m 30s"
+        },
+        "timePlayed": {
+          "value": 166467,
+          "displayValue": "46h"
+        },
+        "mVPs": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "roundsPlayed": {
+          "value": 1611,
+          "displayValue": "1,611"
+        },
+        "roundsWon": {
+          "value": 782,
+          "displayValue": "782"
+        },
+        "roundsLost": {
+          "value": 829,
+          "displayValue": "829"
+        },
+        "roundsWinPct": {
+          "value": 48.541278708876476,
+          "displayValue": "48.5%"
+        },
+        "roundsDuration": {
+          "value": 103.3314711359404,
+          "displayValue": "01m 43s"
+        },
+        "score": {
+          "value": 246120,
+          "displayValue": "246,120"
+        },
+        "scorePerMatch": {
+          "value": 3238.4210526315787,
+          "displayValue": "3,238"
+        },
+        "scorePerRound": {
+          "value": 152.77467411545624,
+          "displayValue": "152.8"
+        },
+        "kills": {
+          "value": 831,
+          "displayValue": "831"
+        },
+        "killsPerRound": {
+          "value": 0.515828677839851,
+          "displayValue": "0.5"
+        },
+        "killsPerMatch": {
+          "value": 10.93421052631579,
+          "displayValue": "10.9"
+        },
+        "deaths": {
+          "value": 1230,
+          "displayValue": "1,230"
+        },
+        "deathsPerRound": {
+          "value": 0.7635009310986964,
+          "displayValue": "0.8"
+        },
+        "deathsPerMatch": {
+          "value": 16.18421052631579,
+          "displayValue": "16.2"
+        },
+        "assists": {
+          "value": 418,
+          "displayValue": "418"
+        },
+        "assistsPerRound": {
+          "value": 0.2594661700806952,
+          "displayValue": "0.3"
+        },
+        "assistsPerMatch": {
+          "value": 5.5,
+          "displayValue": "5.5"
+        },
+        "kDRatio": {
+          "value": 0.675609756097561,
+          "displayValue": "0.68"
+        },
+        "kDARatio": {
+          "value": 0.8455284552845529,
+          "displayValue": "0.85"
+        },
+        "kADRatio": {
+          "value": 1.0154471544715447,
+          "displayValue": "1.02"
+        },
+        "damage": {
+          "value": 171116,
+          "displayValue": "171,116"
+        },
+        "damageDelta": {
+          "value": -56500,
+          "displayValue": "-56,500"
+        },
+        "damageDeltaPerRound": {
+          "value": -35.071384233395406,
+          "displayValue": "-35"
+        },
+        "damagePerRound": {
+          "value": 106.21725636250775,
+          "displayValue": "106.2"
+        },
+        "damagePerMatch": {
+          "value": 2251.5263157894738,
+          "displayValue": "2,251.53"
+        },
+        "damagePerMinute": {
+          "value": 61.68565248738284,
+          "displayValue": "61.7"
+        },
+        "damageReceived": {
+          "value": 227616,
+          "displayValue": "227,616"
+        },
+        "headshots": {
+          "value": 518,
+          "displayValue": "518"
+        },
+        "headshotsPerRound": {
+          "value": 0.32153941651148354,
+          "displayValue": "0.3"
+        },
+        "headshotsPercentage": {
+          "value": 19.17808219178082,
+          "displayValue": "19.2%"
+        },
+        "grenadeCasts": {
+          "value": 1862,
+          "displayValue": "1,862"
+        },
+        "grenadeCastsPerRound": {
+          "value": 1.1558038485412787,
+          "displayValue": "1.2"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 24.5,
+          "displayValue": "24.50"
+        },
+        "ability1Casts": {
+          "value": 956,
+          "displayValue": "956"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.5934202358783365,
+          "displayValue": "0.6"
+        },
+        "ability1CastsPerMatch": {
+          "value": 12.578947368421053,
+          "displayValue": "12.58"
+        },
+        "ability2Casts": {
+          "value": 1362,
+          "displayValue": "1,362"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.845437616387337,
+          "displayValue": "0.8"
+        },
+        "ability2CastsPerMatch": {
+          "value": 17.92105263157895,
+          "displayValue": "17.92"
+        },
+        "ultimateCasts": {
+          "value": 133,
+          "displayValue": "133"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.08255741775294848,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 1.75,
+          "displayValue": "1.75"
+        },
+        "dealtHeadshots": {
+          "value": 630,
+          "displayValue": "630"
+        },
+        "dealtBodyshots": {
+          "value": 2402,
+          "displayValue": "2,402"
+        },
+        "dealtLegshots": {
+          "value": 253,
+          "displayValue": "253"
+        },
+        "receivedHeadshots": {
+          "value": 769,
+          "displayValue": "769"
+        },
+        "receivedBodyshots": {
+          "value": 3084,
+          "displayValue": "3,084"
+        },
+        "receivedLegshots": {
+          "value": 198,
+          "displayValue": "198"
+        },
+        "econRating": {
+          "value": 3169,
+          "displayValue": "3,169"
+        },
+        "econRatingPerMatch": {
+          "value": 41.69736842105263,
+          "displayValue": "42"
+        },
+        "econRatingPerRound": {
+          "value": 1.9671011793916822,
+          "displayValue": "2.0"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 87,
+          "displayValue": "87"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.054003724394785846,
+          "displayValue": "0.1"
+        },
+        "firstBloodsPerMatch": {
+          "value": 1.144736842105263,
+          "displayValue": "1.14"
+        },
+        "firstDeaths": {
+          "value": 139,
+          "displayValue": "139"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.08628181253879579,
+          "displayValue": "0.1"
+        },
+        "lastDeaths": {
+          "value": 198,
+          "displayValue": "198"
+        },
+        "survived": {
+          "value": 383,
+          "displayValue": "383"
+        },
+        "traded": {
+          "value": 210,
+          "displayValue": "210"
+        },
+        "kAST": {
+          "value": 63.75,
+          "displayValue": "63.8%"
+        },
+        "mostKillsInMatch": {
+          "value": 22,
+          "displayValue": "22"
+        },
+        "flawless": {
+          "value": 70,
+          "displayValue": "70"
+        },
+        "thrifty": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 10,
+          "displayValue": "10"
+        },
+        "clutches": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "clutchesPercentage": {
+          "value": 0.6828057107386716,
+          "displayValue": "0.7%"
+        },
+        "clutchesLost": {
+          "value": 191,
+          "displayValue": "191"
+        },
+        "clutches1v1": {
+          "value": 6,
+          "displayValue": "6"
+        },
+        "clutches1v2": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "clutches1v3": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "clutchesLost1v2": {
+          "value": 33,
+          "displayValue": "33"
+        },
+        "clutchesLost1v3": {
+          "value": 48,
+          "displayValue": "48"
+        },
+        "clutchesLost1v4": {
+          "value": 62,
+          "displayValue": "62"
+        },
+        "clutchesLost1v5": {
+          "value": 37,
+          "displayValue": "37"
+        },
+        "kills1K": {
+          "value": 495,
+          "displayValue": "495"
+        },
+        "kills2K": {
+          "value": 120,
+          "displayValue": "120"
+        },
+        "kills3K": {
+          "value": 28,
+          "displayValue": "28"
+        },
+        "kills4K": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 0.38495575221238937,
+          "displayValue": "0.38"
+        },
+        "plants": {
+          "value": 137,
+          "displayValue": "137"
+        },
+        "plantsPerMatch": {
+          "value": 1.8026315789473684,
+          "displayValue": "1.80"
+        },
+        "plantsPerRound": {
+          "value": 0.17586649550706032,
+          "displayValue": "0.2"
+        },
+        "attackKills": {
+          "value": 393,
+          "displayValue": "393"
+        },
+        "attackKillsPerRound": {
+          "value": 0.5044929396662388,
+          "displayValue": "0.5"
+        },
+        "attackDeaths": {
+          "value": 610,
+          "displayValue": "610"
+        },
+        "attackKDRatio": {
+          "value": 0.6442622950819672,
+          "displayValue": "0.64"
+        },
+        "attackAssists": {
+          "value": 207,
+          "displayValue": "207"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.26572528883183566,
+          "displayValue": "0.3"
+        },
+        "attackRoundsWon": {
+          "value": 365,
+          "displayValue": "365"
+        },
+        "attackRoundsLost": {
+          "value": 414,
+          "displayValue": "414"
+        },
+        "attackRoundsPlayed": {
+          "value": 779,
+          "displayValue": "779"
+        },
+        "attackRoundsWinPct": {
+          "value": 46.85494223363286,
+          "displayValue": "46.9%"
+        },
+        "attackScore": {
+          "value": 113900,
+          "displayValue": "113,900"
+        },
+        "attackScorePerRound": {
+          "value": 146.21309370988448,
+          "displayValue": "146.2"
+        },
+        "attackDamage": {
+          "value": 79324,
+          "displayValue": "79,324"
+        },
+        "attackDamageReceived": {
+          "value": 112789,
+          "displayValue": "112,789"
+        },
+        "attackDamagePerRound": {
+          "value": 101.82798459563543,
+          "displayValue": "101.8"
+        },
+        "attackDamageDelta": {
+          "value": -33465,
+          "displayValue": "-33,465"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": -42.958921694480104,
+          "displayValue": "-43"
+        },
+        "attackHeadshots": {
+          "value": 255,
+          "displayValue": "255"
+        },
+        "attackTraded": {
+          "value": 115,
+          "displayValue": "115"
+        },
+        "attackSurvived": {
+          "value": 169,
+          "displayValue": "169"
+        },
+        "attackFirstBloods": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.043645699614890884,
+          "displayValue": "0.0"
+        },
+        "attackFirstDeaths": {
+          "value": 61,
+          "displayValue": "61"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.07830551989730423,
+          "displayValue": "0.1"
+        },
+        "attackEsr": {
+          "value": 0.35789473684210527,
+          "displayValue": "0.36"
+        },
+        "attackKAST": {
+          "value": 63.93,
+          "displayValue": "63.9%"
+        },
+        "defuses": {
+          "value": 28,
+          "displayValue": "28"
+        },
+        "defusesPerMatch": {
+          "value": 0.3684210526315789,
+          "displayValue": "0.37"
+        },
+        "defusesPerRound": {
+          "value": 0.03365384615384615,
+          "displayValue": "0.0"
+        },
+        "defenseKills": {
+          "value": 438,
+          "displayValue": "438"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.5264423076923077,
+          "displayValue": "0.5"
+        },
+        "defenseDeaths": {
+          "value": 620,
+          "displayValue": "620"
+        },
+        "defenseKDRatio": {
+          "value": 0.7064516129032258,
+          "displayValue": "0.71"
+        },
+        "defenseAssists": {
+          "value": 209,
+          "displayValue": "209"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.2512019230769231,
+          "displayValue": "0.3"
+        },
+        "defenseRoundsWon": {
+          "value": 417,
+          "displayValue": "417"
+        },
+        "defenseRoundsLost": {
+          "value": 415,
+          "displayValue": "415"
+        },
+        "defenseRoundsPlayed": {
+          "value": 832,
+          "displayValue": "832"
+        },
+        "defenseRoundsWinPct": {
+          "value": 50.120192307692314,
+          "displayValue": "50.1%"
+        },
+        "defenseScore": {
+          "value": 132220,
+          "displayValue": "132,220"
+        },
+        "defenseScorePerRound": {
+          "value": 158.91826923076923,
+          "displayValue": "158.9"
+        },
+        "defenseDamage": {
+          "value": 91792,
+          "displayValue": "91,792"
+        },
+        "defenseDamageReceived": {
+          "value": 114827,
+          "displayValue": "114,827"
+        },
+        "defenseDamagePerRound": {
+          "value": 110.32692307692308,
+          "displayValue": "110.3"
+        },
+        "defenseDamageDelta": {
+          "value": -23035,
+          "displayValue": "-23,035"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": -27.686298076923077,
+          "displayValue": "-28"
+        },
+        "defenseHeadshots": {
+          "value": 263,
+          "displayValue": "263"
+        },
+        "defenseTraded": {
+          "value": 95,
+          "displayValue": "95"
+        },
+        "defenseSurvived": {
+          "value": 214,
+          "displayValue": "214"
+        },
+        "defenseFirstBloods": {
+          "value": 53,
+          "displayValue": "53"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.06370192307692307,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 78,
+          "displayValue": "78"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.09375,
+          "displayValue": "0.1"
+        },
+        "defenseEsr": {
+          "value": 0.40458015267175573,
+          "displayValue": "0.40"
+        },
+        "defenseKAST": {
+          "value": 63.58,
+          "displayValue": "63.6%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 100,
+          "displayValue": "100"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Gold 1"
+        }
+      }
+    },
+    {
+      "name": "Hapimeru",
+      "tag": "8932",
+      "peak_rank": "Gold 1",
+      "clutch": {},
+      "clutch_success_rate": 13.3,
+      "clutch_wins": 2,
+      "clutch_attempts": 15,
+      "season": {},
+      "stats": {
+        "matchesPlayed": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "matchesWon": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "matchesLost": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "matchesTied": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesWinPct": {
+          "value": 40.0,
+          "displayValue": "40.0%"
+        },
+        "matchesDisconnected": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "matchesDuration": {
+          "value": 2344.6,
+          "displayValue": "39m 04s"
+        },
+        "timePlayed": {
+          "value": 11723,
+          "displayValue": "3h 15m"
+        },
+        "mVPs": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "roundsPlayed": {
+          "value": 105,
+          "displayValue": "105"
+        },
+        "roundsWon": {
+          "value": 52,
+          "displayValue": "52"
+        },
+        "roundsLost": {
+          "value": 53,
+          "displayValue": "53"
+        },
+        "roundsWinPct": {
+          "value": 49.523809523809526,
+          "displayValue": "49.5%"
+        },
+        "roundsDuration": {
+          "value": 111.64761904761905,
+          "displayValue": "01m 51s"
+        },
+        "score": {
+          "value": 19101,
+          "displayValue": "19,101"
+        },
+        "scorePerMatch": {
+          "value": 3820.2,
+          "displayValue": "3,820"
+        },
+        "scorePerRound": {
+          "value": 181.9142857142857,
+          "displayValue": "181.9"
+        },
+        "kills": {
+          "value": 69,
+          "displayValue": "69"
+        },
+        "killsPerRound": {
+          "value": 0.6571428571428571,
+          "displayValue": "0.7"
+        },
+        "killsPerMatch": {
+          "value": 13.8,
+          "displayValue": "13.8"
+        },
+        "deaths": {
+          "value": 73,
+          "displayValue": "73"
+        },
+        "deathsPerRound": {
+          "value": 0.6952380952380952,
+          "displayValue": "0.7"
+        },
+        "deathsPerMatch": {
+          "value": 14.6,
+          "displayValue": "14.6"
+        },
+        "assists": {
+          "value": 40,
+          "displayValue": "40"
+        },
+        "assistsPerRound": {
+          "value": 0.38095238095238093,
+          "displayValue": "0.4"
+        },
+        "assistsPerMatch": {
+          "value": 8.0,
+          "displayValue": "8.0"
+        },
+        "kDRatio": {
+          "value": 0.9452054794520548,
+          "displayValue": "0.95"
+        },
+        "kDARatio": {
+          "value": 1.2191780821917808,
+          "displayValue": "1.22"
+        },
+        "kADRatio": {
+          "value": 1.4931506849315068,
+          "displayValue": "1.49"
+        },
+        "damage": {
+          "value": 12345,
+          "displayValue": "12,345"
+        },
+        "damageDelta": {
+          "value": -1304,
+          "displayValue": "-1,304"
+        },
+        "damageDeltaPerRound": {
+          "value": -12.41904761904762,
+          "displayValue": "-12"
+        },
+        "damagePerRound": {
+          "value": 117.57142857142857,
+          "displayValue": "117.6"
+        },
+        "damagePerMatch": {
+          "value": 2469.0,
+          "displayValue": "2,469.00"
+        },
+        "damagePerMinute": {
+          "value": 63.30769230769231,
+          "displayValue": "63.3"
+        },
+        "damageReceived": {
+          "value": 13649,
+          "displayValue": "13,649"
+        },
+        "headshots": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "headshotsPerRound": {
+          "value": 0.2571428571428571,
+          "displayValue": "0.3"
+        },
+        "headshotsPercentage": {
+          "value": 11.194029850746269,
+          "displayValue": "11.2%"
+        },
+        "grenadeCasts": {
+          "value": 48,
+          "displayValue": "48"
+        },
+        "grenadeCastsPerRound": {
+          "value": 0.45714285714285713,
+          "displayValue": "0.5"
+        },
+        "grenadeCastsPerMatch": {
+          "value": 9.6,
+          "displayValue": "9.60"
+        },
+        "ability1Casts": {
+          "value": 26,
+          "displayValue": "26"
+        },
+        "ability1CastsPerRound": {
+          "value": 0.24761904761904763,
+          "displayValue": "0.2"
+        },
+        "ability1CastsPerMatch": {
+          "value": 5.2,
+          "displayValue": "5.20"
+        },
+        "ability2Casts": {
+          "value": 52,
+          "displayValue": "52"
+        },
+        "ability2CastsPerRound": {
+          "value": 0.49523809523809526,
+          "displayValue": "0.5"
+        },
+        "ability2CastsPerMatch": {
+          "value": 10.4,
+          "displayValue": "10.40"
+        },
+        "ultimateCasts": {
+          "value": 8,
+          "displayValue": "8"
+        },
+        "ultimateCastsPerRound": {
+          "value": 0.0761904761904762,
+          "displayValue": "0.1"
+        },
+        "ultimateCastsPerMatch": {
+          "value": 1.6,
+          "displayValue": "1.60"
+        },
+        "dealtHeadshots": {
+          "value": 30,
+          "displayValue": "30"
+        },
+        "dealtBodyshots": {
+          "value": 204,
+          "displayValue": "204"
+        },
+        "dealtLegshots": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "receivedHeadshots": {
+          "value": 53,
+          "displayValue": "53"
+        },
+        "receivedBodyshots": {
+          "value": 208,
+          "displayValue": "208"
+        },
+        "receivedLegshots": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "econRating": {
+          "value": 242,
+          "displayValue": "242"
+        },
+        "econRatingPerMatch": {
+          "value": 48.4,
+          "displayValue": "48"
+        },
+        "econRatingPerRound": {
+          "value": 2.3047619047619046,
+          "displayValue": "2.3"
+        },
+        "suicides": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstBloods": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "firstBloodsPerRound": {
+          "value": 0.047619047619047616,
+          "displayValue": "0.0"
+        },
+        "firstBloodsPerMatch": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "firstDeaths": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "firstDeathsPerRound": {
+          "value": 0.0,
+          "displayValue": "0.0"
+        },
+        "lastDeaths": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "survived": {
+          "value": 32,
+          "displayValue": "32"
+        },
+        "traded": {
+          "value": 18,
+          "displayValue": "18"
+        },
+        "kAST": {
+          "value": 81.9,
+          "displayValue": "81.9%"
+        },
+        "mostKillsInMatch": {
+          "value": 17,
+          "displayValue": "17"
+        },
+        "flawless": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "thrifty": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "aces": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "teamAces": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutchesPercentage": {
+          "value": 1.9047619047619049,
+          "displayValue": "1.9%"
+        },
+        "clutchesLost": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "clutches1v1": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches1v2": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutches1v3": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v4": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutches1v5": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "clutchesLost1v1": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "clutchesLost1v2": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "clutchesLost1v3": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "clutchesLost1v4": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "clutchesLost1v5": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "kills1K": {
+          "value": 40,
+          "displayValue": "40"
+        },
+        "kills2K": {
+          "value": 13,
+          "displayValue": "13"
+        },
+        "kills3K": {
+          "value": 1,
+          "displayValue": "1"
+        },
+        "kills4K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills5K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "kills6K": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "esr": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "plants": {
+          "value": 19,
+          "displayValue": "19"
+        },
+        "plantsPerMatch": {
+          "value": 3.8,
+          "displayValue": "3.80"
+        },
+        "plantsPerRound": {
+          "value": 0.35185185185185186,
+          "displayValue": "0.4"
+        },
+        "attackKills": {
+          "value": 31,
+          "displayValue": "31"
+        },
+        "attackKillsPerRound": {
+          "value": 0.5740740740740741,
+          "displayValue": "0.6"
+        },
+        "attackDeaths": {
+          "value": 39,
+          "displayValue": "39"
+        },
+        "attackKDRatio": {
+          "value": 0.7948717948717948,
+          "displayValue": "0.79"
+        },
+        "attackAssists": {
+          "value": 21,
+          "displayValue": "21"
+        },
+        "attackAssistsPerRound": {
+          "value": 0.3888888888888889,
+          "displayValue": "0.4"
+        },
+        "attackRoundsWon": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "attackRoundsLost": {
+          "value": 27,
+          "displayValue": "27"
+        },
+        "attackRoundsPlayed": {
+          "value": 54,
+          "displayValue": "54"
+        },
+        "attackRoundsWinPct": {
+          "value": 50.0,
+          "displayValue": "50.0%"
+        },
+        "attackScore": {
+          "value": 8939,
+          "displayValue": "8,939"
+        },
+        "attackScorePerRound": {
+          "value": 165.53703703703704,
+          "displayValue": "165.5"
+        },
+        "attackDamage": {
+          "value": 6102,
+          "displayValue": "6,102"
+        },
+        "attackDamageReceived": {
+          "value": 7130,
+          "displayValue": "7,130"
+        },
+        "attackDamagePerRound": {
+          "value": 113.0,
+          "displayValue": "113.0"
+        },
+        "attackDamageDelta": {
+          "value": -1028,
+          "displayValue": "-1,028"
+        },
+        "attackDamageDeltaPerRound": {
+          "value": -19.037037037037038,
+          "displayValue": "-19"
+        },
+        "attackHeadshots": {
+          "value": 11,
+          "displayValue": "11"
+        },
+        "attackTraded": {
+          "value": 9,
+          "displayValue": "9"
+        },
+        "attackSurvived": {
+          "value": 15,
+          "displayValue": "15"
+        },
+        "attackFirstBloods": {
+          "value": 2,
+          "displayValue": "2"
+        },
+        "attackFirstBloodsPerRound": {
+          "value": 0.037037037037037035,
+          "displayValue": "0.0"
+        },
+        "attackFirstDeaths": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "attackFirstDeathsPerRound": {
+          "value": 0.0,
+          "displayValue": "0.0"
+        },
+        "attackEsr": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "attackKAST": {
+          "value": 75.93,
+          "displayValue": "75.9%"
+        },
+        "defuses": {
+          "value": 5,
+          "displayValue": "5"
+        },
+        "defusesPerMatch": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "defusesPerRound": {
+          "value": 0.09803921568627451,
+          "displayValue": "0.1"
+        },
+        "defenseKills": {
+          "value": 38,
+          "displayValue": "38"
+        },
+        "defenseKillsPerRound": {
+          "value": 0.7450980392156863,
+          "displayValue": "0.7"
+        },
+        "defenseDeaths": {
+          "value": 34,
+          "displayValue": "34"
+        },
+        "defenseKDRatio": {
+          "value": 1.1176470588235294,
+          "displayValue": "1.12"
+        },
+        "defenseAssists": {
+          "value": 18,
+          "displayValue": "18"
+        },
+        "defenseAssistsPerRound": {
+          "value": 0.35294117647058826,
+          "displayValue": "0.4"
+        },
+        "defenseRoundsWon": {
+          "value": 25,
+          "displayValue": "25"
+        },
+        "defenseRoundsLost": {
+          "value": 26,
+          "displayValue": "26"
+        },
+        "defenseRoundsPlayed": {
+          "value": 51,
+          "displayValue": "51"
+        },
+        "defenseRoundsWinPct": {
+          "value": 49.01960784313725,
+          "displayValue": "49.0%"
+        },
+        "defenseScore": {
+          "value": 10162,
+          "displayValue": "10,162"
+        },
+        "defenseScorePerRound": {
+          "value": 199.2549019607843,
+          "displayValue": "199.3"
+        },
+        "defenseDamage": {
+          "value": 6243,
+          "displayValue": "6,243"
+        },
+        "defenseDamageReceived": {
+          "value": 6519,
+          "displayValue": "6,519"
+        },
+        "defenseDamagePerRound": {
+          "value": 122.41176470588235,
+          "displayValue": "122.4"
+        },
+        "defenseDamageDelta": {
+          "value": -276,
+          "displayValue": "-276"
+        },
+        "defenseDamageDeltaPerRound": {
+          "value": -5.411764705882353,
+          "displayValue": "-5"
+        },
+        "defenseHeadshots": {
+          "value": 16,
+          "displayValue": "16"
+        },
+        "defenseTraded": {
+          "value": 9,
+          "displayValue": "9"
+        },
+        "defenseSurvived": {
+          "value": 17,
+          "displayValue": "17"
+        },
+        "defenseFirstBloods": {
+          "value": 3,
+          "displayValue": "3"
+        },
+        "defenseFirstBloodsPerRound": {
+          "value": 0.058823529411764705,
+          "displayValue": "0.1"
+        },
+        "defenseFirstDeaths": {
+          "value": 0,
+          "displayValue": "0"
+        },
+        "defenseFirstDeathsPerRound": {
+          "value": 0.0,
+          "displayValue": "0.0"
+        },
+        "defenseEsr": {
+          "value": 1.0,
+          "displayValue": "1.00"
+        },
+        "defenseKAST": {
+          "value": 88.24,
+          "displayValue": "88.2%"
+        },
+        "rank": {
+          "value": null,
+          "displayValue": ""
+        },
+        "trnPerformanceScore": {
+          "value": 463,
+          "displayValue": "463"
+        },
+        "peakRank": {
+          "value": null,
+          "displayValue": "Gold 1"
         }
       }
     }
