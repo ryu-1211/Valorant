@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ValoRank</title>
+  <style>
+    :root {
+      --bg:       #0f1923;
+      --surface:  #1f2d3a;
+      --surface2: #162330;
+      --red:      #ff4655;
+      --gold:     #f0b232;
+      --text:     #e8eaed;
+      --muted:    #7f8ea3;
+      --border:   #2a3d4f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height: 100vh; }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #0f1923 0%, #1a0a0e 100%);
+      border-bottom: 2px solid var(--red);
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    header h1 { font-size: 1.6rem; letter-spacing: 4px; font-weight: 800; }
+    header h1 span { color: var(--red); }
+    #updated { font-size: 0.78rem; color: var(--muted); }
+
+    /* タブ */
+    .tabs { display: flex; gap: 4px; padding: 16px 24px 0; flex-wrap: wrap; }
+    .tab {
+      padding: 8px 18px; border: 1px solid var(--border); border-radius: 4px 4px 0 0;
+      background: var(--surface2); color: var(--muted); cursor: pointer;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 1px; transition: .15s;
+    }
+    .tab:hover { color: var(--text); border-color: var(--red); }
+    .tab.active { background: var(--red); color: #fff; border-color: var(--red); }
+
+    /* テーブルラッパー */
+    .table-wrap {
+      margin: 0 24px 24px; border: 1px solid var(--border);
+      border-radius: 0 4px 4px 4px; overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    thead tr { background: var(--surface2); }
+    th {
+      padding: 12px 14px; text-align: left; font-size: 0.75rem;
+      letter-spacing: 1px; color: var(--muted); white-space: nowrap;
+      cursor: pointer; user-select: none; border-bottom: 1px solid var(--border);
+    }
+    th:hover { color: var(--red); }
+    th.sorted { color: var(--gold); }
+    th .arrow { margin-left: 4px; }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface); }
+    td { padding: 13px 14px; white-space: nowrap; }
+
+    /* 順位列 */
+    .rank-cell { font-size: 1.1rem; text-align: center; width: 48px; }
+    .rank-1 { color: #ffd700; }
+    .rank-2 { color: #c0c0c0; }
+    .rank-3 { color: #cd7f32; }
+
+    /* プレイヤー名 */
+    .player-name { font-weight: 700; color: var(--text); }
+    .player-tag  { color: var(--muted); font-size: 0.8rem; }
+    .player-link { text-decoration: none; }
+    .player-link:hover .player-name { color: var(--red); }
+
+    /* ランク */
+    .rank-badge { font-size: 0.78rem; color: var(--gold); }
+
+    /* ハイライト列 */
+    .highlight { color: var(--gold); font-weight: 700; }
+
+    /* ローディング・エラー */
+    .status { padding: 60px; text-align: center; color: var(--muted); font-size: 1rem; }
+    .error { color: var(--red); }
+
+    /* レスポンシブ */
+    @media (max-width: 600px) {
+      header { flex-direction: column; gap: 8px; }
+      .tabs { padding: 12px 12px 0; }
+      .table-wrap { margin: 0 12px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>VALO<span>RANK</span></h1>
+  <div id="updated">読み込み中...</div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+<div class="table-wrap">
+  <table id="main-table">
+    <thead><tr id="thead-row"></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<script>
+const TABS = [
+  { key: 'acs',     label: 'ACS',      stat: 'scorePerRound',        fmt: v => v.toFixed(1) },
+  { key: 'kd',      label: 'K/D',       stat: 'kDRatio',              fmt: v => v.toFixed(2) },
+  { key: 'kast',    label: 'KAST',      stat: 'kAST',                 fmt: v => v.toFixed(1) + '%' },
+  { key: 'hs',      label: 'HS%',       stat: 'headshotsPercentage',  fmt: v => v.toFixed(1) + '%' },
+  { key: 'clutch',  label: 'CLUTCH',    stat: '__clutch__',           fmt: v => v.toFixed(1) + '%' },
+  { key: 'adr',     label: 'ADR',       stat: 'damagePerRound',       fmt: v => v.toFixed(1) },
+  { key: 'winrate', label: '勝率',      stat: 'matchesWinPct',        fmt: v => v.toFixed(1) + '%' },
+  { key: 'fb',      label: 'FB',        stat: 'firstBloods',          fmt: v => Math.round(v) },
+  { key: 'aces',    label: 'ACES',      stat: 'aces',                 fmt: v => Math.round(v) },
+];
+
+const COLUMNS = [
+  { label: '#',          key: '__rank__' },
+  { label: 'PLAYER',     key: '__name__' },
+  { label: 'PEAK RANK',  key: '__peak__' },
+  { label: 'ACS',        key: 'scorePerRound' },
+  { label: 'K/D',        key: 'kDRatio' },
+  { label: 'KAST',       key: 'kAST' },
+  { label: 'HS%',        key: 'headshotsPercentage' },
+  { label: 'CLUTCH',     key: '__clutch__' },
+  { label: 'ADR',        key: 'damagePerRound' },
+  { label: '勝率',       key: 'matchesWinPct' },
+  { label: 'ACES',       key: 'aces' },
+  { label: 'MATCHES',    key: 'matchesPlayed' },
+];
+
+let allPlayers = [];
+let sortKey = 'scorePerRound';
+let sortAsc = false;
+let activeTab = 'acs';
+
+function statVal(p, key) {
+  if (key === '__clutch__') return p.clutch_success_rate ?? 0;
+  return p.stats?.[key]?.value ?? 0;
+}
+
+function statDisp(p, key) {
+  if (key === '__clutch__') {
+    const r = p.clutch_success_rate ?? 0;
+    return `${r.toFixed(1)}% <span style="color:var(--muted);font-size:.78rem;">(${p.clutch_wins}/${p.clutch_attempts})</span>`;
+  }
+  return p.stats?.[key]?.displayValue ?? '-';
+}
+
+function render() {
+  const sorted = [...allPlayers].sort((a, b) => {
+    const va = statVal(a, sortKey), vb = statVal(b, sortKey);
+    return sortAsc ? va - vb : vb - va;
+  });
+
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+
+  sorted.forEach((p, i) => {
+    const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
+    const cls   = i < 3 ? `rank-${i+1}` : '';
+    const url   = `https://tracker.gg/valorant/profile/riot/${encodeURIComponent(p.name)}%23${p.tag}/overview`;
+
+    const cells = COLUMNS.map(col => {
+      if (col.key === '__rank__') return `<td class="rank-cell ${cls}">${medal}</td>`;
+      if (col.key === '__name__') return `<td><a class="player-link" href="${url}" target="_blank"><span class="player-name">${p.name}</span><span class="player-tag"> #${p.tag}</span></a></td>`;
+      if (col.key === '__peak__') return `<td class="rank-badge">${p.peak_rank ?? '-'}</td>`;
+      const hl = col.key === sortKey ? ' class="highlight"' : '';
+      return `<td${hl}>${statDisp(p, col.key)}</td>`;
+    }).join('');
+
+    tbody.innerHTML += `<tr>${cells}</tr>`;
+  });
+}
+
+function buildHeader() {
+  const tr = document.getElementById('thead-row');
+  tr.innerHTML = COLUMNS.map(col => {
+    if (col.key === '__rank__' || col.key === '__name__' || col.key === '__peak__') {
+      return `<th>${col.label}</th>`;
+    }
+    const sorted = col.key === sortKey;
+    const arrow  = sorted ? (sortAsc ? '▲' : '▼') : '';
+    return `<th class="${sorted ? 'sorted' : ''}" data-key="${col.key}">${col.label}<span class="arrow">${arrow}</span></th>`;
+  }).join('');
+
+  tr.querySelectorAll('th[data-key]').forEach(th => {
+    th.addEventListener('click', () => {
+      if (sortKey === th.dataset.key) { sortAsc = !sortAsc; }
+      else { sortKey = th.dataset.key; sortAsc = false; }
+      buildHeader();
+      render();
+    });
+  });
+}
+
+function buildTabs() {
+  const wrap = document.getElementById('tabs');
+  wrap.innerHTML = '';
+  TABS.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (t.key === activeTab ? ' active' : '');
+    btn.textContent = t.label;
+    btn.addEventListener('click', () => {
+      activeTab = t.key;
+      sortKey   = t.stat;
+      sortAsc   = false;
+      buildTabs();
+      buildHeader();
+      render();
+    });
+    wrap.appendChild(btn);
+  });
+}
+
+function timeAgo(iso) {
+  const diff = Math.floor((Date.now() - new Date(iso)) / 1000);
+  if (diff < 60)   return `${diff}秒前`;
+  if (diff < 3600) return `${Math.floor(diff/60)}分前`;
+  return `${Math.floor(diff/3600)}時間前`;
+}
+
+async function load() {
+  try {
+    const r = await fetch(`stats.json?t=${Date.now()}`);
+    if (!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    allPlayers = data.players ?? [];
+    document.getElementById('updated').textContent =
+      `最終更新: ${timeAgo(data.updated_at)}`;
+  } catch (e) {
+    document.getElementById('tbody').innerHTML =
+      `<tr><td colspan="12" class="status error">データを読み込めませんでした (${e.message})</td></tr>`;
+    return;
+  }
+
+  buildTabs();
+  buildHeader();
+  render();
+}
+
+load();
+setInterval(load, 5 * 60 * 1000); // 5分ごとに自動更新
+</script>
+</body>
+</html>
