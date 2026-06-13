@@ -7,46 +7,46 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg:      #0d1117;
-      --card:    #161b22;
-      --card2:   #1c2332;
-      --border:  #2a3a4a;
-      --red:     #ff4655;
-      --gold:    #f0b232;
-      --blue:    #58a6ff;
-      --text:    #e6edf3;
-      --muted:   #7d8da5;
-      --radius:  10px;
+      --bg: #0d1117; --card: #161b22; --card2: #1c2332; --border: #2a3a4a;
+      --red: #ff4655; --gold: #f0b232; --blue: #58a6ff; --green: #3fb950;
+      --text: #e6edf3; --muted: #7d8da5; --radius: 10px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; }
 
     /* ── ヘッダー ── */
     header {
-      background: linear-gradient(135deg, #0d1117 0%, #1a0812 60%, #0d1117 100%);
+      background: linear-gradient(135deg,#0d1117 0%,#1a0812 60%,#0d1117 100%);
       border-bottom: 1px solid var(--border);
-      padding: 0 28px;
-      height: 64px;
+      padding: 0 28px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
       position: sticky; top: 0; z-index: 100;
-      backdrop-filter: blur(10px);
     }
     .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 6px; }
     .logo span { color: var(--red); }
-    .header-right { display: flex; align-items: center; gap: 16px; }
+    .header-right { display: flex; align-items: center; gap: 12px; }
     #updated { font-size: 0.75rem; color: var(--muted); }
-    .refresh-btn {
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem;
-      transition: .15s;
+    .btn { background: none; border: 1px solid var(--border); color: var(--muted);
+      padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; transition: .15s; }
+    .btn:hover { border-color: var(--red); color: var(--red); }
+
+    main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+    /* ── シーズンバー ── */
+    .season-bar {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;
     }
-    .refresh-btn:hover { border-color: var(--red); color: var(--red); }
+    .season-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 1px; margin-right: 4px; }
+    .season-btn {
+      padding: 5px 14px; border-radius: 16px; border: 1px solid var(--border);
+      background: var(--card); color: var(--muted); cursor: pointer;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; transition: .15s;
+    }
+    .season-btn:hover { border-color: var(--blue); color: var(--text); }
+    .season-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; }
 
-    /* ── メインコンテンツ ── */
-    main { max-width: 1400px; margin: 0 auto; padding: 24px 20px; }
-
-    /* ── タブ ── */
-    .tabs { display: flex; gap: 6px; margin-bottom: 24px; flex-wrap: wrap; }
+    /* ── スタッツタブ ── */
+    .tabs { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
     .tab {
       padding: 7px 18px; border-radius: 20px; border: 1px solid var(--border);
       background: var(--card); color: var(--muted); cursor: pointer;
@@ -56,84 +56,73 @@
     .tab.active { background: var(--red); border-color: var(--red); color: #fff; }
 
     /* ── グリッド ── */
-    .charts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-    @media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 16px; }
+    @media(max-width:1000px) { .grid-2,.grid-3 { grid-template-columns: 1fr; } }
 
-    /* ── カード共通 ── */
+    /* ── カード ── */
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px;
     }
     .card-title {
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
-      color: var(--muted); margin-bottom: 16px; text-transform: uppercase;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+      color: var(--muted); margin-bottom: 14px; text-transform: uppercase;
     }
-    .card-title span { color: var(--red); }
+    .card-title em { color: var(--red); font-style: normal; }
 
     /* ── トップカード ── */
-    .top-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    .top-card {
-      background: var(--card2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      transition: border-color .15s;
-    }
-    .top-card:hover { border-color: var(--red); }
-    .top-card-label { font-size: 0.68rem; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 6px; }
-    .top-card-player { font-weight: 700; font-size: 0.95rem; color: var(--gold); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .top-card-value { font-size: 1.4rem; font-weight: 900; color: var(--text); }
+    .top-cards { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 10px; margin-bottom: 16px; }
+    .tc { background: var(--card2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; transition: border-color .15s; }
+    .tc:hover { border-color: var(--red); }
+    .tc-label { font-size: 0.65rem; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; }
+    .tc-player { font-weight: 700; font-size: 0.88rem; color: var(--gold); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tc-value { font-size: 1.3rem; font-weight: 900; }
 
     /* ── テーブル ── */
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    .tbl-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
     thead tr { border-bottom: 2px solid var(--border); }
-    th {
-      padding: 10px 14px; text-align: left;
-      font-size: 0.68rem; letter-spacing: 1.5px; color: var(--muted);
-      cursor: pointer; white-space: nowrap; user-select: none;
-    }
+    th { padding: 9px 12px; text-align: left; font-size: 0.67rem; letter-spacing: 1.5px; color: var(--muted); cursor: pointer; white-space: nowrap; }
     th:hover { color: var(--red); }
     th.sorted { color: var(--gold); }
     tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: var(--card2); }
-    td { padding: 12px 14px; white-space: nowrap; }
-    .medal { font-size: 1.1rem; }
-    .player-link { text-decoration: none; }
-    .pname { font-weight: 700; color: var(--text); }
-    .ptag  { color: var(--muted); font-size: 0.78rem; }
-    .player-link:hover .pname { color: var(--red); }
-    .rank-badge { color: var(--gold); font-size: 0.8rem; }
+    td { padding: 11px 12px; white-space: nowrap; }
+    .plink { text-decoration: none; }
+    .plink:hover .pn { color: var(--red); }
+    .pn { font-weight: 700; }
+    .pt { color: var(--muted); font-size: 0.78rem; }
+    .rb { color: var(--gold); font-size: 0.78rem; }
     .hl { color: var(--gold); font-weight: 800; }
+    .med { font-size: 1.05rem; }
+
+    /* ── クラッチ内訳セクション ── */
+    .clutch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media(max-width:900px) { .clutch-grid { grid-template-columns: 1fr; } }
 
     /* ── ローディング ── */
-    .loading { text-align: center; padding: 80px; color: var(--muted); }
+    .loading { text-align: center; padding: 80px; color: var(--muted); font-size: 1.1rem; }
     .dot { display: inline-block; animation: blink 1.2s infinite; }
-    .dot:nth-child(2) { animation-delay: .2s; }
-    .dot:nth-child(3) { animation-delay: .4s; }
-    @keyframes blink { 0%,80%,100% { opacity: .2; } 40% { opacity: 1; } }
+    .dot:nth-child(2) { animation-delay:.2s; }
+    .dot:nth-child(3) { animation-delay:.4s; }
+    @keyframes blink { 0%,80%,100%{opacity:.2} 40%{opacity:1} }
+
+    /* ── セクション区切り ── */
+    .section-title {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; color: var(--muted);
+      text-transform: uppercase; margin: 20px 0 12px;
+      padding-left: 10px; border-left: 3px solid var(--red);
+    }
   </style>
 </head>
 <body>
-
 <header>
   <div class="logo">VALO<span>RANK</span></div>
   <div class="header-right">
     <span id="updated">読み込み中...</span>
-    <button class="refresh-btn" onclick="loadData()">↺ 更新</button>
+    <button class="btn" onclick="loadData()">↺ 更新</button>
   </div>
 </header>
 
@@ -144,46 +133,57 @@
 <script>
 // ── 設定 ──────────────────────────────────────────────────────
 const TABS = [
-  { key:'acs',     label:'ACS',   stat:'scorePerRound',       disp: v=>`${v.toFixed(1)}` },
-  { key:'kd',      label:'K/D',   stat:'kDRatio',             disp: v=>`${v.toFixed(2)}` },
-  { key:'kast',    label:'KAST',  stat:'kAST',                disp: v=>`${v.toFixed(1)}%` },
-  { key:'hs',      label:'HS%',   stat:'headshotsPercentage', disp: v=>`${v.toFixed(1)}%` },
-  { key:'clutch',  label:'CLUTCH',stat:'__clutch__',          disp: v=>`${v.toFixed(1)}%` },
-  { key:'adr',     label:'ADR',   stat:'damagePerRound',      disp: v=>`${v.toFixed(1)}` },
-  { key:'winrate', label:'勝率',  stat:'matchesWinPct',       disp: v=>`${v.toFixed(1)}%` },
+  {key:'acs',    label:'ACS',  stat:'scorePerRound',       fmt:v=>`${v.toFixed(1)}`},
+  {key:'kd',     label:'K/D',  stat:'kDRatio',             fmt:v=>`${v.toFixed(2)}`},
+  {key:'kast',   label:'KAST', stat:'kAST',                fmt:v=>`${v.toFixed(1)}%`},
+  {key:'hs',     label:'HS%',  stat:'headshotsPercentage', fmt:v=>`${v.toFixed(1)}%`},
+  {key:'clutch', label:'CLUTCH',stat:'__clutch__',         fmt:v=>`${v.toFixed(1)}%`},
+  {key:'adr',    label:'ADR',  stat:'damagePerRound',      fmt:v=>`${v.toFixed(1)}`},
+  {key:'winrate',label:'勝率', stat:'matchesWinPct',       fmt:v=>`${v.toFixed(1)}%`},
+  {key:'fb',     label:'FB',   stat:'firstBloods',         fmt:v=>`${Math.round(v)}`},
 ];
 
 const RADAR_STATS = [
-  { label:'ACS',    stat:'scorePerRound',       max:350 },
-  { label:'K/D',    stat:'kDRatio',             max:3.0 },
-  { label:'KAST',   stat:'kAST',                max:100 },
-  { label:'HS%',    stat:'headshotsPercentage', max:50  },
-  { label:'CLUTCH', stat:'__clutch__',          max:50  },
-  { label:'ADR',    stat:'damagePerRound',       max:200 },
+  {label:'ACS',   stat:'scorePerRound',       max:350},
+  {label:'K/D',   stat:'kDRatio',             max:3.0},
+  {label:'KAST',  stat:'kAST',                max:100},
+  {label:'HS%',   stat:'headshotsPercentage', max:50},
+  {label:'CLUTCH',stat:'__clutch__',          max:50},
+  {label:'ADR',   stat:'damagePerRound',      max:200},
 ];
 
 const TOP_CARDS = [
-  { label:'TOP ACS',    stat:'scorePerRound',       fmt:v=>`${v.toFixed(1)}` },
-  { label:'TOP K/D',    stat:'kDRatio',             fmt:v=>`${v.toFixed(2)}` },
-  { label:'TOP KAST',   stat:'kAST',                fmt:v=>`${v.toFixed(1)}%` },
-  { label:'TOP HS%',    stat:'headshotsPercentage', fmt:v=>`${v.toFixed(1)}%` },
-  { label:'TOP CLUTCH', stat:'__clutch__',          fmt:v=>`${v.toFixed(1)}%` },
-  { label:'TOP ADR',    stat:'damagePerRound',      fmt:v=>`${v.toFixed(1)}` },
+  {label:'TOP ACS',    stat:'scorePerRound',       fmt:v=>`${v.toFixed(1)}`},
+  {label:'TOP K/D',    stat:'kDRatio',             fmt:v=>`${v.toFixed(2)}`},
+  {label:'TOP KAST',   stat:'kAST',                fmt:v=>`${v.toFixed(1)}%`},
+  {label:'TOP HS%',    stat:'headshotsPercentage', fmt:v=>`${v.toFixed(1)}%`},
+  {label:'TOP CLUTCH', stat:'__clutch__',          fmt:v=>`${v.toFixed(1)}%`},
+  {label:'TOP ADR',    stat:'damagePerRound',      fmt:v=>`${v.toFixed(1)}`},
+  {label:'TOP ACES',   stat:'aces',                fmt:v=>`${Math.round(v)}`},
+  {label:'TOP FB',     stat:'firstBloods',         fmt:v=>`${Math.round(v)}`},
 ];
 
 const TABLE_COLS = [
-  { label:'#',       key:'__rank__' },
-  { label:'PLAYER',  key:'__name__' },
-  { label:'RANK',    key:'__peak__' },
-  { label:'ACS',     key:'scorePerRound' },
-  { label:'K/D',     key:'kDRatio' },
-  { label:'KDA',     key:'kDARatio' },
-  { label:'KAST',    key:'kAST' },
-  { label:'HS%',     key:'headshotsPercentage' },
-  { label:'CLUTCH',  key:'__clutch__' },
-  { label:'ADR',     key:'damagePerRound' },
-  { label:'勝率',    key:'matchesWinPct' },
-  { label:'試合数',  key:'matchesPlayed' },
+  {label:'#',      key:'__rank__'},
+  {label:'PLAYER', key:'__name__'},
+  {label:'RANK',   key:'__peak__'},
+  {label:'ACS',    key:'scorePerRound'},
+  {label:'K/D',    key:'kDRatio'},
+  {label:'KDA',    key:'kDARatio'},
+  {label:'KAST',   key:'kAST'},
+  {label:'HS%',    key:'headshotsPercentage'},
+  {label:'CLUTCH', key:'__clutch__'},
+  {label:'ADR',    key:'damagePerRound'},
+  {label:'勝率',   key:'matchesWinPct'},
+  {label:'ACS(ATK)',key:'attackScorePerRound'},
+  {label:'ACS(DEF)',key:'defenseScorePerRound'},
+  {label:'FB数',   key:'firstBloods'},
+  {label:'FD数',   key:'firstDeaths'},
+  {label:'ACES',   key:'aces'},
+  {label:'2K',     key:'kills2K'},
+  {label:'3K',     key:'kills3K'},
+  {label:'4K',     key:'kills4K'},
+  {label:'試合数', key:'matchesPlayed'},
 ];
 
 const PALETTE = [
@@ -191,45 +191,53 @@ const PALETTE = [
   '#a371f7','#39d353','#ff8c00','#00b4d8','#ff6b6b',
 ];
 
+const MEDALS = ['🥇','🥈','🥉'];
+
 // ── 状態 ──────────────────────────────────────────────────────
-let players = [];
+let allData = null;          // stats.json 全体
+let currentPlayers = [];     // 現在表示中のプレイヤーリスト
+let currentSeasonId = null;
 let activeTab = 'acs';
 let sortKey = 'scorePerRound';
 let sortAsc = false;
-let barChart = null;
-let radarChart = null;
+let charts = {};
 
 // ── ユーティリティ ────────────────────────────────────────────
 function sv(p, stat) {
-  if (stat === '__clutch__') return p.clutch_success_rate ?? 0;
+  if (stat === '__clutch__') return p.clutch?.success_rate ?? p.clutch_success_rate ?? 0;
   return p.stats?.[stat]?.value ?? 0;
 }
 function dv(p, stat) {
   if (stat === '__clutch__') {
-    const r = (p.clutch_success_rate ?? 0).toFixed(1);
-    return `${r}% <small style="color:var(--muted)">(${p.clutch_wins}/${p.clutch_attempts})</small>`;
+    const c = p.clutch || {};
+    const r = (c.success_rate ?? p.clutch_success_rate ?? 0).toFixed(1);
+    const w = c.wins ?? p.clutch_wins ?? 0;
+    const a = c.attempts ?? p.clutch_attempts ?? 0;
+    return `${r}% <small style="color:var(--muted)">(${w}/${a})</small>`;
   }
   return p.stats?.[stat]?.displayValue ?? '-';
 }
-function topPlayer(stat) {
-  return [...players].sort((a,b)=>sv(b,stat)-sv(a,stat))[0];
-}
-function normalize(val, max) { return Math.min(100, (val / max) * 100); }
+function top(stat) { return [...currentPlayers].sort((a,b)=>sv(b,stat)-sv(a,stat))[0]; }
+function norm(v,mx) { return Math.min(100,(v/mx)*100); }
 function timeAgo(iso) {
-  const s = Math.floor((Date.now()-new Date(iso))/1000);
-  if (s<60) return `${s}秒前`;
-  if (s<3600) return `${Math.floor(s/60)}分前`;
+  const s=Math.floor((Date.now()-new Date(iso))/1000);
+  if(s<60) return `${s}秒前`;
+  if(s<3600) return `${Math.floor(s/60)}分前`;
   return `${Math.floor(s/3600)}時間前`;
 }
+function destroyChart(key) { if(charts[key]){ charts[key].destroy(); delete charts[key]; } }
 
 // ── データ取得 ────────────────────────────────────────────────
 async function loadData() {
   try {
     const r = await fetch(`stats.json?t=${Date.now()}`);
     if (!r.ok) throw new Error(r.status);
-    const data = await r.json();
-    players = data.players ?? [];
-    document.getElementById('updated').textContent = `最終更新: ${timeAgo(data.updated_at)}`;
+    allData = await r.json();
+    document.getElementById('updated').textContent = `最終更新: ${timeAgo(allData.updated_at)}`;
+
+    // 初期シーズンを設定
+    currentSeasonId = allData.current_season_id || 'current';
+    setPlayers(currentSeasonId);
     renderAll();
   } catch(e) {
     document.getElementById('root').innerHTML =
@@ -237,41 +245,104 @@ async function loadData() {
   }
 }
 
+function setPlayers(seasonId) {
+  currentSeasonId = seasonId;
+  if (allData.seasons && allData.seasons[seasonId]) {
+    currentPlayers = allData.seasons[seasonId];
+  } else {
+    currentPlayers = allData.players || [];
+  }
+}
+
 // ── 全体レンダリング ──────────────────────────────────────────
 function renderAll() {
   const root = document.getElementById('root');
   root.innerHTML = `
+    <div class="season-bar" id="seasonBar"></div>
     <div class="tabs" id="tabs"></div>
-    <div class="charts-grid">
+
+    <div class="section-title">ランキング概要</div>
+    <div class="grid-2">
       <div class="card">
-        <div class="card-title">ランキング — <span id="bar-title">${activeTab.toUpperCase()}</span></div>
-        <canvas id="barChart" height="260"></canvas>
+        <div class="card-title">ランキング — <em id="bar-title">ACS</em></div>
+        <canvas id="barChart" height="240"></canvas>
       </div>
       <div class="card">
-        <div class="card-title">総合比較 — <span>レーダーチャート</span></div>
-        <canvas id="radarChart" height="260"></canvas>
+        <div class="card-title">総合比較 — <em>レーダーチャート</em></div>
+        <canvas id="radarChart" height="240"></canvas>
       </div>
     </div>
+
+    <div class="section-title">トップパフォーマー</div>
     <div class="top-cards" id="topCards"></div>
+
+    <div class="section-title">クラッチ詳細</div>
+    <div class="clutch-grid">
+      <div class="card">
+        <div class="card-title">クラッチ成功率 — <em>1vN 別</em></div>
+        <canvas id="clutchRateChart" height="220"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">クラッチ試行回数 — <em>1vN 別（勝敗内訳）</em></div>
+        <canvas id="clutchCountChart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="section-title">ATK / DEF パフォーマンス</div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">ACS 比較 — <em>ATK vs DEF</em></div>
+        <canvas id="atkDefChart" height="200"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">マルチキル — <em>2K / 3K / 4K / 5K</em></div>
+        <canvas id="multikillChart" height="200"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">ファーストブラッド / ファーストデス</div>
+        <canvas id="fbfdChart" height="200"></canvas>
+      </div>
+    </div>
+
+    <div class="section-title">全データテーブル</div>
     <div class="card">
-      <div class="card-title">全データ — <span>クリックで並び替え</span></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr id="thead"></tr></thead>
-          <tbody id="tbody"></tbody>
-        </table>
+      <div class="tbl-wrap">
+        <table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table>
       </div>
     </div>
   `;
 
+  renderSeasonBar();
   renderTabs();
   renderBarChart();
   renderRadarChart();
   renderTopCards();
+  renderClutchCharts();
+  renderAtkDefChart();
+  renderMultikillChart();
+  renderFbFdChart();
   renderTable();
 }
 
-// ── タブ ─────────────────────────────────────────────────────
+// ── シーズンバー ──────────────────────────────────────────────
+function renderSeasonBar() {
+  const list = allData.season_list || [];
+  const wrap = document.getElementById('seasonBar');
+  if (!list.length) { wrap.style.display='none'; return; }
+  wrap.innerHTML = `<span class="season-label">シーズン:</span>` +
+    list.map(s =>
+      `<button class="season-btn${s.id===currentSeasonId?' active':''}"
+        onclick="switchSeason('${s.id}')">${s.shortName||s.name}</button>`
+    ).join('');
+}
+function switchSeason(id) {
+  setPlayers(id);
+  sortKey = 'scorePerRound'; sortAsc = false; activeTab = 'acs';
+  Object.keys(charts).forEach(destroyChart);
+  renderAll();
+}
+
+// ── スタッツタブ ──────────────────────────────────────────────
 function renderTabs() {
   document.getElementById('tabs').innerHTML = TABS.map(t =>
     `<button class="tab${t.key===activeTab?' active':''}" onclick="switchTab('${t.key}')">${t.label}</button>`
@@ -280,175 +351,244 @@ function renderTabs() {
 function switchTab(key) {
   activeTab = key;
   const tab = TABS.find(t=>t.key===key);
-  sortKey = tab.stat;
-  sortAsc = false;
+  sortKey = tab.stat; sortAsc = false;
   document.getElementById('bar-title').textContent = key.toUpperCase();
-  renderTabs();
-  renderBarChart();
-  renderTable();
+  renderTabs(); renderBarChart(); renderTable();
 }
 
 // ── バーチャート ──────────────────────────────────────────────
 function renderBarChart() {
-  const tab  = TABS.find(t=>t.key===activeTab);
-  const stat = tab.stat;
-  const sorted = [...players].sort((a,b)=>sv(b,stat)-sv(a,stat));
-  const labels = sorted.map(p=>`${p.name}#${p.tag}`);
-  const values = sorted.map(p=>sv(p,stat));
-
-  const bgColors = sorted.map((_,i)=>{
-    if(i===0) return 'rgba(240,178,50,0.85)';
-    if(i===1) return 'rgba(192,192,192,0.75)';
-    if(i===2) return 'rgba(205,127,50,0.75)';
-    return 'rgba(255,70,85,0.55)';
-  });
-  const borderColors = sorted.map((_,i)=>{
-    if(i===0) return '#f0b232';
-    if(i===1) return '#c0c0c0';
-    if(i===2) return '#cd7f32';
-    return '#ff4655';
-  });
-
-  if (barChart) barChart.destroy();
+  const tab = TABS.find(t=>t.key===activeTab);
+  const sorted = [...currentPlayers].sort((a,b)=>sv(b,tab.stat)-sv(a,tab.stat));
+  const bgColors = sorted.map((_,i)=>i===0?'rgba(240,178,50,.85)':i===1?'rgba(192,192,192,.75)':i===2?'rgba(205,127,50,.75)':'rgba(255,70,85,.55)');
+  const bdColors = sorted.map((_,i)=>i===0?'#f0b232':i===1?'#c0c0c0':i===2?'#cd7f32':'#ff4655');
+  destroyChart('bar');
   const ctx = document.getElementById('barChart').getContext('2d');
-  barChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: bgColors,
-        borderColor: borderColors,
-        borderWidth: 2,
-        borderRadius: 6,
-      }]
+  charts['bar'] = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels: sorted.map(p=>`${p.name}#${p.tag}`),
+      datasets:[{data:sorted.map(p=>sv(p,tab.stat)),backgroundColor:bgColors,borderColor:bdColors,borderWidth:2,borderRadius:6}]
     },
-    options: {
-      indexAxis: 'y',
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: {
-            label: ctx => ` ${tab.disp(ctx.raw)}`
-          }
-        }
+    options:{
+      indexAxis:'y', responsive:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${tab.fmt(c.raw)}`}}},
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5',font:{size:11}}},
+        y:{grid:{display:false},ticks:{color:'#e6edf3',font:{size:12,weight:'700'}}}
       },
-      scales: {
-        x: {
-          grid: { color: 'rgba(255,255,255,0.05)' },
-          ticks: { color: '#7d8da5', font: { size: 11 } },
-        },
-        y: {
-          grid: { display: false },
-          ticks: { color: '#e6edf3', font: { size: 12, weight: '700' } },
-        }
-      },
-      animation: { duration: 600, easing: 'easeOutQuart' }
+      animation:{duration:500}
     }
   });
 }
 
 // ── レーダーチャート ──────────────────────────────────────────
 function renderRadarChart() {
-  const datasets = players.map((p, i) => ({
-    label: `${p.name}#${p.tag}`,
-    data: RADAR_STATS.map(s => normalize(sv(p, s.stat), s.max)),
-    backgroundColor: PALETTE[i % PALETTE.length] + '22',
-    borderColor: PALETTE[i % PALETTE.length],
-    borderWidth: 2,
-    pointBackgroundColor: PALETTE[i % PALETTE.length],
-    pointRadius: 4,
-    pointHoverRadius: 6,
-  }));
-
-  if (radarChart) radarChart.destroy();
+  destroyChart('radar');
   const ctx = document.getElementById('radarChart').getContext('2d');
-  radarChart = new Chart(ctx, {
-    type: 'radar',
-    data: { labels: RADAR_STATS.map(s=>s.label), datasets },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { color: '#e6edf3', font: { size: 11 }, padding: 12, boxWidth: 12 }
-        },
-        tooltip: {
-          callbacks: {
-            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toFixed(0)}pts`
-          }
-        }
-      },
-      scales: {
-        r: {
-          min: 0, max: 100,
-          grid: { color: 'rgba(255,255,255,0.08)' },
-          angleLines: { color: 'rgba(255,255,255,0.08)' },
-          ticks: { display: false },
-          pointLabels: { color: '#7d8da5', font: { size: 12, weight: '700' } }
-        }
-      },
-      animation: { duration: 800, easing: 'easeOutQuart' }
+  charts['radar'] = new Chart(ctx,{
+    type:'radar',
+    data:{
+      labels: RADAR_STATS.map(s=>s.label),
+      datasets: currentPlayers.map((p,i)=>({
+        label:`${p.name}#${p.tag}`,
+        data: RADAR_STATS.map(s=>norm(sv(p,s.stat),s.max)),
+        backgroundColor: PALETTE[i%PALETTE.length]+'22',
+        borderColor: PALETTE[i%PALETTE.length],
+        borderWidth:2, pointBackgroundColor:PALETTE[i%PALETTE.length], pointRadius:4,
+      }))
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:11},padding:10,boxWidth:12}}},
+      scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,.08)'},angleLines:{color:'rgba(255,255,255,.08)'},ticks:{display:false},pointLabels:{color:'#7d8da5',font:{size:12,weight:'700'}}}}
+    }
+  });
+}
+
+// ── クラッチ詳細チャート ──────────────────────────────────────
+function renderClutchCharts() {
+  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const types = ['1v1','1v2','1v3','1v4','1v5'];
+
+  // 成功率チャート（折れ線）
+  destroyChart('clutchRate');
+  const ctx1 = document.getElementById('clutchRateChart').getContext('2d');
+  charts['clutchRate'] = new Chart(ctx1,{
+    type:'line',
+    data:{
+      labels: types,
+      datasets: currentPlayers.map((p,i)=>{
+        const bd = p.clutch?.breakdown || {};
+        return {
+          label:`${p.name}#${p.tag}`,
+          data: types.map(t=>bd[t]?.rate ?? 0),
+          borderColor: PALETTE[i%PALETTE.length],
+          backgroundColor: PALETTE[i%PALETTE.length]+'33',
+          borderWidth:2, pointRadius:5, tension:0.3, fill:false,
+        };
+      })
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:11},padding:8,boxWidth:10}}},
+      scales:{
+        x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5'}},
+        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5',callback:v=>`${v}%`},min:0}
+      }
+    }
+  });
+
+  // 試行回数チャート（積み上げ棒）
+  destroyChart('clutchCount');
+  const ctx2 = document.getElementById('clutchCountChart').getContext('2d');
+  const winColors  = ['#3fb950','#58a6ff','#f0b232','#a371f7','#ff4655'];
+  const loseColors = ['#3fb95055','#58a6ff55','#f0b23255','#a371f755','#ff465555'];
+  charts['clutchCount'] = new Chart(ctx2,{
+    type:'bar',
+    data:{
+      labels,
+      datasets: [
+        ...types.map((t,i)=>({
+          label:`${t} 勝利`,
+          data: currentPlayers.map(p=>p.clutch?.breakdown?.[t]?.wins ?? 0),
+          backgroundColor: winColors[i], stack:'win',
+        })),
+        ...types.map((t,i)=>({
+          label:`${t} 敗北`,
+          data: currentPlayers.map(p=>-(p.clutch?.breakdown?.[t]?.losses ?? 0)),
+          backgroundColor: loseColors[i], stack:'lose',
+        })),
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:10},padding:6,boxWidth:10}}},
+      scales:{
+        x:{stacked:true,grid:{display:false},ticks:{color:'#e6edf3',font:{size:11}}},
+        y:{stacked:true,grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5',callback:v=>Math.abs(v)}}
+      }
+    }
+  });
+}
+
+// ── ATK/DEF チャート ──────────────────────────────────────────
+function renderAtkDefChart() {
+  destroyChart('atkDef');
+  const ctx = document.getElementById('atkDefChart').getContext('2d');
+  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  charts['atkDef'] = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'ATK ACS',data:currentPlayers.map(p=>sv(p,'attackScorePerRound')),backgroundColor:'rgba(255,70,85,.7)',borderColor:'#ff4655',borderWidth:1,borderRadius:4},
+        {label:'DEF ACS',data:currentPlayers.map(p=>sv(p,'defenseScorePerRound')),backgroundColor:'rgba(88,166,255,.7)',borderColor:'#58a6ff',borderWidth:1,borderRadius:4},
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:11},padding:8,boxWidth:10}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#e6edf3',font:{size:11}}},
+        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5'}}
+      }
+    }
+  });
+}
+
+// ── マルチキルチャート ────────────────────────────────────────
+function renderMultikillChart() {
+  destroyChart('multikill');
+  const ctx = document.getElementById('multikillChart').getContext('2d');
+  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const mkColors = ['#3fb950','#f0b232','#ff8c00','#ff4655'];
+  charts['multikill'] = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:['kills2K','kills3K','kills4K','kills5K'].map((k,i)=>({
+        label:['2K','3K','4K','5K'][i],
+        data:currentPlayers.map(p=>sv(p,k)),
+        backgroundColor:mkColors[i]+'99', borderColor:mkColors[i], borderWidth:1, borderRadius:4,
+      }))
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:11},padding:8,boxWidth:10}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#e6edf3',font:{size:11}}},
+        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5'}}
+      }
+    }
+  });
+}
+
+// ── FB/FD チャート ────────────────────────────────────────────
+function renderFbFdChart() {
+  destroyChart('fbfd');
+  const ctx = document.getElementById('fbfdChart').getContext('2d');
+  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  charts['fbfd'] = new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels,
+      datasets:[
+        {label:'FB (ファーストブラッド)',data:currentPlayers.map(p=>sv(p,'firstBloods')),backgroundColor:'rgba(63,185,80,.7)',borderColor:'#3fb950',borderWidth:1,borderRadius:4},
+        {label:'FD (ファーストデス)',   data:currentPlayers.map(p=>sv(p,'firstDeaths')),backgroundColor:'rgba(255,70,85,.5)',borderColor:'#ff4655',borderWidth:1,borderRadius:4},
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{legend:{position:'bottom',labels:{color:'#e6edf3',font:{size:11},padding:8,boxWidth:10}}},
+      scales:{
+        x:{grid:{display:false},ticks:{color:'#e6edf3',font:{size:11}}},
+        y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#7d8da5'}}
+      }
     }
   });
 }
 
 // ── トップカード ──────────────────────────────────────────────
 function renderTopCards() {
-  if (!players.length) return;
-  document.getElementById('topCards').innerHTML = TOP_CARDS.map(c => {
-    const p = topPlayer(c.stat);
-    if (!p) return '';
-    return `
-      <div class="top-card">
-        <div class="top-card-label">${c.label}</div>
-        <div class="top-card-player">${p.name}#${p.tag}</div>
-        <div class="top-card-value">${c.fmt(sv(p,c.stat))}</div>
-      </div>`;
+  document.getElementById('topCards').innerHTML = TOP_CARDS.map(c=>{
+    const p = top(c.stat); if(!p) return '';
+    return `<div class="tc"><div class="tc-label">${c.label}</div>
+      <div class="tc-player">${p.name}#${p.tag}</div>
+      <div class="tc-value">${c.fmt(sv(p,c.stat))}</div></div>`;
   }).join('');
 }
 
 // ── テーブル ──────────────────────────────────────────────────
 function renderTable() {
-  const sorted = [...players].sort((a,b)=>{
+  const sorted = [...currentPlayers].sort((a,b)=>{
     const va=sv(a,sortKey), vb=sv(b,sortKey);
-    return sortAsc ? va-vb : vb-va;
+    return sortAsc?va-vb:vb-va;
   });
-
-  // ヘッダー
-  document.getElementById('thead').innerHTML = TABLE_COLS.map(col => {
-    const special = ['__rank__','__name__','__peak__'].includes(col.key);
-    if (special) return `<th>${col.label}</th>`;
-    const isSorted = col.key===sortKey;
-    const arrow = isSorted ? (sortAsc?'▲':'▼') : '';
-    return `<th class="${isSorted?'sorted':''}" onclick="doSort('${col.key}')">${col.label} ${arrow}</th>`;
+  document.getElementById('thead').innerHTML = TABLE_COLS.map(col=>{
+    if(['__rank__','__name__','__peak__'].includes(col.key)) return `<th>${col.label}</th>`;
+    const s=col.key===sortKey;
+    return `<th class="${s?'sorted':''}" onclick="doSort('${col.key}')">${col.label}${s?(sortAsc?' ▲':' ▼'):''}</th>`;
   }).join('');
 
-  // ボディ
-  const MEDALS = ['🥇','🥈','🥉'];
-  document.getElementById('tbody').innerHTML = sorted.map((p,i) => {
-    const url = `https://tracker.gg/valorant/profile/riot/${encodeURIComponent(p.name)}%23${p.tag}/overview`;
-    return `<tr>${TABLE_COLS.map(col=>{
-      if(col.key==='__rank__')
-        return `<td class="medal">${i<3?MEDALS[i]:`<span style="color:var(--muted)">${i+1}</span>`}</td>`;
-      if(col.key==='__name__')
-        return `<td><a class="player-link" href="${url}" target="_blank"><span class="pname">${p.name}</span><span class="ptag"> #${p.tag}</span></a></td>`;
-      if(col.key==='__peak__')
-        return `<td class="rank-badge">${p.peak_rank??'-'}</td>`;
-      const hl = col.key===sortKey ? ' class="hl"' : '';
-      return `<td${hl}>${dv(p,col.key)}</td>`;
-    }).join('')}</tr>`;
-  }).join('');
+  document.getElementById('tbody').innerHTML = sorted.map((p,i)=>`<tr>${TABLE_COLS.map(col=>{
+    if(col.key==='__rank__') return `<td class="med">${i<3?MEDALS[i]:`<span style="color:var(--muted)">${i+1}</span>`}</td>`;
+    if(col.key==='__name__'){
+      const url=`https://tracker.gg/valorant/profile/riot/${encodeURIComponent(p.name)}%23${p.tag}/overview`;
+      return `<td><a class="plink" href="${url}" target="_blank"><span class="pn">${p.name}</span><span class="pt"> #${p.tag}</span></a></td>`;
+    }
+    if(col.key==='__peak__') return `<td class="rb">${p.peak_rank??'-'}</td>`;
+    const hl=col.key===sortKey?' class="hl"':'';
+    return `<td${hl}>${dv(p,col.key)}</td>`;
+  }).join('')}</tr>`).join('');
 }
 
 function doSort(key) {
-  sortAsc = sortKey===key ? !sortAsc : false;
+  sortAsc = sortKey===key?!sortAsc:false;
   sortKey = key;
   renderTable();
-  // タブも同期
-  const tab = TABS.find(t=>t.stat===key);
-  if(tab && tab.key!==activeTab) { activeTab=tab.key; renderTabs(); }
+  const t=TABS.find(x=>x.stat===key);
+  if(t&&t.key!==activeTab){ activeTab=t.key; renderTabs(); }
 }
 
 // ── 起動 ─────────────────────────────────────────────────────

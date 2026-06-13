@@ -22,34 +22,45 @@ def init_db() -> None:
                 UNIQUE(name, tag)
             );
             CREATE TABLE IF NOT EXISTS cache (
-                player_id   INTEGER PRIMARY KEY REFERENCES players(id),
+                player_id   INTEGER NOT NULL REFERENCES players(id) ON DELETE CASCADE,
+                season_id   TEXT    NOT NULL DEFAULT 'current',
                 data        TEXT    NOT NULL,
-                updated_at  INTEGER NOT NULL
+                updated_at  INTEGER NOT NULL,
+                PRIMARY KEY (player_id, season_id)
             );
         """)
+        # マイグレーション: 旧スキーマに season_id カラムがない場合は再作成
+        cols = [r[1] for r in con.execute("PRAGMA table_info(cache)").fetchall()]
+        if "season_id" not in cols:
+            con.executescript("""
+                ALTER TABLE cache RENAME TO cache_old;
+                CREATE TABLE cache (
+                    player_id   INTEGER NOT NULL REFERENCES players(id) ON DELETE CASCADE,
+                    season_id   TEXT    NOT NULL DEFAULT 'current',
+                    data        TEXT    NOT NULL,
+                    updated_at  INTEGER NOT NULL,
+                    PRIMARY KEY (player_id, season_id)
+                );
+                INSERT INTO cache (player_id, season_id, data, updated_at)
+                SELECT player_id, 'current', data, updated_at FROM cache_old;
+                DROP TABLE cache_old;
+            """)
 
 
 # ── プレイヤー管理 ────────────────────────────────────────────
 
-
 def add_player(name: str, tag: str) -> bool:
-    """登録済みなら False、新規追加なら True を返す。"""
     with _conn() as con:
         try:
-            con.execute(
-                "INSERT INTO players (name, tag) VALUES (?, ?)", (name, tag)
-            )
+            con.execute("INSERT INTO players (name, tag) VALUES (?, ?)", (name, tag))
             return True
         except sqlite3.IntegrityError:
             return False
 
 
 def remove_player(name: str, tag: str) -> bool:
-    """削除できたら True、存在しなければ False を返す。"""
     with _conn() as con:
-        cur = con.execute(
-            "DELETE FROM players WHERE name=? AND tag=?", (name, tag)
-        )
+        cur = con.execute("DELETE FROM players WHERE name=? AND tag=?", (name, tag))
         return cur.rowcount > 0
 
 
@@ -69,26 +80,25 @@ def get_player_id(name: str, tag: str) -> int | None:
 
 # ── キャッシュ管理 ────────────────────────────────────────────
 
-
-def save_cache(player_id: int, data: dict) -> None:
+def save_cache(player_id: int, data: dict, season_id: str = "current") -> None:
     payload = json.dumps(data, ensure_ascii=False)
     with _conn() as con:
         con.execute(
             """
-            INSERT INTO cache (player_id, data, updated_at)
-            VALUES (?, ?, ?)
-            ON CONFLICT(player_id) DO UPDATE
+            INSERT INTO cache (player_id, season_id, data, updated_at)
+            VALUES (?, ?, ?, ?)
+            ON CONFLICT(player_id, season_id) DO UPDATE
             SET data=excluded.data, updated_at=excluded.updated_at
             """,
-            (player_id, payload, int(time.time())),
+            (player_id, season_id, payload, int(time.time())),
         )
 
 
-def load_cache(player_id: int, ttl: int) -> dict | None:
-    """TTL 秒以内のキャッシュがあれば返す。なければ None。"""
+def load_cache(player_id: int, ttl: int, season_id: str = "current") -> dict | None:
     with _conn() as con:
         row = con.execute(
-            "SELECT data, updated_at FROM cache WHERE player_id=?", (player_id,)
+            "SELECT data, updated_at FROM cache WHERE player_id=? AND season_id=?",
+            (player_id, season_id),
         ).fetchone()
     if not row:
         return None
@@ -97,10 +107,19 @@ def load_cache(player_id: int, ttl: int) -> dict | None:
     return json.loads(row["data"])
 
 
-def load_cache_force(player_id: int) -> dict | None:
-    """TTL に関わらずキャッシュを返す（失敗時フォールバック用）。"""
+def load_cache_force(player_id: int, season_id: str = "current") -> dict | None:
     with _conn() as con:
         row = con.execute(
-            "SELECT data FROM cache WHERE player_id=?", (player_id,)
+            "SELECT data FROM cache WHERE player_id=? AND season_id=?",
+            (player_id, season_id),
         ).fetchone()
     return json.loads(row["data"]) if row else None
+
+
+def load_all_cached_seasons(player_id: int) -> dict[str, dict]:
+    """プレイヤーの全シーズンキャッシュを {season_id: data} で返す。"""
+    with _conn() as con:
+        rows = con.execute(
+            "SELECT season_id, data FROM cache WHERE player_id=?", (player_id,)
+        ).fetchall()
+    return {r["season_id"]: json.loads(r["data"]) for r in rows}

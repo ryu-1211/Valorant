@@ -59,32 +59,48 @@ def _rank_emoji(rank_str: str) -> str:
     return "🎮"
 
 
-async def _fetch_with_cache(name: str, tag: str, force: bool = False) -> dict | None:
-    """キャッシュを確認し、期限切れなら tracker.gg から取得してキャッシュを更新。"""
+async def _fetch_with_cache(name: str, tag: str, force: bool = False,
+                            seasons: int = 1) -> dict | None:
+    """
+    キャッシュを確認し、期限切れなら tracker.gg から取得してキャッシュを更新。
+    seasons=1 なら最新シーズンのみ、2以上なら複数シーズンを取得。
+    """
     pid = db.get_player_id(name, tag)
     if pid is None:
         return None
 
     if not force:
-        cached = db.load_cache(pid, CACHE_TTL_SECONDS)
+        cached = db.load_cache(pid, CACHE_TTL_SECONDS, "current")
         if cached:
             return cached
 
-    data = await asyncio.get_event_loop().run_in_executor(
-        None, tracker.fetch_stats, name, tag
-    )
-    if data:
-        db.save_cache(pid, data)
-        return data
+    if seasons > 1:
+        def _fetch():
+            return tracker.fetch_recent_seasons(name, tag, count=seasons)
+        multi = await asyncio.get_event_loop().run_in_executor(None, _fetch)
+        if multi:
+            for sid, record in multi["seasons"].items():
+                db.save_cache(pid, record, sid)
+            # "current" にも最新シーズンを保存（後方互換）
+            current_id = multi["current_season_id"]
+            if current_id in multi["seasons"]:
+                db.save_cache(pid, multi["seasons"][current_id], "current")
+            return multi["seasons"].get(current_id)
+    else:
+        data = await asyncio.get_event_loop().run_in_executor(
+            None, tracker.fetch_stats, name, tag
+        )
+        if data:
+            db.save_cache(pid, data, "current")
+            return data
 
-    # 取得失敗時は古いキャッシュでフォールバック
-    return db.load_cache_force(pid)
+    return db.load_cache_force(pid, "current")
 
 
-async def _gather_all_stats(force: bool = False) -> list[dict]:
+async def _gather_all_stats(force: bool = False, seasons: int = 1) -> list[dict]:
     """全登録プレイヤーのデータを並列取得。"""
     players = db.list_players()
-    tasks = [_fetch_with_cache(p["name"], p["tag"], force) for p in players]
+    tasks = [_fetch_with_cache(p["name"], p["tag"], force, seasons) for p in players]
     results = await asyncio.gather(*tasks)
     return [r for r in results if r is not None]
 
@@ -265,20 +281,24 @@ async def cmd_profile(interaction: discord.Interaction, name: str, tag: str):
 
 # ── /update ───────────────────────────────────────────────────
 
-@tree.command(name="update", description="全プレイヤーのデータを強制更新します（管理者用）")
-async def cmd_update(interaction: discord.Interaction):
+@tree.command(name="update", description="全プレイヤーのデータを更新します")
+@app_commands.describe(seasons="取得するシーズン数（1=最新のみ / 3=直近3シーズン）")
+async def cmd_update(interaction: discord.Interaction, seasons: int = 1):
     await interaction.response.defer()
     players = db.list_players()
     if not players:
         await interaction.followup.send("登録プレイヤーがいません。")
         return
 
+    label = f"直近 {seasons} シーズン" if seasons > 1 else "最新シーズン"
     msg = await interaction.followup.send(
-        f"⏳ {len(players)} 人のデータを更新中...", wait=True
+        f"⏳ {len(players)} 人の{label}データを更新中...", wait=True
     )
-    results = await _gather_all_stats(force=True)
+    results = await _gather_all_stats(force=True, seasons=seasons)
     await asyncio.get_event_loop().run_in_executor(None, _export_and_push)
-    await msg.edit(content=f"✅ {len(results)}/{len(players)} 人のデータを更新してWebページに反映しました。")
+    await msg.edit(
+        content=f"✅ {len(results)}/{len(players)} 人の{label}データを更新してWebページに反映しました。"
+    )
 
 
 # ── 起動 ─────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 """
-登録プレイヤーの最新キャッシュを docs/stats.json に書き出す。
-Bot から呼び出されるほか、単体でも実行可能。
+登録プレイヤーの統計データを docs/stats.json に書き出す。
+複数シーズン対応: season_list + seasons[season_id] 構造で出力。
 """
 
 import json
@@ -14,39 +14,95 @@ DOCS_DIR = Path(__file__).parent / "docs"
 OUT_FILE = DOCS_DIR / "stats.json"
 
 
+def _build_stats_out(raw_stats: dict) -> dict:
+    """stats dict から value/displayValue のみを抽出（JSON サイズ削減）。"""
+    return {
+        key: {
+            "value":        entry.get("value"),
+            "displayValue": entry.get("displayValue", ""),
+        }
+        for key, entry in raw_stats.items()
+    }
+
+
+def _build_player_record(p: dict, data: dict) -> dict:
+    return {
+        "name":        p["name"],
+        "tag":         p["tag"],
+        "peak_rank":   data.get("peak_rank", "不明"),
+        "clutch":      data.get("clutch", {}),
+        # 後方互換フィールド
+        "clutch_success_rate": data.get("clutch_success_rate", 0.0),
+        "clutch_wins":         data.get("clutch_wins", 0),
+        "clutch_attempts":     data.get("clutch_attempts", 0),
+        "season":      data.get("season", {}),
+        "stats":       _build_stats_out(data.get("stats", {})),
+    }
+
+
 def export_stats() -> bool:
     players = db.list_players()
     if not players:
         return False
 
-    records = []
+    # 全シーズン ID の収集（全プレイヤーの union）
+    all_season_ids: set[str] = set()
+    player_season_data: dict[str, dict] = {}  # "name#tag" -> {season_id: record}
+    season_list_master: list[dict] = []
+
     for p in players:
         pid = db.get_player_id(p["name"], p["tag"])
-        data = db.load_cache_force(pid)
-        if not data:
+        if pid is None:
+            continue
+        cached_seasons = db.load_all_cached_seasons(pid)
+        if not cached_seasons:
             continue
 
-        # stats の value のみを JSON に含める（displayValue も保持）
-        stats_out = {}
-        for key, entry in data.get("stats", {}).items():
-            stats_out[key] = {
-                "value":        entry.get("value"),
-                "displayValue": entry.get("displayValue", ""),
-            }
+        key = f"{p['name']}#{p['tag']}"
+        player_season_data[key] = {}
 
-        records.append({
-            "name":                p["name"],
-            "tag":                 p["tag"],
-            "peak_rank":           data.get("peak_rank", "不明"),
-            "clutch_success_rate": data.get("clutch_success_rate", 0.0),
-            "clutch_wins":         data.get("clutch_wins", 0),
-            "clutch_attempts":     data.get("clutch_attempts", 0),
-            "stats":               stats_out,
-        })
+        for sid, data in cached_seasons.items():
+            all_season_ids.add(sid)
+            player_season_data[key][sid] = _build_player_record(p, data)
+
+            # season_list をマスターリストに追加（重複排除）
+            s_meta = data.get("season", {})
+            if s_meta and s_meta.get("id") and not any(
+                x.get("id") == s_meta["id"] for x in season_list_master
+            ):
+                season_list_master.append(s_meta)
+
+    if not player_season_data:
+        return False
+
+    # season_list を新しい順に並べる
+    season_list_master.sort(key=lambda x: x.get("id", ""), reverse=False)
+
+    # "current" キーを先頭シーズン ID に統合
+    current_id = season_list_master[0]["id"] if season_list_master else "current"
+
+    # シーズン別プレイヤーリストを構築
+    seasons_out: dict[str, list] = {}
+    for season_id in all_season_ids:
+        records = []
+        for p in players:
+            key = f"{p['name']}#{p['tag']}"
+            if key in player_season_data and season_id in player_season_data[key]:
+                records.append(player_season_data[key][season_id])
+        if records:
+            seasons_out[season_id] = records
+
+    # "current" キャッシュも含める（後方互換）
+    if "current" in all_season_ids and current_id not in seasons_out:
+        seasons_out[current_id] = seasons_out.pop("current", [])
 
     payload = {
-        "updated_at": datetime.now(timezone.utc).isoformat(),
-        "players":    records,
+        "updated_at":       datetime.now(timezone.utc).isoformat(),
+        "current_season_id": current_id,
+        "season_list":      season_list_master,
+        "seasons":          seasons_out,
+        # 後方互換: players = current season
+        "players": seasons_out.get(current_id, seasons_out.get("current", [])),
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
@@ -54,12 +110,12 @@ def export_stats() -> bool:
         json.dumps(payload, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"[export] {len(records)} 人分を {OUT_FILE} に書き出しました")
+    total = sum(len(v) for v in seasons_out.values())
+    print(f"[export] {total} 件（{len(seasons_out)} シーズン）を {OUT_FILE} に書き出しました")
     return True
 
 
 def git_push(commit_msg: str = "update stats") -> bool:
-    """docs/stats.json を git commit して push する。失敗しても例外を投げない。"""
     repo = Path(__file__).parent
     try:
         subprocess.run(["git", "add", "docs/stats.json"], cwd=repo, check=True,
@@ -69,8 +125,7 @@ def git_push(commit_msg: str = "update stats") -> bool:
         )
         if result.returncode == 0:
             print("[export] 変更なし — push スキップ")
-            return True  # 差分なし
-
+            return True
         subprocess.run(["git", "commit", "-m", commit_msg], cwd=repo, check=True,
                        capture_output=True)
         subprocess.run(["git", "push"], cwd=repo, check=True, capture_output=True)
