@@ -4,6 +4,7 @@
 """
 
 import json
+import re
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -75,11 +76,21 @@ def export_stats() -> bool:
     if not player_season_data:
         return False
 
-    # season_list を新しい順（API順 = 最新が先頭）に保つ
-    # UUID辞書順ではなく、API が返した順序（episodeName/actName）を尊重するためソートしない
-    # ただし重複がないことは保証済みなのでそのまま使う
+    # season_list を新しい順（エピソード→アクトの降順）に並べる。
+    # DB からの読み出し順は保証されないため、season メタから番号を抽出してソートする。
+    def _season_sort_key(s: dict) -> tuple[int, int]:
+        ep = re.search(r"(\d+)", s.get("episodeName", "") or "")
+        ac = re.search(r"(\d+)", s.get("actName", "") or "")
+        # shortName "E26: A3" からのフォールバック
+        if not ep or not ac:
+            m = re.search(r"E(\d+).*?A(\d+)", s.get("shortName", "") or "")
+            if m:
+                return (int(m.group(1)), int(m.group(2)))
+        return (int(ep.group(1)) if ep else 0, int(ac.group(1)) if ac else 0)
 
-    # "current" キーを先頭シーズン ID に統合
+    season_list_master.sort(key=_season_sort_key, reverse=True)
+
+    # "current" キーを先頭シーズン ID（=最新）に統合
     current_id = season_list_master[0]["id"] if season_list_master else "current"
 
     # シーズン別プレイヤーリストを構築
