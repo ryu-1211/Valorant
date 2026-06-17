@@ -375,7 +375,7 @@ function renderBarChart() {
   charts['bar'] = new Chart(ctx,{
     type:'bar',
     data:{
-      labels: sorted.map(p=>`${p.name}#${p.tag}`),
+      labels: sorted.map(p=>`${p.name}`),
       datasets:[{data:sorted.map(p=>sv(p,tab.stat)),backgroundColor:bgColors,borderColor:bdColors,borderWidth:2,borderRadius:6}]
     },
     options:{
@@ -399,7 +399,7 @@ function renderRadarChart() {
     data:{
       labels: RADAR_STATS.map(s=>s.label),
       datasets: currentPlayers.map((p,i)=>({
-        label:`${p.name}#${p.tag}`,
+        label:`${p.name}`,
         data: RADAR_STATS.map(s=>norm(sv(p,s.stat),s.max)),
         backgroundColor: PALETTE[i%PALETTE.length]+'22',
         borderColor: PALETTE[i%PALETTE.length],
@@ -416,7 +416,7 @@ function renderRadarChart() {
 
 // ── クラッチ詳細チャート ──────────────────────────────────────
 function renderClutchCharts() {
-  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const labels = currentPlayers.map(p=>`${p.name}`);
   const types = ['1v1','1v2','1v3','1v4','1v5'];
 
   // 成功率チャート（折れ線）
@@ -429,7 +429,7 @@ function renderClutchCharts() {
       datasets: currentPlayers.map((p,i)=>{
         const bd = p.clutch?.breakdown || {};
         return {
-          label:`${p.name}#${p.tag}`,
+          label:`${p.name}`,
           data: types.map(t=>bd[t]?.rate ?? 0),
           borderColor: PALETTE[i%PALETTE.length],
           backgroundColor: PALETTE[i%PALETTE.length]+'33',
@@ -484,7 +484,7 @@ function renderClutchCharts() {
 function renderAtkDefChart() {
   destroyChart('atkDef');
   const ctx = document.getElementById('atkDefChart').getContext('2d');
-  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const labels = currentPlayers.map(p=>`${p.name}`);
   charts['atkDef'] = new Chart(ctx,{
     type:'bar',
     data:{
@@ -509,7 +509,7 @@ function renderAtkDefChart() {
 function renderMultikillChart() {
   destroyChart('multikill');
   const ctx = document.getElementById('multikillChart').getContext('2d');
-  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const labels = currentPlayers.map(p=>`${p.name}`);
   const mkColors = ['#3fb950','#f0b232','#ff8c00','#ff4655'];
   charts['multikill'] = new Chart(ctx,{
     type:'bar',
@@ -536,7 +536,7 @@ function renderMultikillChart() {
 function renderFbFdChart() {
   destroyChart('fbfd');
   const ctx = document.getElementById('fbfdChart').getContext('2d');
-  const labels = currentPlayers.map(p=>`${p.name}#${p.tag}`);
+  const labels = currentPlayers.map(p=>`${p.name}`);
   charts['fbfd'] = new Chart(ctx,{
     type:'bar',
     data:{
