@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ValoRank</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- Chart.js はローカル同梱（CDN ブロック環境でも動作するため） -->
+  <script src="chart.umd.min.js"></script>
   <style>
     :root {
       --bg: #0d1117; --card: #161b22; --card2: #1c2332; --border: #2a3a4a;
@@ -217,7 +218,7 @@ function dv(p, stat) {
   }
   return p.stats?.[stat]?.displayValue ?? '-';
 }
-function top(stat) { return [...currentPlayers].sort((a,b)=>sv(b,stat)-sv(a,stat))[0]; }
+function topPlayer(stat) { return [...currentPlayers].sort((a,b)=>sv(b,stat)-sv(a,stat))[0]; }
 function norm(v,mx) { return Math.min(100,(v/mx)*100); }
 function timeAgo(iso) {
   const s=Math.floor((Date.now()-new Date(iso))/1000);
@@ -314,14 +315,21 @@ function renderAll() {
 
   renderSeasonBar();
   renderTabs();
-  renderBarChart();
-  renderRadarChart();
   renderTopCards();
-  renderClutchCharts();
-  renderAtkDefChart();
-  renderMultikillChart();
-  renderFbFdChart();
   renderTable();
+  // チャート系は Chart.js が読めなくてもテーブル等が出るよう個別に保護
+  safeChart(renderBarChart);
+  safeChart(renderRadarChart);
+  safeChart(renderClutchCharts);
+  safeChart(renderAtkDefChart);
+  safeChart(renderMultikillChart);
+  safeChart(renderFbFdChart);
+}
+
+// Chart.js が未ロードでもページ全体が落ちないようにする
+function safeChart(fn) {
+  if (typeof Chart === 'undefined') return;
+  try { fn(); } catch(e) { console.error('chart render failed:', e); }
 }
 
 // ── シーズンバー ──────────────────────────────────────────────
@@ -552,7 +560,7 @@ function renderFbFdChart() {
 // ── トップカード ──────────────────────────────────────────────
 function renderTopCards() {
   document.getElementById('topCards').innerHTML = TOP_CARDS.map(c=>{
-    const p = top(c.stat); if(!p) return '';
+    const p = topPlayer(c.stat); if(!p) return '';
     return `<div class="tc"><div class="tc-label">${c.label}</div>
       <div class="tc-player">${p.name}#${p.tag}</div>
       <div class="tc-value">${c.fmt(sv(p,c.stat))}</div></div>`;
