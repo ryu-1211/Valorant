@@ -562,7 +562,7 @@ function renderTopCards() {
   document.getElementById('topCards').innerHTML = TOP_CARDS.map(c=>{
     const p = topPlayer(c.stat); if(!p) return '';
     return `<div class="tc"><div class="tc-label">${c.label}</div>
-      <div class="tc-player">${p.name}#${p.tag}</div>
+      <div class="tc-player">${p.name}</div>
       <div class="tc-value">${c.fmt(sv(p,c.stat))}</div></div>`;
   }).join('');
 }
