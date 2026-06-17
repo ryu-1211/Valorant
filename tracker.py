@@ -17,11 +17,16 @@ _HEADERS = {
 
 
 def _build_url(name: str, tag: str, season_id: str | None = None) -> str:
+    """プロフィール（現行シーズン）エンドポイント。"""
     encoded = quote(name, safe="")
-    url = f"{_BASE_URL}/{encoded}%23{tag}"
-    if season_id:
-        url += f"?seasonId={season_id}"
-    return url
+    return f"{_BASE_URL}/{encoded}%23{tag}"
+
+
+def _build_season_url(name: str, tag: str, season_id: str) -> str:
+    """指定シーズンのフルスタッツを返す segments/season エンドポイント。
+    profile?seasonId= は無効（常に現行シーズンを返す）ため、こちらを使う。"""
+    encoded = quote(name, safe="")
+    return f"{_BASE_URL}/{encoded}%23{tag}/segments/season?seasonId={season_id}"
 
 
 def _get(url: str, retry: int = 2) -> dict | None:
@@ -43,11 +48,12 @@ def _get(url: str, retry: int = 2) -> dict | None:
     return None
 
 
-def _parse_season_segment(segments: list) -> dict | None:
+def _parse_season_segment(segments: list, season_id: str | None = None) -> dict | None:
     for seg in segments:
-        if (seg.get("type") == "season"
-                and seg.get("attributes", {}).get("playlist") == "competitive"):
-            return seg.get("stats", {})
+        a = seg.get("attributes", {})
+        if seg.get("type") == "season" and a.get("playlist") == "competitive":
+            if season_id is None or a.get("seasonId") == season_id:
+                return seg.get("stats", {})
     return None
 
 
@@ -114,44 +120,52 @@ def get_season_list(name: str, tag: str) -> list[dict]:
     return data.get("data", {}).get("metadata", {}).get("seasons", [])
 
 
-def fetch_stats(name: str, tag: str, season_id: str | None = None) -> dict | None:
-    """指定シーズン（省略時=最新）の統計を返す。失敗時は None。"""
-    data = _get(_build_url(name, tag, season_id))
+def _fetch_season_stats(name: str, tag: str, season_id: str) -> dict | None:
+    """segments/season エンドポイントから指定シーズンの competitive スタッツを返す。"""
+    data = _get(_build_season_url(name, tag, season_id))
     if not data:
         return None
+    segs = data.get("data", [])
+    if not isinstance(segs, list):
+        return None
+    return _parse_season_segment(segs, season_id)
 
+
+def fetch_stats(name: str, tag: str, season_id: str | None = None) -> dict | None:
+    """指定シーズン（省略時=最新）の統計を返す。失敗時は None。"""
+    # 最新シーズン取得 + シーズンリスト + ピークランクのためにまず profile を叩く
+    data = _get(_build_url(name, tag))
+    if not data:
+        return None
     segments = data.get("data", {}).get("segments", [])
     meta_seasons = data.get("data", {}).get("metadata", {}).get("seasons", [])
+    peak = _parse_peak_rank(segments)
+    current_id = meta_seasons[0]["id"] if meta_seasons else None
 
-    season_stats = _parse_season_segment(segments)
+    # 最新シーズン（または season_id 未指定）は profile の season セグメントを使う
+    if season_id is None or season_id == current_id:
+        season_stats = _parse_season_segment(segments)
+        season_meta = meta_seasons[0] if meta_seasons else {}
+    else:
+        season_stats = _fetch_season_stats(name, tag, season_id)
+        season_meta = next((s for s in meta_seasons if s.get("id") == season_id), {})
+
     if not season_stats:
         return None
-
-    peak = _parse_peak_rank(segments)
-
-    # シーズンメタ（名称など）
-    season_meta: dict = {}
-    if season_id:
-        for s in meta_seasons:
-            if s.get("id") == season_id:
-                season_meta = s
-                break
-    elif meta_seasons:
-        season_meta = meta_seasons[0]  # デフォルト=最新
-
     return _build_player_record(name, tag, season_stats, peak, season_meta)
 
 
-def fetch_recent_seasons(name: str, tag: str, count: int = 3) -> dict | None:
+def fetch_recent_seasons(name: str, tag: str, count: int = 99) -> dict | None:
     """
-    最新 count 件のシーズンデータをまとめて返す。
+    利用可能な全シーズン（count 件まで）のデータをまとめて返す。
     {
       season_list: [{id, shortName, name}, ...],   ← 全利用可能シーズン
       seasons: {season_id: player_record, ...},     ← 取得したシーズン分
       current_season_id: str,
     }
+    各過去シーズンは segments/season エンドポイントから個別取得する
+    （profile?seasonId= は無効で常に現行シーズンを返すため）。
     """
-    # まず最新シーズンを取得してシーズンリストも得る
     data = _get(_build_url(name, tag))
     if not data:
         return None
@@ -172,20 +186,16 @@ def fetch_recent_seasons(name: str, tag: str, count: int = 3) -> dict | None:
         "seasons": {},
     }
 
-    # 最新シーズンを登録
+    # 最新シーズンは profile から取得済み
     result["seasons"][current_id] = _build_player_record(
         name, tag, season_stats, peak, meta_seasons[0] if meta_seasons else {}
     )
 
-    # 2番目以降のシーズンを取得
+    # 2番目以降のシーズンは segments/season から個別取得
     for season in meta_seasons[1:count]:
         sid = season["id"]
-        time.sleep(1.5)
-        extra = _get(_build_url(name, tag, sid))
-        if not extra:
-            continue
-        extra_segs = extra.get("data", {}).get("segments", [])
-        extra_stats = _parse_season_segment(extra_segs)
+        time.sleep(4.0)
+        extra_stats = _fetch_season_stats(name, tag, sid)
         if not extra_stats:
             continue
         result["seasons"][sid] = _build_player_record(

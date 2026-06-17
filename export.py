@@ -41,6 +41,123 @@ def _build_player_record(p: dict, data: dict) -> dict:
     }
 
 
+# ── オールシーズン集計 ────────────────────────────────────────
+# 単純合計すべきカウント系スタッツ
+_SUM_KEYS = [
+    "roundsPlayed", "roundsWon", "roundsLost",
+    "matchesPlayed", "matchesWon", "matchesLost", "matchesTied",
+    "kills", "deaths", "assists", "score", "damage",
+    "dealtHeadshots", "dealtBodyshots", "dealtLegshots",
+    "firstBloods", "firstDeaths", "aces", "mVPs", "flawless",
+    "teamAces", "plants", "defuses",
+    "kills1K", "kills2K", "kills3K", "kills4K", "kills5K",
+    "attackScore", "attackRoundsPlayed", "attackKills", "attackDeaths",
+    "attackFirstBloods", "attackFirstDeaths",
+    "defenseScore", "defenseRoundsPlayed", "defenseKills", "defenseDeaths",
+    "defenseFirstBloods", "defenseFirstDeaths",
+    "clutches", "clutchesLost",
+    "clutches1v1", "clutches1v2", "clutches1v3", "clutches1v4", "clutches1v5",
+    "clutchesLost1v1", "clutchesLost1v2", "clutchesLost1v3", "clutchesLost1v4", "clutchesLost1v5",
+]
+
+
+def _sv(stats: dict, key: str) -> float:
+    try:
+        return float(stats.get(key, {}).get("value") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _entry(value, display: str) -> dict:
+    return {"value": value, "displayValue": display}
+
+
+def _aggregate_player_seasons(season_datas: list[dict]) -> dict:
+    """1プレイヤーの複数シーズン分の生 data を合算し、率は再計算した data を返す。"""
+    sums = {k: 0.0 for k in _SUM_KEYS}
+    kast_rounds = 0.0
+    for data in season_datas:
+        st = data.get("stats", {})
+        for k in _SUM_KEYS:
+            sums[k] += _sv(st, k)
+        kast_rounds += _sv(st, "kAST") / 100.0 * _sv(st, "roundsPlayed")
+
+    rounds  = sums["roundsPlayed"] or 1
+    matches = sums["matchesPlayed"] or 1
+    deaths  = sums["deaths"] or 1
+    shots   = (sums["dealtHeadshots"] + sums["dealtBodyshots"] + sums["dealtLegshots"]) or 1
+    atk_r   = sums["attackRoundsPlayed"] or 1
+    def_r   = sums["defenseRoundsPlayed"] or 1
+
+    acs     = sums["score"] / rounds
+    kd      = sums["kills"] / deaths
+    kda     = (sums["kills"] + sums["assists"] / 2) / deaths
+    kast    = kast_rounds / rounds * 100
+    hs      = sums["dealtHeadshots"] / shots * 100
+    adr     = sums["damage"] / rounds
+    winpct  = sums["matchesWon"] / matches * 100
+    atk_acs = sums["attackScore"] / atk_r
+    def_acs = sums["defenseScore"] / def_r
+
+    out: dict = {
+        "scorePerRound":        _entry(acs, f"{acs:.1f}"),
+        "kDRatio":              _entry(kd, f"{kd:.2f}"),
+        "kDARatio":             _entry(kda, f"{kda:.2f}"),
+        "kAST":                 _entry(kast, f"{kast:.1f}%"),
+        "headshotsPercentage":  _entry(hs, f"{hs:.1f}%"),
+        "damagePerRound":       _entry(adr, f"{adr:.1f}"),
+        "matchesWinPct":        _entry(winpct, f"{winpct:.1f}%"),
+        "attackScorePerRound":  _entry(atk_acs, f"{atk_acs:.1f}"),
+        "defenseScorePerRound": _entry(def_acs, f"{def_acs:.1f}"),
+    }
+    for k in _SUM_KEYS:
+        iv = int(round(sums[k]))
+        out[k] = _entry(iv, f"{iv:,}")
+
+    # クラッチ集計
+    cw = int(sums["clutches"]); cl = int(sums["clutchesLost"]); ca = cw + cl
+    crate = round(cw / ca * 100, 1) if ca > 0 else 0.0
+    breakdown = {}
+    for n in range(1, 6):
+        w = int(sums[f"clutches1v{n}"]); l = int(sums[f"clutchesLost1v{n}"]); a = w + l
+        breakdown[f"1v{n}"] = {
+            "wins": w, "losses": l, "attempts": a,
+            "rate": round(w / a * 100, 1) if a > 0 else 0.0,
+        }
+    clutch = {"success_rate": crate, "wins": cw, "losses": cl,
+              "attempts": ca, "breakdown": breakdown}
+
+    return {
+        "peak_rank": "—",
+        "clutch": clutch,
+        "clutch_success_rate": crate,
+        "clutch_wins": cw,
+        "clutch_attempts": ca,
+        "season": {"id": "all", "shortName": "ALL", "name": "オールシーズン",
+                   "episodeName": "All", "actName": ""},
+        "stats": out,
+    }
+
+
+MIN_EPISODE = 6  # これ以降のシーズンのみ表示（Episode 6 〜。それより古いものは除外）
+
+
+def _season_sort_key(s: dict) -> tuple[int, int]:
+    ep = re.search(r"(\d+)", s.get("episodeName", "") or "")
+    ac = re.search(r"(\d+)", s.get("actName", "") or "")
+    # shortName "E26: A3" からのフォールバック
+    if not ep or not ac:
+        m = re.search(r"E(\d+).*?A(\d+)", s.get("shortName", "") or "")
+        if m:
+            return (int(m.group(1)), int(m.group(2)))
+    return (int(ep.group(1)) if ep else 0, int(ac.group(1)) if ac else 0)
+
+
+def _keep_season(s: dict) -> bool:
+    """Episode/Season 番号が MIN_EPISODE 以上なら表示対象。"""
+    return _season_sort_key(s)[0] >= MIN_EPISODE
+
+
 def export_stats() -> bool:
     players = db.list_players()
     if not players:
@@ -49,6 +166,7 @@ def export_stats() -> bool:
     # 全シーズン ID の収集（全プレイヤーの union）
     all_season_ids: set[str] = set()
     player_season_data: dict[str, dict] = {}  # "name#tag" -> {season_id: record}
+    player_raw_seasons: dict[str, dict] = {}  # "name#tag" -> {season_id: 生data}（集計用）
     season_list_master: list[dict] = []
 
     for p in players:
@@ -61,14 +179,17 @@ def export_stats() -> bool:
 
         key = f"{p['name']}#{p['tag']}"
         player_season_data[key] = {}
+        player_raw_seasons[key] = {}
 
         for sid, data in cached_seasons.items():
             all_season_ids.add(sid)
             player_season_data[key][sid] = _build_player_record(p, data)
+            if sid != "current":
+                player_raw_seasons[key][sid] = data
 
-            # season_list をマスターリストに追加（重複排除）
+            # season_list をマスターリストに追加（重複排除・Episode 6 以降のみ）
             s_meta = data.get("season", {})
-            if s_meta and s_meta.get("id") and not any(
+            if s_meta and s_meta.get("id") and _keep_season(s_meta) and not any(
                 x.get("id") == s_meta["id"] for x in season_list_master
             ):
                 season_list_master.append(s_meta)
@@ -77,27 +198,19 @@ def export_stats() -> bool:
         return False
 
     # season_list を新しい順（エピソード→アクトの降順）に並べる。
-    # DB からの読み出し順は保証されないため、season メタから番号を抽出してソートする。
-    def _season_sort_key(s: dict) -> tuple[int, int]:
-        ep = re.search(r"(\d+)", s.get("episodeName", "") or "")
-        ac = re.search(r"(\d+)", s.get("actName", "") or "")
-        # shortName "E26: A3" からのフォールバック
-        if not ep or not ac:
-            m = re.search(r"E(\d+).*?A(\d+)", s.get("shortName", "") or "")
-            if m:
-                return (int(m.group(1)), int(m.group(2)))
-        return (int(ep.group(1)) if ep else 0, int(ac.group(1)) if ac else 0)
-
     season_list_master.sort(key=_season_sort_key, reverse=True)
+
+    # 表示対象シーズン ID の集合
+    kept_ids = {s["id"] for s in season_list_master}
 
     # "current" キーを先頭シーズン ID（=最新）に統合
     current_id = season_list_master[0]["id"] if season_list_master else "current"
 
-    # シーズン別プレイヤーリストを構築
+    # シーズン別プレイヤーリストを構築（Episode 6 以降のみ）
     seasons_out: dict[str, list] = {}
     for season_id in all_season_ids:
-        if season_id == "current":
-            continue  # 後でマージ
+        if season_id == "current" or season_id not in kept_ids:
+            continue
         records = []
         for p in players:
             key = f"{p['name']}#{p['tag']}"
@@ -128,6 +241,24 @@ def export_stats() -> bool:
             key = f"{p['name']}#{p['tag']}"
             if key in player_season_data and "current" in player_season_data[key]:
                 seasons_out["current"].append(player_season_data[key]["current"])
+
+    # ── オールシーズン集計（Episode 6 以降のみ対象）──
+    all_records = []
+    for p in players:
+        key = f"{p['name']}#{p['tag']}"
+        raws = [d for d in player_raw_seasons.get(key, {}).values()
+                if _keep_season(d.get("season", {}))]
+        if not raws:
+            continue
+        agg = _aggregate_player_seasons(raws)
+        all_records.append(_build_player_record(p, agg))
+    if all_records:
+        seasons_out["all"] = all_records
+        # season_list の先頭に ALL ボタンを追加
+        season_list_master.insert(0, {
+            "id": "all", "shortName": "ALL", "name": "オールシーズン",
+            "episodeName": "All", "actName": "",
+        })
 
     payload = {
         "updated_at":       datetime.now(timezone.utc).isoformat(),

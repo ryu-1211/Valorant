@@ -188,8 +188,16 @@ const TABLE_COLS = [
 ];
 
 const PALETTE = [
-  '#ff4655','#f0b232','#58a6ff','#3fb950','#f778ba',
-  '#a371f7','#39d353','#ff8c00','#00b4d8','#ff6b6b',
+  '#ff4655', // レッド
+  '#ff8c42', // オレンジ
+  '#ffd24a', // イエロー
+  '#3fb950', // グリーン
+  '#1fd4c3', // ティール
+  '#3aa0ff', // ブルー
+  '#7c6cff', // インディゴ
+  '#c061f7', // パープル
+  '#ff5fa2', // ピンク
+  '#c9d1d9', // ライトグレー
 ];
 
 const MEDALS = ['🥇','🥈','🥉'];
@@ -202,6 +210,21 @@ let activeTab = 'acs';
 let sortKey = 'scorePerRound';
 let sortAsc = false;
 let charts = {};
+let playerColorMap = {};     // "name#tag" -> 固定カラー
+
+// ── プレイヤー固定カラー ──────────────────────────────────────
+function pkey(p) { return `${p.name}#${p.tag}`; }
+function buildColorMap() {
+  const keys = [];
+  const seen = new Set();
+  const add = (p) => { const k = pkey(p); if (!seen.has(k)) { seen.add(k); keys.push(k); } };
+  // 最新シーズンの並びを優先し、その後に他シーズンのプレイヤーを追加
+  (allData.players || []).forEach(add);
+  Object.values(allData.seasons || {}).forEach(list => list.forEach(add));
+  playerColorMap = {};
+  keys.forEach((k, i) => { playerColorMap[k] = PALETTE[i % PALETTE.length]; });
+}
+function pcolor(p) { return playerColorMap[pkey(p)] || PALETTE[0]; }
 
 // ── ユーティリティ ────────────────────────────────────────────
 function sv(p, stat) {
@@ -235,6 +258,9 @@ async function loadData() {
     if (!r.ok) throw new Error(r.status);
     allData = await r.json();
     document.getElementById('updated').textContent = `最終更新: ${timeAgo(allData.updated_at)}`;
+
+    // プレイヤーごとに固定の色を割り当て（全シーズンで一貫させる）
+    buildColorMap();
 
     // 初期シーズンを設定
     currentSeasonId = allData.current_season_id || 'current';
@@ -398,13 +424,16 @@ function renderRadarChart() {
     type:'radar',
     data:{
       labels: RADAR_STATS.map(s=>s.label),
-      datasets: currentPlayers.map((p,i)=>({
-        label:`${p.name}`,
-        data: RADAR_STATS.map(s=>norm(sv(p,s.stat),s.max)),
-        backgroundColor: PALETTE[i%PALETTE.length]+'22',
-        borderColor: PALETTE[i%PALETTE.length],
-        borderWidth:2, pointBackgroundColor:PALETTE[i%PALETTE.length], pointRadius:4,
-      }))
+      datasets: currentPlayers.map((p)=>{
+        const col = pcolor(p);
+        return {
+          label:`${p.name}`,
+          data: RADAR_STATS.map(s=>norm(sv(p,s.stat),s.max)),
+          backgroundColor: col+'22',
+          borderColor: col,
+          borderWidth:2, pointBackgroundColor:col, pointRadius:4,
+        };
+      })
     },
     options:{
       responsive:true,
@@ -426,13 +455,14 @@ function renderClutchCharts() {
     type:'line',
     data:{
       labels: types,
-      datasets: currentPlayers.map((p,i)=>{
+      datasets: currentPlayers.map((p)=>{
         const bd = p.clutch?.breakdown || {};
+        const col = pcolor(p);
         return {
           label:`${p.name}`,
           data: types.map(t=>bd[t]?.rate ?? 0),
-          borderColor: PALETTE[i%PALETTE.length],
-          backgroundColor: PALETTE[i%PALETTE.length]+'33',
+          borderColor: col,
+          backgroundColor: col+'33',
           borderWidth:2, pointRadius:5, tension:0.3, fill:false,
         };
       })
