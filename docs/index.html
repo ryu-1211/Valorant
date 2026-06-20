@@ -242,6 +242,10 @@ let agentPlayer = null;      // エージェント別: 選択中プレイヤー 
 let agentScope = 'current';  // エージェント別: 'current' | 'all'
 let agentSort = 'matchesPlayed';
 let agentOpen = false;       // 折りたたみ開閉
+let mapPlayer = null;        // マップ別: 選択中プレイヤー
+let mapScope = 'current';    // マップ別: 'current' | 'all'
+let mapSort = 'matchesPlayed';
+let mapOpen = false;
 
 // ── プレイヤー固定カラー ──────────────────────────────────────
 function pkey(p) { return `${p.name}#${p.tag}`; }
@@ -371,6 +375,9 @@ function renderAll() {
 
     <div class="section-title">エージェント別成績</div>
     <div class="card" id="agentSection"></div>
+
+    <div class="section-title">マップ別成績</div>
+    <div class="card" id="mapSection"></div>
   `;
 
   renderSeasonBar();
@@ -378,6 +385,7 @@ function renderAll() {
   renderTopCards();
   renderTable();
   renderAgentSection();
+  renderMapSection();
   // チャート系は Chart.js が読めなくてもテーブル等が出るよう個別に保護
   safeChart(renderBarChart);
   safeChart(renderRadarChart);
@@ -753,6 +761,86 @@ function renderAgentBody(){
         if(c.key==='__name__') return `<td><span class="pn">${a.name}</span> <span class="role-badge r-${a.role}">${a.role}</span></td>`;
         const hl = c.key===agentSort?' class="hl"':'';
         return `<td${hl}>${adv(a,c.key)}</td>`;
+      }).join('')}</tr>`).join('')
+    }</tbody></table></div>
+  `;
+}
+
+// ── マップ別成績 ──────────────────────────────────────────────
+const MAP_COLS = [
+  {label:'マップ', key:'__name__'},
+  {label:'試合',   key:'matchesPlayed'},
+  {label:'勝率',   key:'matchesWinPct',      fmt:v=>`${v.toFixed(1)}%`},
+  {label:'攻撃勝率',key:'attackRoundsWinPct', fmt:v=>`${v.toFixed(1)}%`},
+  {label:'防衛勝率',key:'defenseRoundsWinPct',fmt:v=>`${v.toFixed(1)}%`},
+  {label:'ACS',    key:'scorePerRound',      fmt:v=>v.toFixed(1)},
+  {label:'K/D',    key:'kDRatio',            fmt:v=>v.toFixed(2)},
+  {label:'HS%',    key:'headshotsPercentage',fmt:v=>`${v.toFixed(1)}%`},
+  {label:'ADR',    key:'damagePerRound',     fmt:v=>v.toFixed(1)},
+  {label:'KAST',   key:'kAST',               fmt:v=>`${v.toFixed(1)}%`},
+];
+function mapList(){
+  const m = (allData.maps||{})[mapPlayer];
+  return (m && m[mapScope]) ? m[mapScope] : [];
+}
+function renderMapSection(){
+  const sec = document.getElementById('mapSection');
+  if(!sec) return;
+  const maps = allData.maps || {};
+  const keys = Object.keys(maps);
+  if(!keys.length){ sec.innerHTML = `<div class="agent-empty">マップ別データがまだありません。</div>`; return; }
+  if(!mapPlayer || !maps[mapPlayer]) mapPlayer = keys[0];
+  sec.innerHTML = `
+    <div class="agent-head" onclick="toggleMap()">
+      <h3>🗺️ マップ別の得意・苦手</h3>
+      <span class="chev">${mapOpen?'▲ 閉じる':'▼ 開く'}</span>
+    </div>
+    <div class="agent-body" id="mapBody" style="display:${mapOpen?'block':'none'}"></div>
+  `;
+  if(mapOpen) renderMapBody();
+}
+function toggleMap(){ mapOpen=!mapOpen; renderMapSection(); }
+function setMapPlayer(v){ mapPlayer=v; renderMapBody(); }
+function setMapScope(v){ mapScope=v; renderMapBody(); }
+function mapDoSort(key){ mapSort=key; renderMapBody(); }
+
+function renderMapBody(){
+  const body = document.getElementById('mapBody');
+  if(!body) return;
+  const keys = Object.keys(allData.maps||{});
+  const opts = keys.map(k=>`<option value="${k}"${k===mapPlayer?' selected':''}>${k.split('#')[0]}</option>`).join('');
+
+  const list = [...mapList()].sort((a,b)=> asv(b,mapSort)-asv(a,mapSort));
+  const minM = mapScope==='all' ? 15 : 4;
+  const qualified = mapList().filter(m=> asv(m,'matchesPlayed') >= minM);
+  const byWin = [...qualified].sort((a,b)=> asv(b,'matchesWinPct')-asv(a,'matchesWinPct'));
+  const good = byWin.slice(0,3);
+  const bad = byWin.slice(-3).reverse();
+  const gbRow = m => `<div class="gb-row"><span class="an">${m.name}</span>
+    <span class="av">勝率${asv(m,'matchesWinPct').toFixed(1)}% / ACS${asv(m,'scorePerRound').toFixed(0)} / ${asv(m,'matchesPlayed')}戦</span></div>`;
+
+  body.innerHTML = `
+    <div class="agent-controls">
+      <div class="grp"><span class="lbl">プレイヤー</span>
+        <select class="psel" onchange="setMapPlayer(this.value)">${opts}</select></div>
+      <div class="grp"><span class="lbl">期間</span>
+        <button class="pill${mapScope==='current'?' on':''}" onclick="setMapScope('current')">現行シーズン</button>
+        <button class="pill${mapScope==='all'?' on':''}" onclick="setMapScope('all')">全期間</button></div>
+    </div>
+    ${qualified.length ? `<div class="gb-cards">
+      <div class="gb gb-good"><div class="gb-title">⬆ 得意なマップ（${minM}戦以上・勝率順）</div>${good.map(gbRow).join('')||'<div class="gb-row av">該当なし</div>'}</div>
+      <div class="gb gb-bad"><div class="gb-title">⬇ 苦手なマップ（${minM}戦以上・勝率順）</div>${bad.map(gbRow).join('')||'<div class="gb-row av">該当なし</div>'}</div>
+    </div>` : ''}
+    <div class="tbl-wrap"><table><thead><tr>${
+      MAP_COLS.map(c=> c.key==='__name__'
+        ? `<th>${c.label}</th>`
+        : `<th class="${c.key===mapSort?'sorted':''}" onclick="mapDoSort('${c.key}')">${c.label}${c.key===mapSort?' ▼':''}</th>`
+      ).join('')
+    }</tr></thead><tbody>${
+      list.map(m=>`<tr>${MAP_COLS.map(c=>{
+        if(c.key==='__name__') return `<td><span class="pn">${m.name}</span></td>`;
+        const hl = c.key===mapSort?' class="hl"':'';
+        return `<td${hl}>${adv(m,c.key)}</td>`;
       }).join('')}</tr>`).join('')
     }</tbody></table></div>
   `;

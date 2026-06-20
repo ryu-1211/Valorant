@@ -168,6 +168,58 @@ def fetch_agents(name: str, tag: str, season_id: str | None = None) -> list[dict
     return _parse_agents(segs)
 
 
+# ── マップ別 ──────────────────────────────────────────────────
+
+_MAP_STAT_KEYS = [
+    "matchesPlayed", "matchesWon", "roundsPlayed", "kills", "deaths",
+    "matchesWinPct", "roundsWinPct", "attackRoundsWinPct", "defenseRoundsWinPct",
+    "kDRatio", "scorePerRound", "headshotsPercentage", "damagePerRound", "kAST",
+    "firstBloods", "aces",
+]
+
+
+def _parse_maps(segments: list) -> list[dict]:
+    """map セグメントから {name, image, stats(subset), clutch} のリストを返す。"""
+    out = []
+    for seg in segments:
+        if seg.get("type") != "map":
+            continue
+        if seg.get("attributes", {}).get("playlist") not in (None, "competitive"):
+            continue
+        meta = seg.get("metadata", {})
+        st = seg.get("stats", {})
+        stats_subset = {
+            k: {
+                "value": st.get(k, {}).get("value"),
+                "displayValue": st.get(k, {}).get("displayValue", ""),
+            }
+            for k in _MAP_STAT_KEYS if k in st
+        }
+        out.append({
+            "name": meta.get("name", "?"),
+            "image": meta.get("imageUrl", ""),
+            "stats": stats_subset,
+            "clutch": _clutch_stats(st),
+        })
+    out.sort(key=lambda m: m["stats"].get("matchesPlayed", {}).get("value") or 0, reverse=True)
+    return out
+
+
+def fetch_maps(name: str, tag: str, season_id: str | None = None) -> list[dict]:
+    """マップ別スタッツを返す。season_id 省略時は全期間。"""
+    enc = quote(name, safe="")
+    url = f"{_BASE_URL}/{enc}%23{tag}/segments/map"
+    if season_id:
+        url += f"?seasonId={season_id}"
+    data = _get(url)
+    if not data:
+        return []
+    segs = data.get("data", [])
+    if not isinstance(segs, list):
+        return []
+    return _parse_maps(segs)
+
+
 # ── 公開 API ──────────────────────────────────────────────────
 
 def get_season_list(name: str, tag: str) -> list[dict]:

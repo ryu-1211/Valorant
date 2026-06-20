@@ -182,8 +182,8 @@ def export_stats() -> bool:
         player_raw_seasons[key] = {}
 
         for sid, data in cached_seasons.items():
-            if sid.startswith("agents:"):
-                continue  # エージェント別データは別処理
+            if sid.startswith("agents:") or sid.startswith("maps:"):
+                continue  # エージェント/マップ別データは別処理
             all_season_ids.add(sid)
             player_season_data[key][sid] = _build_player_record(p, data)
             if sid != "current":
@@ -262,22 +262,33 @@ def export_stats() -> bool:
             "episodeName": "All", "actName": "",
         })
 
-    # ── エージェント別データ（現行 / 全期間）──
+    # ── エージェント別 / マップ別データ（現行 / 全期間）──
     agents_out: dict[str, dict] = {}
+    maps_out: dict[str, dict] = {}
     for p in players:
         pid = db.get_player_id(p["name"], p["tag"])
         if pid is None:
             continue
         key = f"{p['name']}#{p['tag']}"
-        cur = db.load_cache_force(pid, "agents:current")
-        allt = db.load_cache_force(pid, "agents:all")
-        entry = {}
-        if cur and cur.get("agents"):
-            entry["current"] = cur["agents"]
-        if allt and allt.get("agents"):
-            entry["all"] = allt["agents"]
-        if entry:
-            agents_out[key] = entry
+        a_cur = db.load_cache_force(pid, "agents:current")
+        a_all = db.load_cache_force(pid, "agents:all")
+        a_entry = {}
+        if a_cur and a_cur.get("agents"):
+            a_entry["current"] = a_cur["agents"]
+        if a_all and a_all.get("agents"):
+            a_entry["all"] = a_all["agents"]
+        if a_entry:
+            agents_out[key] = a_entry
+
+        m_cur = db.load_cache_force(pid, "maps:current")
+        m_all = db.load_cache_force(pid, "maps:all")
+        m_entry = {}
+        if m_cur and m_cur.get("maps"):
+            m_entry["current"] = m_cur["maps"]
+        if m_all and m_all.get("maps"):
+            m_entry["all"] = m_all["maps"]
+        if m_entry:
+            maps_out[key] = m_entry
 
     payload = {
         "updated_at":       datetime.now(timezone.utc).isoformat(),
@@ -286,6 +297,7 @@ def export_stats() -> bool:
         "seasons":          seasons_out,
         "players": seasons_out.get(current_id, []),
         "agents":           agents_out,
+        "maps":             maps_out,
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
