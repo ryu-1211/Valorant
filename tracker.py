@@ -110,6 +110,64 @@ def _build_player_record(name: str, tag: str, stats: dict, peak: str,
     }
 
 
+# ── エージェント別 ────────────────────────────────────────────
+
+# UI で表示するエージェント別スタッツ（カウント系 + 率系）
+_AGENT_STAT_KEYS = [
+    "matchesPlayed", "matchesWon", "roundsPlayed", "kills", "deaths", "assists",
+    "matchesWinPct", "kDRatio", "kDARatio", "scorePerRound", "headshotsPercentage",
+    "damagePerRound", "kAST", "firstBloods", "firstDeaths", "aces",
+    "kills2K", "kills3K", "kills4K", "kills5K",
+    "clutches", "clutchesLost",
+]
+
+
+def _parse_agents(segments: list) -> list[dict]:
+    """agent セグメントから {name, role, color, image, stats(subset), clutch} のリストを返す。"""
+    out = []
+    for seg in segments:
+        if seg.get("type") != "agent":
+            continue
+        if seg.get("attributes", {}).get("playlist") not in (None, "competitive"):
+            continue
+        meta = seg.get("metadata", {})
+        st = seg.get("stats", {})
+        stats_subset = {
+            k: {
+                "value": st.get(k, {}).get("value"),
+                "displayValue": st.get(k, {}).get("displayValue", ""),
+            }
+            for k in _AGENT_STAT_KEYS if k in st
+        }
+        clutch = _clutch_stats(st)
+        out.append({
+            "name": meta.get("name", "?"),
+            "role": meta.get("role", ""),
+            "color": meta.get("color", ""),
+            "image": meta.get("imageUrl", ""),
+            "stats": stats_subset,
+            "clutch": clutch,
+        })
+    # 試合数の多い順
+    out.sort(key=lambda a: a["stats"].get("matchesPlayed", {}).get("value") or 0, reverse=True)
+    return out
+
+
+def fetch_agents(name: str, tag: str, season_id: str | None = None) -> list[dict]:
+    """エージェント別スタッツを返す。season_id 省略時は全期間（キャリア通算）。"""
+    enc = quote(name, safe="")
+    url = f"{_BASE_URL}/{enc}%23{tag}/segments/agent"
+    if season_id:
+        url += f"?seasonId={season_id}"
+    data = _get(url)
+    if not data:
+        return []
+    segs = data.get("data", [])
+    if not isinstance(segs, list):
+        return []
+    return _parse_agents(segs)
+
+
 # ── 公開 API ──────────────────────────────────────────────────
 
 def get_season_list(name: str, tag: str) -> list[dict]:

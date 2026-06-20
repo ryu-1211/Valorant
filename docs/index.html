@@ -116,6 +116,33 @@
       text-transform: uppercase; margin: 20px 0 12px;
       padding-left: 10px; border-left: 3px solid var(--red);
     }
+
+    /* ── エージェント別セクション ── */
+    .agent-head { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+    .agent-head h3 { font-size:0.9rem; font-weight:700; letter-spacing:1px; }
+    .agent-head .chev { color:var(--muted); transition:.2s; }
+    .agent-body { margin-top:16px; }
+    .agent-controls { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:14px; }
+    .agent-controls .grp { display:flex; gap:6px; align-items:center; }
+    .agent-controls .lbl { font-size:0.7rem; color:var(--muted); letter-spacing:1px; }
+    .pill { padding:5px 12px; border-radius:16px; border:1px solid var(--border); background:var(--card2);
+      color:var(--muted); cursor:pointer; font-size:0.74rem; font-weight:700; transition:.15s; }
+    .pill:hover { border-color:var(--blue); color:var(--text); }
+    .pill.on { background:var(--blue); border-color:var(--blue); color:#fff; }
+    .psel { padding:6px 10px; border-radius:8px; border:1px solid var(--border); background:var(--card2);
+      color:var(--text); font-size:0.8rem; font-weight:700; }
+    .role-badge { display:inline-block; padding:1px 7px; border-radius:10px; font-size:0.62rem; font-weight:700;
+      letter-spacing:.5px; color:#fff; vertical-align:middle; }
+    .r-Duelist{background:#d3564f;} .r-Sentinel{background:#3f9e4f;} .r-Initiator{background:#caa83a;} .r-Controller{background:#6f7bd6;}
+    .gb-cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+    @media(max-width:800px){ .gb-cards{grid-template-columns:1fr;} }
+    .gb { border:1px solid var(--border); border-radius:var(--radius); padding:12px 14px; background:var(--card2); }
+    .gb-title { font-size:0.7rem; letter-spacing:1px; margin-bottom:8px; font-weight:700; }
+    .gb-good .gb-title { color:var(--green); } .gb-bad .gb-title { color:var(--red); }
+    .gb-row { display:flex; justify-content:space-between; padding:4px 0; font-size:0.82rem; }
+    .gb-row .an { font-weight:700; }
+    .gb-row .av { color:var(--muted); }
+    .agent-empty { color:var(--muted); padding:24px; text-align:center; }
   </style>
 </head>
 <body>
@@ -211,6 +238,10 @@ let sortKey = 'scorePerRound';
 let sortAsc = false;
 let charts = {};
 let playerColorMap = {};     // "name#tag" -> 固定カラー
+let agentPlayer = null;      // エージェント別: 選択中プレイヤー "name#tag"
+let agentScope = 'current';  // エージェント別: 'current' | 'all'
+let agentSort = 'matchesPlayed';
+let agentOpen = false;       // 折りたたみ開閉
 
 // ── プレイヤー固定カラー ──────────────────────────────────────
 function pkey(p) { return `${p.name}#${p.tag}`; }
@@ -337,12 +368,16 @@ function renderAll() {
         <table><thead><tr id="thead"></tr></thead><tbody id="tbody"></tbody></table>
       </div>
     </div>
+
+    <div class="section-title">エージェント別成績</div>
+    <div class="card" id="agentSection"></div>
   `;
 
   renderSeasonBar();
   renderTabs();
   renderTopCards();
   renderTable();
+  renderAgentSection();
   // チャート系は Chart.js が読めなくてもテーブル等が出るよう個別に保護
   safeChart(renderBarChart);
   safeChart(renderRadarChart);
@@ -627,6 +662,100 @@ function doSort(key) {
   renderTable();
   const t=TABS.find(x=>x.stat===key);
   if(t&&t.key!==activeTab){ activeTab=t.key; renderTabs(); }
+}
+
+// ── エージェント別成績 ────────────────────────────────────────
+const AGENT_COLS = [
+  {label:'エージェント', key:'__name__'},
+  {label:'試合',   key:'matchesPlayed'},
+  {label:'勝率',   key:'matchesWinPct', fmt:v=>`${v.toFixed(1)}%`},
+  {label:'ACS',    key:'scorePerRound', fmt:v=>v.toFixed(1)},
+  {label:'K/D',    key:'kDRatio',       fmt:v=>v.toFixed(2)},
+  {label:'HS%',    key:'headshotsPercentage', fmt:v=>`${v.toFixed(1)}%`},
+  {label:'ADR',    key:'damagePerRound',fmt:v=>v.toFixed(1)},
+  {label:'KAST',   key:'kAST',          fmt:v=>`${v.toFixed(1)}%`},
+  {label:'CLUTCH', key:'__clutch__',    fmt:v=>`${v.toFixed(1)}%`},
+  {label:'FB',     key:'firstBloods',   fmt:v=>`${Math.round(v)}`},
+];
+function asv(a, key){
+  if(key==='__clutch__') return a.clutch?.success_rate ?? 0;
+  return a.stats?.[key]?.value ?? 0;
+}
+function adv(a, key){
+  if(key==='__clutch__'){ const c=a.clutch||{}; return `${(c.success_rate??0).toFixed(1)}% <small style="color:var(--muted)">(${c.wins??0}/${c.attempts??0})</small>`; }
+  return a.stats?.[key]?.displayValue ?? '-';
+}
+function agentList(){
+  const m = (allData.agents||{})[agentPlayer];
+  return (m && m[agentScope]) ? m[agentScope] : [];
+}
+function renderAgentSection(){
+  const sec = document.getElementById('agentSection');
+  if(!sec) return;
+  const agents = allData.agents || {};
+  const keys = Object.keys(agents);
+  if(!keys.length){ sec.innerHTML = `<div class="agent-empty">エージェント別データがまだありません。</div>`; return; }
+  if(!agentPlayer || !agents[agentPlayer]) agentPlayer = keys[0];
+
+  sec.innerHTML = `
+    <div class="agent-head" onclick="toggleAgent()">
+      <h3>🎭 エージェント別の得意・苦手</h3>
+      <span class="chev">${agentOpen?'▲ 閉じる':'▼ 開く'}</span>
+    </div>
+    <div class="agent-body" id="agentBody" style="display:${agentOpen?'block':'none'}"></div>
+  `;
+  if(agentOpen) renderAgentBody();
+}
+function toggleAgent(){ agentOpen=!agentOpen; renderAgentSection(); }
+function setAgentPlayer(v){ agentPlayer=v; renderAgentBody(); }
+function setAgentScope(v){ agentScope=v; renderAgentBody(); }
+function agentDoSort(key){ agentSort = key; renderAgentBody(); }
+
+function renderAgentBody(){
+  const body = document.getElementById('agentBody');
+  if(!body) return;
+  const keys = Object.keys(allData.agents||{});
+  const opts = keys.map(k=>{
+    const nm = k.split('#')[0];
+    return `<option value="${k}"${k===agentPlayer?' selected':''}>${nm}</option>`;
+  }).join('');
+
+  const list = [...agentList()].sort((a,b)=> asv(b,agentSort)-asv(a,agentSort));
+  // 得意/苦手: 一定試合数以上で勝率順
+  const minM = agentScope==='all' ? 15 : 4;
+  const qualified = agentList().filter(a=> asv(a,'matchesPlayed') >= minM);
+  const byWin = [...qualified].sort((a,b)=> asv(b,'matchesWinPct')-asv(a,'matchesWinPct'));
+  const good = byWin.slice(0,3);
+  const bad = byWin.slice(-3).reverse();
+
+  const gbRow = a => `<div class="gb-row"><span class="an">${a.name} <span class="role-badge r-${a.role}">${a.role}</span></span>
+    <span class="av">勝率${asv(a,'matchesWinPct').toFixed(1)}% / ACS${asv(a,'scorePerRound').toFixed(0)} / ${asv(a,'matchesPlayed')}戦</span></div>`;
+
+  body.innerHTML = `
+    <div class="agent-controls">
+      <div class="grp"><span class="lbl">プレイヤー</span>
+        <select class="psel" onchange="setAgentPlayer(this.value)">${opts}</select></div>
+      <div class="grp"><span class="lbl">期間</span>
+        <button class="pill${agentScope==='current'?' on':''}" onclick="setAgentScope('current')">現行シーズン</button>
+        <button class="pill${agentScope==='all'?' on':''}" onclick="setAgentScope('all')">全期間</button></div>
+    </div>
+    ${qualified.length ? `<div class="gb-cards">
+      <div class="gb gb-good"><div class="gb-title">⬆ 得意なエージェント（${minM}戦以上・勝率順）</div>${good.map(gbRow).join('')||'<div class="gb-row av">該当なし</div>'}</div>
+      <div class="gb gb-bad"><div class="gb-title">⬇ 苦手なエージェント（${minM}戦以上・勝率順）</div>${bad.map(gbRow).join('')||'<div class="gb-row av">該当なし</div>'}</div>
+    </div>` : ''}
+    <div class="tbl-wrap"><table><thead><tr>${
+      AGENT_COLS.map(c=> c.key==='__name__'
+        ? `<th>${c.label}</th>`
+        : `<th class="${c.key===agentSort?'sorted':''}" onclick="agentDoSort('${c.key}')">${c.label}${c.key===agentSort?' ▼':''}</th>`
+      ).join('')
+    }</tr></thead><tbody>${
+      list.map(a=>`<tr>${AGENT_COLS.map(c=>{
+        if(c.key==='__name__') return `<td><span class="pn">${a.name}</span> <span class="role-badge r-${a.role}">${a.role}</span></td>`;
+        const hl = c.key===agentSort?' class="hl"':'';
+        return `<td${hl}>${adv(a,c.key)}</td>`;
+      }).join('')}</tr>`).join('')
+    }</tbody></table></div>
+  `;
 }
 
 // ── 起動 ─────────────────────────────────────────────────────

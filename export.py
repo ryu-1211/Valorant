@@ -182,6 +182,8 @@ def export_stats() -> bool:
         player_raw_seasons[key] = {}
 
         for sid, data in cached_seasons.items():
+            if sid.startswith("agents:"):
+                continue  # エージェント別データは別処理
             all_season_ids.add(sid)
             player_season_data[key][sid] = _build_player_record(p, data)
             if sid != "current":
@@ -260,12 +262,30 @@ def export_stats() -> bool:
             "episodeName": "All", "actName": "",
         })
 
+    # ── エージェント別データ（現行 / 全期間）──
+    agents_out: dict[str, dict] = {}
+    for p in players:
+        pid = db.get_player_id(p["name"], p["tag"])
+        if pid is None:
+            continue
+        key = f"{p['name']}#{p['tag']}"
+        cur = db.load_cache_force(pid, "agents:current")
+        allt = db.load_cache_force(pid, "agents:all")
+        entry = {}
+        if cur and cur.get("agents"):
+            entry["current"] = cur["agents"]
+        if allt and allt.get("agents"):
+            entry["all"] = allt["agents"]
+        if entry:
+            agents_out[key] = entry
+
     payload = {
         "updated_at":       datetime.now(timezone.utc).isoformat(),
         "current_season_id": current_id,
         "season_list":      season_list_master,
         "seasons":          seasons_out,
         "players": seasons_out.get(current_id, []),
+        "agents":           agents_out,
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
