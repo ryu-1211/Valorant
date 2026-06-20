@@ -220,6 +220,54 @@ def fetch_maps(name: str, tag: str, season_id: str | None = None) -> list[dict]:
     return _parse_maps(segs)
 
 
+# ── エージェント×マップ（組み合わせ）──────────────────────────
+
+_COMBO_STAT_KEYS = ["matchesPlayed", "matchesWon", "matchesWinPct",
+                    "scorePerRound", "kDRatio", "headshotsPercentage"]
+
+
+def _parse_agent_map_combos(segments: list) -> list[dict]:
+    """agent-top-map セグメント（エージェント×マップ）を返す。
+    metadata.name=エージェント名 / attributes.mapKey=マップ。"""
+    out = []
+    for seg in segments:
+        if seg.get("type") != "agent-top-map":
+            continue
+        a = seg.get("attributes", {})
+        if a.get("playlist") not in (None, "competitive"):
+            continue
+        meta = seg.get("metadata", {})
+        st = seg.get("stats", {})
+        mapkey = a.get("mapKey", "")
+        out.append({
+            "agent": meta.get("name", "?"),
+            "color": meta.get("color", ""),
+            "mapKey": mapkey,
+            "map": mapkey.capitalize() if mapkey else "?",
+            "stats": {
+                k: {"value": st.get(k, {}).get("value"),
+                    "displayValue": st.get(k, {}).get("displayValue", "")}
+                for k in _COMBO_STAT_KEYS if k in st
+            },
+        })
+    return out
+
+
+def fetch_combos(name: str, tag: str, season_id: str | None = None) -> list[dict]:
+    """エージェント×マップの組み合わせ別スタッツ。/segments/agent から agent-top-map を抽出。"""
+    enc = quote(name, safe="")
+    url = f"{_BASE_URL}/{enc}%23{tag}/segments/agent"
+    if season_id:
+        url += f"?seasonId={season_id}"
+    data = _get(url)
+    if not data:
+        return []
+    segs = data.get("data", [])
+    if not isinstance(segs, list):
+        return []
+    return _parse_agent_map_combos(segs)
+
+
 # ── 公開 API ──────────────────────────────────────────────────
 
 def get_season_list(name: str, tag: str) -> list[dict]:

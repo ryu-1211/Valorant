@@ -143,6 +143,17 @@
     .gb-row .an { font-weight:700; }
     .gb-row .av { color:var(--muted); }
     .agent-empty { color:var(--muted); padding:24px; text-align:center; }
+
+    /* ── ヒートマップ（エージェント×マップ）── */
+    .heat { border-collapse:separate; border-spacing:3px; font-size:0.74rem; }
+    .heat th { padding:6px 8px; color:var(--muted); font-size:0.66rem; letter-spacing:.5px; white-space:nowrap; text-align:center; }
+    .heat th.rowh { text-align:right; position:sticky; left:0; background:var(--card); z-index:1; }
+    .heat td { width:54px; height:40px; text-align:center; border-radius:6px; color:#fff; font-weight:700; }
+    .heat td.empty { background:var(--card2); color:var(--border); font-weight:400; }
+    .heat td small { display:block; font-size:0.6rem; font-weight:400; opacity:.85; }
+    .heat .roled { font-size:0.6rem; }
+    .heat-legend { display:flex; align-items:center; gap:8px; font-size:0.68rem; color:var(--muted); margin-top:10px; }
+    .heat-bar { width:120px; height:10px; border-radius:5px; background:linear-gradient(90deg,hsl(0,60%,42%),hsl(60,60%,42%),hsl(120,55%,38%)); }
   </style>
 </head>
 <body>
@@ -246,6 +257,10 @@ let mapPlayer = null;        // マップ別: 選択中プレイヤー
 let mapScope = 'current';    // マップ別: 'current' | 'all'
 let mapSort = 'matchesPlayed';
 let mapOpen = false;
+let comboPlayer = null;      // エージェント×マップ: 選択中プレイヤー
+let comboScope = 'all';      // 'current' | 'all'（既定は全期間=データが多い）
+let comboMetric = 'matchesWinPct'; // セルに表示する指標
+let comboOpen = false;
 
 // ── プレイヤー固定カラー ──────────────────────────────────────
 function pkey(p) { return `${p.name}#${p.tag}`; }
@@ -378,6 +393,9 @@ function renderAll() {
 
     <div class="section-title">マップ別成績</div>
     <div class="card" id="mapSection"></div>
+
+    <div class="section-title">エージェント × マップ</div>
+    <div class="card" id="comboSection"></div>
   `;
 
   renderSeasonBar();
@@ -386,6 +404,7 @@ function renderAll() {
   renderTable();
   renderAgentSection();
   renderMapSection();
+  renderComboSection();
   // チャート系は Chart.js が読めなくてもテーブル等が出るよう個別に保護
   safeChart(renderBarChart);
   safeChart(renderRadarChart);
@@ -843,6 +862,91 @@ function renderMapBody(){
         return `<td${hl}>${adv(m,c.key)}</td>`;
       }).join('')}</tr>`).join('')
     }</tbody></table></div>
+  `;
+}
+
+// ── エージェント×マップ（ヒートマップ）────────────────────────
+const COMBO_METRICS = [
+  {key:'matchesWinPct',  label:'勝率',  fmt:v=>`${v.toFixed(0)}%`, color:v=>`hsl(${Math.max(0,Math.min(120,v*1.2))},58%,40%)`},
+  {key:'scorePerRound',  label:'ACS',   fmt:v=>v.toFixed(0),       color:v=>`hsl(${Math.max(0,Math.min(120,(v-130)/1.2))},58%,40%)`},
+  {key:'kDRatio',        label:'K/D',   fmt:v=>v.toFixed(2),       color:v=>`hsl(${Math.max(0,Math.min(120,(v-0.6)*150))},58%,40%)`},
+];
+function comboList(){
+  const m = (allData.combos||{})[comboPlayer];
+  return (m && m[comboScope]) ? m[comboScope] : [];
+}
+function renderComboSection(){
+  const sec = document.getElementById('comboSection');
+  if(!sec) return;
+  const combos = allData.combos || {};
+  const keys = Object.keys(combos);
+  if(!keys.length){ sec.innerHTML = `<div class="agent-empty">組み合わせデータがまだありません。</div>`; return; }
+  if(!comboPlayer || !combos[comboPlayer]) comboPlayer = keys[0];
+  sec.innerHTML = `
+    <div class="agent-head" onclick="toggleCombo()">
+      <h3>🔀 エージェント × マップ（得意な組み合わせ）</h3>
+      <span class="chev">${comboOpen?'▲ 閉じる':'▼ 開く'}</span>
+    </div>
+    <div class="agent-body" id="comboBody" style="display:${comboOpen?'block':'none'}"></div>
+  `;
+  if(comboOpen) renderComboBody();
+}
+function toggleCombo(){ comboOpen=!comboOpen; renderComboSection(); }
+function setComboPlayer(v){ comboPlayer=v; renderComboBody(); }
+function setComboScope(v){ comboScope=v; renderComboBody(); }
+function setComboMetric(v){ comboMetric=v; renderComboBody(); }
+function csv(c,key){ return c.stats?.[key]?.value ?? null; }
+
+function renderComboBody(){
+  const body = document.getElementById('comboBody');
+  if(!body) return;
+  const keys = Object.keys(allData.combos||{});
+  const opts = keys.map(k=>`<option value="${k}"${k===comboPlayer?' selected':''}>${k.split('#')[0]}</option>`).join('');
+  const metric = COMBO_METRICS.find(m=>m.key===comboMetric) || COMBO_METRICS[0];
+
+  const list = comboList();
+  // 行=エージェント, 列=マップ。試合数で並べる
+  const agentTot = {}, mapTot = {};
+  const cell = {}; // `${agent}|${map}` -> combo
+  list.forEach(c=>{
+    const mp = csv(c,'matchesPlayed') || 0;
+    agentTot[c.agent] = (agentTot[c.agent]||0) + mp;
+    mapTot[c.map] = (mapTot[c.map]||0) + mp;
+    cell[`${c.agent}|${c.map}`] = c;
+  });
+  const agents = Object.keys(agentTot).sort((a,b)=>agentTot[b]-agentTot[a]);
+  const maps = Object.keys(mapTot).sort((a,b)=>mapTot[b]-mapTot[a]);
+
+  if(!agents.length){
+    body.innerHTML = `<div class="agent-empty">このプレイヤー/期間の組み合わせデータがありません。</div>`;
+    return;
+  }
+
+  const head = `<tr><th class="rowh"></th>${maps.map(m=>`<th>${m}</th>`).join('')}</tr>`;
+  const rows = agents.map(ag=>{
+    const tds = maps.map(mp=>{
+      const c = cell[`${ag}|${mp}`];
+      const v = c ? csv(c, metric.key) : null;
+      const games = c ? csv(c,'matchesPlayed') : 0;
+      if(v===null || !games){ return `<td class="empty">·</td>`; }
+      const op = games < 3 ? 0.45 : 1;  // 試合数が少ないセルは薄く
+      return `<td style="background:${metric.color(v)};opacity:${op}" title="${ag} × ${mp}: ${games}戦 勝率${(csv(c,'matchesWinPct')||0).toFixed(0)}% ACS${(csv(c,'scorePerRound')||0).toFixed(0)}">${metric.fmt(v)}<small>${games}戦</small></td>`;
+    }).join('');
+    return `<tr><th class="rowh">${ag}</th>${tds}</tr>`;
+  }).join('');
+
+  body.innerHTML = `
+    <div class="agent-controls">
+      <div class="grp"><span class="lbl">プレイヤー</span>
+        <select class="psel" onchange="setComboPlayer(this.value)">${opts}</select></div>
+      <div class="grp"><span class="lbl">期間</span>
+        <button class="pill${comboScope==='current'?' on':''}" onclick="setComboScope('current')">現行シーズン</button>
+        <button class="pill${comboScope==='all'?' on':''}" onclick="setComboScope('all')">全期間</button></div>
+      <div class="grp"><span class="lbl">指標</span>
+        ${COMBO_METRICS.map(m=>`<button class="pill${comboMetric===m.key?' on':''}" onclick="setComboMetric('${m.key}')">${m.label}</button>`).join('')}</div>
+    </div>
+    <div class="tbl-wrap"><table class="heat"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+    <div class="heat-legend"><span>低</span><span class="heat-bar"></span><span>高</span><span style="margin-left:10px">（数字=${metric.label} / 下=試合数・3戦未満は薄め・セルにカーソルで詳細）</span></div>
   `;
 }
 

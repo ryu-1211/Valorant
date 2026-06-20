@@ -182,8 +182,8 @@ def export_stats() -> bool:
         player_raw_seasons[key] = {}
 
         for sid, data in cached_seasons.items():
-            if sid.startswith("agents:") or sid.startswith("maps:"):
-                continue  # エージェント/マップ別データは別処理
+            if sid.startswith(("agents:", "maps:", "combos:")):
+                continue  # エージェント/マップ/組み合わせ別データは別処理
             all_season_ids.add(sid)
             player_season_data[key][sid] = _build_player_record(p, data)
             if sid != "current":
@@ -262,9 +262,10 @@ def export_stats() -> bool:
             "episodeName": "All", "actName": "",
         })
 
-    # ── エージェント別 / マップ別データ（現行 / 全期間）──
+    # ── エージェント別 / マップ別 / 組み合わせデータ（現行 / 全期間）──
     agents_out: dict[str, dict] = {}
     maps_out: dict[str, dict] = {}
+    combos_out: dict[str, dict] = {}
     for p in players:
         pid = db.get_player_id(p["name"], p["tag"])
         if pid is None:
@@ -290,6 +291,16 @@ def export_stats() -> bool:
         if m_entry:
             maps_out[key] = m_entry
 
+        c_cur = db.load_cache_force(pid, "combos:current")
+        c_all = db.load_cache_force(pid, "combos:all")
+        c_entry = {}
+        if c_cur and c_cur.get("combos"):
+            c_entry["current"] = c_cur["combos"]
+        if c_all and c_all.get("combos"):
+            c_entry["all"] = c_all["combos"]
+        if c_entry:
+            combos_out[key] = c_entry
+
     payload = {
         "updated_at":       datetime.now(timezone.utc).isoformat(),
         "current_season_id": current_id,
@@ -298,6 +309,7 @@ def export_stats() -> bool:
         "players": seasons_out.get(current_id, []),
         "agents":           agents_out,
         "maps":             maps_out,
+        "combos":           combos_out,
     }
 
     DOCS_DIR.mkdir(exist_ok=True)
