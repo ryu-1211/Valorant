@@ -33,6 +33,7 @@ async def _auto_refresh_loop():
         await asyncio.sleep(3600)
         print("[bot] 定期更新開始")
         await _gather_all_stats(force=True)
+        await _refresh_extras()
         await asyncio.get_event_loop().run_in_executor(None, _export_and_push)
         print("[bot] 定期更新完了")
 
@@ -40,6 +41,32 @@ async def _auto_refresh_loop():
 def _export_and_push():
     if exporter.export_stats():
         exporter.git_push("auto: update stats")
+
+
+def _refresh_extras_sync():
+    """全プレイヤーのエージェント別・マップ別・組み合わせを取得して DB に保存（同期・スロットル付き）。"""
+    players = db.list_players()
+    for p in players:
+        pid = db.get_player_id(p["name"], p["tag"])
+        if pid is None:
+            continue
+        try:
+            extras = tracker.fetch_extras(p["name"], p["tag"])
+        except Exception as e:
+            print(f"[bot] extras 取得失敗 {p['name']}#{p['tag']}: {e}")
+            continue
+        if not extras:
+            continue
+        db.save_cache(pid, {"agents": extras["agents"]["current"]}, "agents:current")
+        db.save_cache(pid, {"agents": extras["agents"]["all"]},     "agents:all")
+        db.save_cache(pid, {"maps":   extras["maps"]["current"]},   "maps:current")
+        db.save_cache(pid, {"maps":   extras["maps"]["all"]},       "maps:all")
+        db.save_cache(pid, {"combos": extras["combos"]["current"]}, "combos:current")
+        db.save_cache(pid, {"combos": extras["combos"]["all"]},     "combos:all")
+
+
+async def _refresh_extras():
+    await asyncio.get_event_loop().run_in_executor(None, _refresh_extras_sync)
 
 
 @client.event
@@ -125,6 +152,23 @@ async def cmd_add(interaction: discord.Interaction, name: str, tag: str):
             "名前とタグを確認してください。"
         )
         return
+
+    # エージェント/マップ/組み合わせも取得（失敗してもプレイヤー追加は維持）
+    pid = db.get_player_id(name, tag)
+
+    def _save_extras():
+        ex = tracker.fetch_extras(name, tag)
+        if ex and pid is not None:
+            db.save_cache(pid, {"agents": ex["agents"]["current"]}, "agents:current")
+            db.save_cache(pid, {"agents": ex["agents"]["all"]},     "agents:all")
+            db.save_cache(pid, {"maps":   ex["maps"]["current"]},   "maps:current")
+            db.save_cache(pid, {"maps":   ex["maps"]["all"]},       "maps:all")
+            db.save_cache(pid, {"combos": ex["combos"]["current"]}, "combos:current")
+            db.save_cache(pid, {"combos": ex["combos"]["all"]},     "combos:all")
+    try:
+        await asyncio.get_event_loop().run_in_executor(None, _save_extras)
+    except Exception as e:
+        print(f"[bot] /add extras 失敗: {e}")
 
     rank = data["stats"].get("rank", {}).get("displayValue") or data["peak_rank"]
     embed = discord.Embed(
@@ -282,8 +326,12 @@ async def cmd_profile(interaction: discord.Interaction, name: str, tag: str):
 # ── /update ───────────────────────────────────────────────────
 
 @tree.command(name="update", description="全プレイヤーのデータを更新します")
-@app_commands.describe(seasons="取得するシーズン数（1=最新のみ / 3=直近3シーズン）")
-async def cmd_update(interaction: discord.Interaction, seasons: int = 1):
+@app_commands.describe(
+    seasons="取得するシーズン数（1=最新のみ / 3=直近3シーズン）",
+    extras="エージェント/マップ/組み合わせも更新する（時間がかかります）",
+)
+async def cmd_update(interaction: discord.Interaction, seasons: int = 1,
+                     extras: bool = False):
     await interaction.response.defer()
     players = db.list_players()
     if not players:
@@ -291,13 +339,16 @@ async def cmd_update(interaction: discord.Interaction, seasons: int = 1):
         return
 
     label = f"直近 {seasons} シーズン" if seasons > 1 else "最新シーズン"
+    extra_label = " + エージェント/マップ/組み合わせ" if extras else ""
     msg = await interaction.followup.send(
-        f"⏳ {len(players)} 人の{label}データを更新中...", wait=True
+        f"⏳ {len(players)} 人の{label}{extra_label}データを更新中...", wait=True
     )
     results = await _gather_all_stats(force=True, seasons=seasons)
+    if extras:
+        await _refresh_extras()
     await asyncio.get_event_loop().run_in_executor(None, _export_and_push)
     await msg.edit(
-        content=f"✅ {len(results)}/{len(players)} 人の{label}データを更新してWebページに反映しました。"
+        content=f"✅ {len(results)}/{len(players)} 人の{label}{extra_label}データを更新してWebページに反映しました。"
     )
 
 

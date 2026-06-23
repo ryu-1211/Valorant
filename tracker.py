@@ -268,6 +268,51 @@ def fetch_combos(name: str, tag: str, season_id: str | None = None) -> list[dict
     return _parse_agent_map_combos(segs)
 
 
+def _fetch_agents_combos(name: str, tag: str, season_id: str | None = None
+                         ) -> tuple[list[dict], list[dict]]:
+    """1リクエストでエージェント別と エージェント×マップ を両方返す（agents, combos）。"""
+    enc = quote(name, safe="")
+    url = f"{_BASE_URL}/{enc}%23{tag}/segments/agent"
+    if season_id:
+        url += f"?seasonId={season_id}"
+    data = _get(url)
+    if not data:
+        return [], []
+    segs = data.get("data", [])
+    if not isinstance(segs, list):
+        return [], []
+    return _parse_agents(segs), _parse_agent_map_combos(segs)
+
+
+def fetch_extras(name: str, tag: str, throttle: float = 2.5) -> dict | None:
+    """1プレイヤーのエージェント別・マップ別・組み合わせ（現行 + 全期間）をまとめて取得。
+    レート制限対策で各リクエスト間に throttle 秒待機する。"""
+    seasons = get_season_list(name, tag)
+    cur = seasons[0]["id"] if seasons else None
+    time.sleep(throttle)
+
+    a_all, c_all = _fetch_agents_combos(name, tag, None)
+    time.sleep(throttle)
+    m_all = fetch_maps(name, tag, None)
+    time.sleep(throttle)
+
+    if cur:
+        a_cur, c_cur = _fetch_agents_combos(name, tag, cur)
+        time.sleep(throttle)
+        m_cur = fetch_maps(name, tag, cur)
+    else:
+        a_cur, c_cur, m_cur = [], [], []
+
+    # 全部空なら失敗扱い
+    if not (a_all or m_all or c_all or a_cur or m_cur or c_cur):
+        return None
+    return {
+        "agents": {"all": a_all, "current": a_cur},
+        "maps":   {"all": m_all, "current": m_cur},
+        "combos": {"all": c_all, "current": c_cur},
+    }
+
+
 # ── 公開 API ──────────────────────────────────────────────────
 
 def get_season_list(name: str, tag: str) -> list[dict]:
